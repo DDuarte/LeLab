@@ -1,0 +1,8 @@
+Stack:
+* Windows :(
+* C++
+* OGRE - Open Source 3D Graphics Engine
+* Blender - Free open source 3D content creation suite
+* MySQL - Source relational database management system
+* TCP - Transmission Control Protocol (server/client communication)
+* ...
