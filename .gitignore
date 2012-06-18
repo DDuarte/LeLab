@@ -2,6 +2,8 @@
 *.slo
 *.lo
 *.o
+[Oo]bj
+[Bb]in
 
 # Compiled Dynamic libraries
 *.so
@@ -10,3 +12,16 @@
 *.lai
 *.la
 *.a
+
+# R#
+*ReSharper*
+
+# VS
+*.user
+*.suo
+*.[Cc]ache
+*.sdf
+*.opensdf
+
+# Windows
+[Tt]humbs.db 
