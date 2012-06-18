@@ -5,4 +5,6 @@ Stack:
 * Blender - Free open source 3D content creation suite
 * MySQL - Source relational database management system
 * TCP - Transmission Control Protocol (server/client communication)
+* Asio (or Boost.Asio) - C++ library for network and low-level I/O programming
+* Boost - C++ libraries
 * ...
