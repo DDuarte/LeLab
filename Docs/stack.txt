@@ -1,5 +1,6 @@
 Stack:
 * Windows :(
+* Visual Studio 2010
 * C++
 * OGRE - Open Source 3D Graphics Engine
 * Blender - Free open source 3D content creation suite
