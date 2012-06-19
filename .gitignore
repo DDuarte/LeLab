@@ -1,14 +1,14 @@
-# Compiled Object files
+# Compiled files
 *.slo
 *.lo
 *.o
 [Oo]bj
 [Bb]in
-
-# Compiled Dynamic libraries
+[Dd]ebug*/
+[Rr]elease*/
+ipch/
+*.pdb
 *.so
-
-# Compiled Static libraries
 *.lai
 *.la
 *.a
