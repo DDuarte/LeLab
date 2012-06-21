@@ -25,3 +25,4 @@ ipch/
 
 # Windows
 [Tt]humbs.db 
+*.log
