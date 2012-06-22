@@ -2,10 +2,13 @@ Stack:
 * Windows :(
 * Visual Studio 2010
 * C++
-* OGRE - Open Source 3D Graphics Engine
 * Blender - Free open source 3D content creation suite
 * MySQL - Source relational database management system
 * TCP - Transmission Control Protocol (server/client communication)
-* Asio (or Boost.Asio) - C++ library for network and low-level I/O programming
 * Boost - C++ libraries
-* ...
+* Boost.Asio - C++ library for network and low-level I/O programming
+* freeglut - OpenSourced alternative to the OpenGL Utility Toolkit (GLUT) library
+* GLEW - The OpenGL Extension Wrangler Library
+* DevIL:  A full featured cross-platform image library.
+* Assimp - Open Asset Import Library
+*
