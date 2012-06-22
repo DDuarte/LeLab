@@ -6,6 +6,8 @@
 
 #define AUTO_SIZE uint32 Size() { return sizeof(*this); }
 
+//! Should only be used for objects allocated in the heap (new)
+
 //! Basic garbage collectable object (ref counting)
 class MMObject
 {
