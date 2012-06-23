@@ -14,12 +14,28 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Functor.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="ProfileSample.h">
+      <Filter>Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="IProfilerOutputHandler.h">
+      <Filter>Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileLogHandler.h">
+      <Filter>Profiling</Filter>
+    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="window.h">
+    <ClInclude Include="Window.h">
       <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileSample.h">
+      <Filter>Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileLogHandler.h">
+      <Filter>Profiling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -36,11 +52,30 @@
     <ClCompile Include="Log.cpp">
       <Filter>Logging</Filter>
     </ClCompile>
+    <ClCompile Include="ProfileSample.cpp">
+      <Filter>Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileLogHandler.cpp">
+      <Filter>Profiling</Filter>
+    </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+
+    <ClCompile Include="window.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileSample.cpp">
+      <Filter>Profiling</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileLogHandler.cpp">
+      <Filter>Profiling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +86,9 @@
     </Filter>
     <Filter Include="Logging">
       <UniqueIdentifier>{ddd98ac9-0c0d-4245-993b-74eeb5a34b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Profiling">
+      <UniqueIdentifier>{e040f962-2522-4d5d-8c85-2829818e8ca3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{4f03fe23-4feb-4966-9a0d-128454332560}</UniqueIdentifier>

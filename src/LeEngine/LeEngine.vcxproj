@@ -13,11 +13,15 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="Functor.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MMBlob.h" />
     <ClInclude Include="MMObject.h" />
     <ClInclude Include="MMPointer.h" />
-    <ClInclude Include="window.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="IProfilerOutputHandler.h" />
+    <ClInclude Include="ProfileLogHandler.h" />
+    <ClInclude Include="ProfileSample.h" />
     <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <ItemGroup>
@@ -27,7 +31,9 @@
     <ClCompile Include="MMBlob.cpp" />
     <ClCompile Include="MMObject.cpp" />
     <ClCompile Include="MMPointer.cpp" />
-    <ClCompile Include="window.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="ProfileSample.cpp" />
+    <ClCompile Include="ProfileLogHandler.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{29A79727-C3C8-49B2-AC86-1DAD9EFAEF3A}</ProjectGuid>

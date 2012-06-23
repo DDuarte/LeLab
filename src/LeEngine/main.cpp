@@ -8,14 +8,14 @@ int main(int argc, char **argv)
     log->EnableConsole();
     log->EnabledTime();
 
-    Log::Get().Write(LOG_ALL_INTERNAL, "Initializing...");
+    LeLog.Write(LOG_ALL_INTERNAL, "Initializing...");
+
+    LeLog << LOG_APP << "test app" << LOG_SERVER << "lol server";
 
     glutInit(&argc, argv);
     Application::Get();
-    // Do super complicated stuff here...
 
     Log::Get().Write(LOG_ALL_INTERNAL, "Closing...");
-
     delete log->GetPtr();
 
     std::cout << "Press any key to exit." << std::endl;
