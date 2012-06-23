@@ -4,7 +4,7 @@
 
 Application::Application()
 {
-    glutInitContextVersion(4, 0);
+    glutInitContextVersion(3, 2);
     glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
     glutInitContextProfile(GLUT_CORE_PROFILE);
 
@@ -24,8 +24,6 @@ Application::Application()
 void Application::Initialize()
 {
     _wManager.AddWindow(new Window("LeWindow"));
-
-
 }
 
 void Application::Render()
