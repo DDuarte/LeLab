@@ -21,7 +21,7 @@ class Log : public Singleton<Log>
 {
 public:
     //! Constructor
-    Log() : _consoleEnabled(false), _timeEnabled(true) { Init(); };
+    Log() : _consoleEnabled(false), _timeEnabled(true), _lastFilter(LOG_APP) { Init(); };
 
     //! Parametrized write. Use any LOG_ enum values in target or a combination of them
     void WriteP(int target, const char* msg, ...);
@@ -33,6 +33,11 @@ public:
 
     //! Enables/disables writing date time in logs
     void EnabledTime(bool write = true) { _timeEnabled = write; }
+
+    //! Stream operator for Application logging
+    Log& operator <<(const char* buffer) { Write(_lastFilter, buffer); return *this; }
+    //! Stream operator that sets the filter of the next streams
+    Log& operator <<(const LogFilter filter) { _lastFilter = filter; return *this; }
 
 private:
     //! Writes the final buffer to the streams. Use Write and WriteP
@@ -55,6 +60,10 @@ private:
 
     //! Defines if logs should have a date time
     bool _timeEnabled;
+
+    LogFilter _lastFilter;
 };
+
+#define LeLog Log::Get()
 
 #endif // LOG_H

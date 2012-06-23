@@ -106,4 +106,3 @@ std::string Log::GetTime() const
 
     return time;
 }
-
