@@ -286,7 +286,7 @@
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /y $(ProjectDir)..\..\include\* $(SolutionDir)..\dep\includes\assimp\</Command>
+      <Command>copy /y "$(ProjectDir)..\..\include\*"  "$(SolutionDir)..\dep\includes\assimp\"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying include files...</Message>

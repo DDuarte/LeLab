@@ -196,7 +196,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /y $(ProjectDir)..\..\include\GL\* $(SolutionDir)..\dep\includes\GL\</Command>
+      <Command>copy /y "$(ProjectDir)..\..\include\GL\*"  "$(SolutionDir)..\dep\includes\GL\"</Command>
       <Message>Copying include files...</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>

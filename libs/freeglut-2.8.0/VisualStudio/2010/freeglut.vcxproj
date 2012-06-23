@@ -210,7 +210,7 @@
     </Lib>
     <PostBuildEvent>
       <Message>Copying include files...</Message>
-      <Command>copy /y $(ProjectDir)..\..\include\GL\* $(SolutionDir)..\dep\includes\GL\</Command>
+      <Command>copy /y "$(ProjectDir)..\..\include\GL\*" "$(SolutionDir)..\dep\includes\GL\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|x64'">
