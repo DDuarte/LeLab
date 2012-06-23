@@ -150,6 +150,13 @@
     <Lib>
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>ColorPicker.lib;
+libjasper.lib;
+libpng.lib;
+zlib.lib
+;lcms.lib;
+libjpeg.lib
+;libtiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
