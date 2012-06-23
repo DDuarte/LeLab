@@ -11,18 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MMBlob.h" />
     <ClInclude Include="MMObject.h" />
     <ClInclude Include="MMPointer.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MMBlob.cpp" />
     <ClCompile Include="MMObject.cpp" />
     <ClCompile Include="MMPointer.cpp" />
+    <ClCompile Include="window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{29A79727-C3C8-49B2-AC86-1DAD9EFAEF3A}</ProjectGuid>

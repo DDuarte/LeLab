@@ -14,6 +14,12 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -29,6 +35,12 @@
     <ClCompile Include="Log.cpp">
       <Filter>Logging</Filter>
     </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -38,6 +50,9 @@
     </Filter>
     <Filter Include="Logging">
       <UniqueIdentifier>{ddd98ac9-0c0d-4245-993b-74eeb5a34b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{4f03fe23-4feb-4966-9a0d-128454332560}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
