@@ -1,6 +1,10 @@
 #include "Application.h"
 
+#include "Defines.h"
+
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
 Application::Application()
 {
@@ -17,6 +21,8 @@ Application::Application()
 
     glutDisplayFunc(Application::Get().Render);
     glutReshapeFunc(Application::Get().Resize);
+    glutKeyboardFunc(Application::Get().KeyboardCB);
+    glutMouseFunc(Application::Get().MouseCB);
 
     glutMainLoop();
 }
@@ -24,11 +30,21 @@ Application::Application()
 void Application::Initialize()
 {
     _wManager.AddWindow(new Window("LeWindow"));
+
+    _meshes.push_back(Mesh().LoadMesh("C:\\Users\\Miguel\\Dropbox\\LeLab\\Models\\Test Only\\monk.3ds"));
 }
 
 void Application::Render()
 {
-     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    Application& me = Application::Get();
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    for (std::vector<Mesh>::iterator itr = me._meshes.begin(); itr != me._meshes.end(); itr++)
+        itr->Render();
+
+
+     //std::for_each(me._meshes.begin(), me._meshes.end());
 
      glutSwapBuffers();
      glutPostRedisplay();
@@ -42,6 +58,11 @@ void Application::Resize(int32 width, int32 height)
 }
 
 void Application::KeyboardCB( uint8 key, int x, int y )
+{
+
+}
+
+void Application::MouseCB( int32 button, int32 state, int32 x, int32 y )
 {
 
 }

@@ -31,6 +31,13 @@
     <ClInclude Include="Window.h">
       <Filter>Application</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
+    <ClInclude Include="ProfileSample.h">
+      <Filter>Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileLogHandler.h">
+      <Filter>Profiling</Filter>
+=======
     <ClInclude Include="Mesh.h">
       <Filter>Application</Filter>
     </ClInclude>
@@ -43,33 +50,7 @@
     <ClInclude Include="MathExt.h" />
     <ClInclude Include="Texture.h">
       <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="ProfileSample.h">
-      <Filter>Profiling</Filter>
-    </ClInclude>
-     <ClInclude Include="Mesh.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="MathExt.h" />
-    <ClInclude Include="Texture.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-
-    <ClInclude Include="ProfileLogHandler.h">
-      <Filter>Profiling</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="MathExt.h" />
-    <ClInclude Include="Texture.h">
-      <Filter>Application</Filter>
+>>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,17 +86,19 @@
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="ProfileSample.cpp">
       <Filter>Profiling</Filter>
     </ClCompile>
     <ClCompile Include="ProfileLogHandler.cpp">
       <Filter>Profiling</Filter>
+=======
+    <ClCompile Include="Texture.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Application</Filter>
+>>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

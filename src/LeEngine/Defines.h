@@ -1,7 +1,11 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#include <cmath>
+
 #include <boost/integer.hpp>
+
+#define INVALID_OGL_VALUE 0xFFFFFFFF
 
 // Helper typedefs
 
@@ -23,7 +27,22 @@ public:
     T X, Y;
 };
 
+template<typename T>
+class Vector3
+{
+public:
+    Vector3() : X(static_cast<T>(0)), Y(static_cast<T>(0)), Z(static_cast<T>(0)) { }
+    Vector3(T x, T y, T z) : X(x), Y(y), Z(z) { }
+    T X, Y, Z;
+};
+
 typedef Vector2<uint32> Size2;
 
+template<typename T>
+inline void SAFE_DELETE(T* p)
+{
+    delete p;
+    p = NULL;
+}
 
 #endif // DEFINES_H

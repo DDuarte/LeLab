@@ -2,8 +2,11 @@
 #define APPLICATION_H
 
 #include "window.h"
+#include "Mesh.h"
+#include "Defines.h"
 
 #include <string>
+#include <vector>
 
 class Application
 {
@@ -19,6 +22,7 @@ public:
     static void KeyboardCB(uint8 key, int x, int y);
     static void MouseCB(int32 button, int32 state, int32 x, int32 y);
 private:
+    std::vector<Mesh> _meshes;
     std::string _name;
     WindowManager _wManager;
 };

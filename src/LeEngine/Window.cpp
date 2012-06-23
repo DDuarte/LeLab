@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "Application.h"
 
+#include <GL/glew.h>
 #include <GL/freeglut.h>
 
 #include <stdexcept>
