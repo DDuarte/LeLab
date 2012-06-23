@@ -39,8 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Libraries\boost_1_49_0;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Libraries\boost_1_49_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOOST_HOME);$(SolutionDir)/../dep/includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_HOME)/stage/lib;$(SolutionDir)/../dep/lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
