@@ -281,6 +281,7 @@
       <PrecompiledHeaderFile>AssimpPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <UndefinePreprocessorDefinitions>_HAS_ITERATOR_DEBUGGING</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Lib>
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
