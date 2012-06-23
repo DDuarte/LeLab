@@ -18,6 +18,7 @@
     <ClInclude Include="MMObject.h" />
     <ClInclude Include="MMPointer.h" />
     <ClInclude Include="window.h" />
+    <ClInclude Include="Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

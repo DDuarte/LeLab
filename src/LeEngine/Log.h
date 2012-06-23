@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <string>
+#include "Singleton.h"
 
 enum LogFilter // flags
 {
@@ -16,11 +17,28 @@ enum LogFilter // flags
 };
 
 //! Simple file logging
-class Log
+class Log : public Singleton<Log>
 {
-protected:
-    //! Singleton, protected constructor
-    Log() {};
+public:
+    //! Constructor
+    Log() : _consoleEnabled(false), _timeEnabled(true) { Init(); };
+
+    //! Parametrized write. Use any LOG_ enum values in target or a combination of them
+    void WriteP(int target, const char* msg, ...);
+    //! Simple write.  Use LOG_ enum values in target or a combination of them
+    void Write(int target, const char* msg) { WriteToStream(target, msg); }
+
+    //! Enabled/disables writing logs to console
+    void EnableConsole(bool write = true) { _consoleEnabled = write; }
+
+    //! Enables/disables writing date time in logs
+    void EnabledTime(bool write = true) { _timeEnabled = write; }
+
+private:
+    //! Writes the final buffer to the streams. Use Write and WriteP
+    void WriteToStream(int target, const char* buffer);
+    //! Returns a formatted string of current time
+    std::string GetTime() const;
 
     //! Application log stream/file
     std::ofstream _appLog;
@@ -29,23 +47,14 @@ protected:
     //! Server log stream/file
     std::ofstream _serverLog;
 
-private:
-    //! Writes the final buffer to the streams. Use Write and WriteP
-    void WriteToStream(int target, const char* buffer);
-    //! Returns a formatted string of current time
-    std::string GetTime() const;
-
-public:
-    //! Singleton
-    static Log& Get() { static Log Log; return Log; }
-
     //! Initializes streams
     bool Init();
 
-    //! Parametrized write. Use any LOG_ enum values in target or a combination of them
-    void WriteP(int target, const char* msg, ...);
-    //! Simple write.  Use LOG_ enum values in target or a combination of them
-    void Write(int target, const char* msg) { WriteToStream(target, msg); }
+    //! Defines if logs should be written to console (cout)
+    bool _consoleEnabled;
+
+    //! Defines if logs should have a date time
+    bool _timeEnabled;
 };
 
 #endif // LOG_H

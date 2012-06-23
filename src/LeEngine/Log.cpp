@@ -32,12 +32,21 @@ void Log::WriteP(int target, const char* msg, ...)
 
 void Log::WriteToStream(int target, const char* buffer)
 {
-    std::string msg = GetTime();
-    msg.append(buffer);
+    std::string time = GetTime();
 
     if (target & LOG_APP)
     {
-        _appLog << msg << '\n';
+        if (_timeEnabled)
+            _appLog << time;
+        _appLog << buffer << '\n';
+
+        if (_consoleEnabled)
+        {
+            if (_timeEnabled)
+                std::cout << time;
+            std::cout << " APP: " << buffer << '\n';
+        }
+
 #ifdef DEBUG
         _appLog.flush();
 #endif
@@ -45,7 +54,16 @@ void Log::WriteToStream(int target, const char* buffer)
 
     if (target & LOG_CLIENT)
     {
-        _clientLog << msg << '\n';
+        if (_timeEnabled)
+            _clientLog << time;
+        _clientLog << buffer << '\n';
+
+        if (_consoleEnabled)
+        {
+            if (_timeEnabled)
+                std::cout << time;
+            std::cout << "CLNT: " << buffer << '\n';
+        }
 #ifdef DEBUG
         _clientLog.flush();
 #endif
@@ -53,7 +71,16 @@ void Log::WriteToStream(int target, const char* buffer)
 
     if (target & LOG_SERVER)
     {
-        _serverLog << msg << '\n';
+        if (_timeEnabled)
+            _serverLog << time;
+        _serverLog << buffer << '\n';
+
+        if (_consoleEnabled)
+        {
+            if (_timeEnabled)
+                std::cout << time;
+            std::cout << "SRVR: " << buffer << '\n';
+        }
 #ifdef DEBUG
         _serverLog.flush();
 #endif
@@ -62,7 +89,7 @@ void Log::WriteToStream(int target, const char* buffer)
     if (target & LOG_USER)
     {
 #ifdef WIN32
-        MessageBoxA(NULL, msg.c_str(), "Message", MB_OK);
+        MessageBoxA(NULL, buffer, "Message", MB_OK);
 #else
 #error User-level logging is not yet implemented for this platform.
 #endif

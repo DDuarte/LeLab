@@ -14,6 +14,7 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
     </ClInclude>
