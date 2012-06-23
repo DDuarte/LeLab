@@ -213,7 +213,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ILUT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\../src/obj/x86/debug/ILUT.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\../src/obj/x86/debug/</AssemblerListingLocation>
       <ObjectFileName>.\../src/obj/x86/debug/</ObjectFileName>

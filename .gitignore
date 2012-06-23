@@ -26,3 +26,12 @@ ipch/
 # Windows
 [Tt]humbs.db 
 *.log
+
+# Specific files (needs more generic rules)
+dep/lib/*.lib
+dep/includes/assimp/*.h
+dep/includes/assimp/*.inl
+dep/includes/assimp/*.hpp
+dep/includes/GL/*.h
+dep/includes/IL/*.h
+dep/includes/IL/*.hpp
