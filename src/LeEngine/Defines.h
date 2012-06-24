@@ -2,7 +2,9 @@
 #define DEFINES_H
 
 #include <sstream>
+#include <string>
 #include <boost/integer.hpp>
+#include <boost/lexical_cast.hpp>
 
 #define INVALID_OGL_VALUE 0xFFFFFFFF
 
@@ -44,7 +46,11 @@ inline void SAFE_DELETE(T* p)
     p = NULL;
 }
 
-#define ToStringA(X) (boost::lexical_cast<std::string>((X)))
+template<typename T>
+inline std::string ToString(T& val)
+{
+    return boost::lexical_cast<std::string>(val);
+}
 
 class Version
 {
