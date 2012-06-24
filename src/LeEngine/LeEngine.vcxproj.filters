@@ -23,12 +23,6 @@
     <ClInclude Include="ProfileLogHandler.h">
       <Filter>Profiling</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Application</Filter>
     </ClInclude>
@@ -114,7 +108,7 @@
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="VideoUpdate.h">
-      <Filter>Rending</Filter>
+      <Filter>Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -129,18 +123,6 @@
     </ClCompile>
     <ClCompile Include="ProfileLogHandler.cpp">
       <Filter>Profiling</Filter>
-    </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Application</Filter>
@@ -173,7 +155,7 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="VideoUpdate.cpp">
-      <Filter>Rending</Filter>
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +194,7 @@
     <Filter Include="Input">
       <UniqueIdentifier>{9a5309e4-1a32-44b0-8a8b-7f360e71f461}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rending">
+    <Filter Include="Rendering">
       <UniqueIdentifier>{cf2a5b4d-0770-49bc-ba67-286250fe9f9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

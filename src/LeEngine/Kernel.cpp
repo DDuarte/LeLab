@@ -20,7 +20,7 @@ int Kernel::Execute()
         {
             //PROFILE("Kernel task loop");
 
-            std::list< MMPointer<ITask> >::iterator it;
+            std::list< MMPointer<ITask> >::iterator it, thisIt;
             for (it = _taskList.begin(); it != _taskList.end();)
             {
                 ITask* t = *it;
@@ -32,19 +32,20 @@ int Kernel::Execute()
             for (it = _taskList.begin(); it != _taskList.end();)
             {
                 ITask* t = *it;
+                thisIt = it;
                 ++it;
                 if (t->CanKill)
                 {
                     t->Stop();
-                    _taskList.remove(t);
+                    _taskList.erase(thisIt);
                     t = NULL;
                 }
             }
             MMObject::CollectGarbage();
         }
-#ifdef DEBUG
-        //ProfileSample::Output();
-#endif
+//#ifdef DEBUG
+//        ProfileSample::Output();
+//#endif
     }
 
     return 0;

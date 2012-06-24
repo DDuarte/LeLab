@@ -42,7 +42,6 @@ void Application::Run(int argc, char* argv[])
     MMPointer<VideoUpdate> videoTask = new VideoUpdate();
     videoTask->Priority = 10000;
     Kernel::Get().AddTask(MMPointer<ITask>(videoTask));
-    
 
     MMPointer<InputTask> inputTask = new InputTask();
     inputTask->Priority = 20;
@@ -52,7 +51,7 @@ void Application::Run(int argc, char* argv[])
     soundTask->Priority = 50;
     Kernel::Get().AddTask(MMPointer<ITask>(soundTask));
 
-    //game-specific tasks:
+    // Game specific tasks
 
     MMPointer<TestTask> tt = new TestTask();
     tt->Priority = 100;
