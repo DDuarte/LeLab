@@ -6,8 +6,6 @@
 #include "MMPointer.h"
 #include "MMDynamicBlob.h"
 
-#include <iostream>
-
 #include <map>
 #include <GL/glfw.h>
 
@@ -28,7 +26,7 @@ public:
     //static int KeyCount;
 
     //! glfwSetKeyCallback
-    static void GLFWCALL KeyHandler(int key, int action) { OldKeys[key] = Keys[key]; Keys[key] = (action == GLFW_PRESS); std::cout << "Key " << (char)key << " - " << action << std::endl; }
+    static void GLFWCALL KeyHandler(int key, int action) { OldKeys[key] = Keys[key]; Keys[key] = (action == GLFW_PRESS); }
 
     static bool CurKey(int index) { return Keys[index]; }
     static bool OldKey(int index) { return OldKeys[index]; }
@@ -46,11 +44,11 @@ public:
     static std::map<int, bool> OldButtons;
 
     //! glfwSetMouseButtonCallback
-    static void GLFWCALL MouseButtonHandler(int button, int action) { OldButtons[button] = Buttons[button]; Buttons[button] = (button == GLFW_PRESS); std::cout << "Mouse " << button << " - " << action << std::endl; }
+    static void GLFWCALL MouseButtonHandler(int button, int action) { OldButtons[button] = Buttons[button]; Buttons[button] = (button == GLFW_PRESS); }
     //! glfwSetMousePosCallback
-    static void GLFWCALL MousePosHandler(int x, int y) { dX = x; dY = y; std::cout << "mouse: " << x << ", " << y << std::endl; }
+    static void GLFWCALL MousePosHandler(int x, int y) { dX = x; dY = y; }
     //! glfwSetMouseWheelCallback
-    static void GLFWCALL MouseWheelHandler(int pos) { OldWheel = Wheel; Wheel = pos; std::cout << "wheel: " << pos << std::endl; }
+    static void GLFWCALL MouseWheelHandler(int pos) { OldWheel = Wheel; Wheel = pos; }
 
     static bool CurMouse(int button) { return Buttons[button]; }
     static bool OldMouse(int button) { return OldButtons[button]; }
