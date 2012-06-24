@@ -845,7 +845,6 @@ libjpeg.lib
     </ClCompile>
     <ClCompile Include="..\src\il_tpl.c" />
     <ClCompile Include="..\src\il_utx.cpp" />
-    <ClCompile Include="..\src\il_utx.cpp" />
     <ClCompile Include="..\src\il_vtf.c" />
     <ClCompile Include="..\src\il_wal.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

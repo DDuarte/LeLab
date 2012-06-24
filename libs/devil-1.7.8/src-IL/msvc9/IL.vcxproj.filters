@@ -248,15 +248,6 @@
     <ClCompile Include="..\src\il_xpm.c">
       <Filter>Source Files\File Formats</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\il_utx.cpp">
-      <Filter>Source Files\File Formats</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\il_utx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\il_utx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="il.def">
