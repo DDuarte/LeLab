@@ -45,9 +45,14 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MMBlob.cpp" />
     <ClCompile Include="MMObject.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="SettingsManager.cpp" />
+=======
+    <ClCompile Include="MMPointer.cpp" />
     <ClCompile Include="Technique.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="ProfileSample.cpp" />
@@ -111,14 +116,7 @@
     <Lib>
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>fmodvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
-    <PostBuildEvent>
-      <Command>copy /y "$(SolutionDir)..\dep\bin\*" "$(SolutionDir)..\bin\"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copying dlls</Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

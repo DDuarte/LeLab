@@ -3,6 +3,8 @@
 
 #include "IApplication.h"
 
+#include <GL/glfw.h>
+
 class Application : public IApplication
 {
 public:

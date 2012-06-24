@@ -62,9 +62,11 @@
     <ClInclude Include="Camera.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="MathExt.h" />
     <ClInclude Include="Texture.h">
       <Filter>Application</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Dator.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -106,13 +108,17 @@
     </ClInclude>
     <ClInclude Include="MMDynamicBlob.h">
       <Filter>Memory</Filter>
-    </ClInclude>
+=======
     <ClInclude Include="Technique.h">
       <Filter>Application</Filter>
+>>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MMBlob.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
     <ClCompile Include="MMObject.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
@@ -149,6 +155,7 @@
     <ClCompile Include="ProfileLogHandler.cpp">
       <Filter>Profiling</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="SettingsManager.cpp">
       <Filter>Settings</Filter>
     </ClCompile>
@@ -160,9 +167,10 @@
     </ClCompile>
     <ClCompile Include="SoundTask.cpp">
       <Filter>Sound</Filter>
-    </ClCompile>
+=======
     <ClCompile Include="Technique.cpp">
       <Filter>Application</Filter>
+>>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,12 +199,6 @@
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{b8151332-6892-42c7-b496-7be5f56132e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Timing">
-      <UniqueIdentifier>{b3c3941c-c70a-4d09-8817-941be87ea37f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{5565734e-9bea-49fa-8786-93cbf4086076}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

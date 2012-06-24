@@ -46,22 +46,19 @@ bool Mesh::MeshEntry::Init( const std::vector<Vertex>& Vertices, const std::vect
 
 inline void Mesh::Clear()
 {
-    _Textures.clear();
-
     for (uint32 i = 0; i < _Textures.size(); i++)
     {
         delete _Textures[i];
         _Textures[i] = NULL;
     }
 
-    //std::for_each(_Textures.begin(), _Textures.end(), SAFE_DELETE<Texture>);
+    _Textures.clear();
 }
 
 Mesh& Mesh::LoadMesh( const std::string& FileName )
 {
     Clear();
 
-    
     Assimp::Importer importer;
 
     const aiScene* pScene = importer.ReadFile(FileName.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);

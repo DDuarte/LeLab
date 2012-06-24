@@ -1,13 +1,21 @@
 #include "Kernel.h"
 #include "ProfileSample.h"
 #include "Log.h"
+
 #include <algorithm>
 #include <list>
 
+#include <GL/glfw.h>
+
 Kernel::Kernel()
 {
-    // SDL_Init(0);
-    // SDLNet_Init();
+    /*if ( glfwInit() )
+    LeLog << LOG_APP << "GLFW version " <<*/
+    if (!glfwInit())
+    {
+        LeLog << LOG_APP << "Failed to initialize GLFW" << NL;
+        exit(EXIT_FAILURE);
+    }
 }
 
 Kernel::~Kernel()

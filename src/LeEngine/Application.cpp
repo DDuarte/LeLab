@@ -43,9 +43,6 @@ void Application::Render()
     for (std::vector<Mesh>::iterator itr = me._meshes.begin(); itr != me._meshes.end(); itr++)
         itr->Render();
 
-
-     //std::for_each(me._meshes.begin(), me._meshes.end());
-
      glutSwapBuffers();
      glutPostRedisplay();
 }

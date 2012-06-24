@@ -2,6 +2,10 @@
 #define DEFINES_H
 
 #include <cmath>
+#include <string>
+#include <sstream>
+
+#include <GL/glfw.h>
 
 #include <boost/integer.hpp>
 
@@ -44,5 +48,25 @@ inline void SAFE_DELETE(T* p)
     delete p;
     p = NULL;
 }
+template<typename T>
+std::string ToString(T value)
+{
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
+}
+
+class Version
+{
+public:
+    uint8 maj, min, rev;
+
+    ostream& operator<<(ostream out)
+    {
+        out << maj << "." << min "." << rev;
+        return out;
+    }
+};
+
 
 #endif // DEFINES_H
