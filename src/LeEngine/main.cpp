@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
     LeLog << LOG_APP << "test app" << LOG_SERVER << "lol server";
 
-    glewInit();
+   
     glutInit(&argc, argv);
     ilInit();
 

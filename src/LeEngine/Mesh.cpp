@@ -46,7 +46,15 @@ bool Mesh::MeshEntry::Init( const std::vector<Vertex>& Vertices, const std::vect
 
 inline void Mesh::Clear()
 {
-    std::for_each(_Textures.begin(), _Textures.end(), SAFE_DELETE<Texture>);
+    _Textures.clear();
+
+    for (uint32 i = 0; i < _Textures.size(); i++)
+    {
+        delete _Textures[i];
+        _Textures[i] = NULL;
+    }
+
+    //std::for_each(_Textures.begin(), _Textures.end(), SAFE_DELETE<Texture>);
 }
 
 Mesh& Mesh::LoadMesh( const std::string& FileName )
@@ -157,7 +165,7 @@ bool Mesh::InitMaterials( const aiScene* pScene, const std::string& Filename )
         // Load a white texture in case the model does not include its own texture
         if (!_Textures[i])
         {
-            _Textures[i] = new Texture(GL_TEXTURE_2D, "./white.png");
+            _Textures[i] = new Texture(GL_TEXTURE_2D, "white.png");
 
             ret = _Textures[i]->Load();
         }

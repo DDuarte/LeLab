@@ -31,7 +31,7 @@ void Application::Initialize()
 {
     _wManager.AddWindow(new Window("LeWindow"));
 
-    _meshes.push_back(Mesh().LoadMesh("C:\\Users\\Miguel\\Dropbox\\LeLab\\Models\\Test Only\\monk.3ds"));
+    _meshes.push_back(Mesh().LoadMesh("monk.3ds"));
 }
 
 void Application::Render()

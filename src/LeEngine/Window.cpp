@@ -13,6 +13,7 @@ Window::Window( std::string name /*= ""*/, Size2 size /*= DEFAULT_WINDOW_SIZE*/,
     glutInitDisplayMode(_displayMode);
 
     _id = glutCreateWindow(_name.c_str());
+     glewInit();
 
     if (_id < 1)
         throw std::runtime_error("ERROR: Could not create a new rendering window.");

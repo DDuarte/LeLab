@@ -13,11 +13,14 @@
 class Texture
 {
 public:
+
     Texture(uint32 TextureTarget, const std::string& FileName);
 
     bool Load();
 
     void Bind(uint32 TextureUnit);
+
+    uint32 GettT() { return _textureTarget; }
 
 private:
     std::string _fileName;
