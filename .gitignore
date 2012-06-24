@@ -32,6 +32,8 @@ dep/lib/*.lib
 dep/includes/assimp/*.h
 dep/includes/assimp/*.inl
 dep/includes/assimp/*.hpp
+dep/includes/assimp/Compiler/*.h
 dep/includes/GL/*.h
 dep/includes/IL/*.h
 dep/includes/IL/*.hpp
+

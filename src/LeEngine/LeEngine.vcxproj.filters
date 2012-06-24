@@ -14,8 +14,6 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Functor.h" />
-    <ClInclude Include="Singleton.h" />
     <ClInclude Include="ProfileSample.h">
       <Filter>Profiling</Filter>
     </ClInclude>
@@ -40,14 +38,13 @@
     <ClInclude Include="Camera.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="MathExt.h" />
     <ClInclude Include="Texture.h">
       <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="ProfileSample.h">
       <Filter>Profiling</Filter>
     </ClInclude>
-     <ClInclude Include="Mesh.h">
+    <ClInclude Include="Mesh.h">
       <Filter>Application</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -56,11 +53,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="MathExt.h" />
     <ClInclude Include="Texture.h">
       <Filter>Application</Filter>
     </ClInclude>
-
     <ClInclude Include="ProfileLogHandler.h">
       <Filter>Profiling</Filter>
     </ClInclude>
@@ -71,6 +66,36 @@
     <ClInclude Include="Texture.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="Dator.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Functor.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="ITask.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="ITask.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="MathDefines.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -78,9 +103,6 @@
       <Filter>Memory</Filter>
     </ClCompile>
     <ClCompile Include="MMObject.cpp">
-      <Filter>Memory</Filter>
-    </ClCompile>
-    <ClCompile Include="MMPointer.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
     <ClCompile Include="Log.cpp">
@@ -98,7 +120,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
     </ClCompile>
-
     <ClCompile Include="window.cpp">
       <Filter>Application</Filter>
     </ClCompile>
@@ -117,6 +138,12 @@
     <ClCompile Include="ProfileLogHandler.cpp">
       <Filter>Profiling</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel.cpp">
+      <Filter>Kernel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -132,6 +159,18 @@
     </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{4f03fe23-4feb-4966-9a0d-128454332560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{28c02e89-06cb-4ef5-bf7c-dc56d7f4e3d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{7c27dcc8-fce3-4be1-9335-aee92a7437e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernel">
+      <UniqueIdentifier>{cd215056-41db-472f-b511-0d6963583352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{b8151332-6892-42c7-b496-7be5f56132e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

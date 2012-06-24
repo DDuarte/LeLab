@@ -27,24 +27,26 @@ void Log::WriteP(int target, const char* msg, ...)
     char buffer[1024];
     vsprintf(buffer, msg, args);
 
-    WriteToStream(target, buffer);
+    Write(target, buffer);
 }
 
-void Log::WriteToStream(int target, const char* buffer)
+void Log::WriteToStream(int target, const char* buffer, bool withNewLine)
 {
     std::string time = GetTime();
+
+    char newLine = withNewLine ? '\n' : '\0';
 
     if (target & LOG_APP)
     {
         if (_timeEnabled)
             _appLog << time;
-        _appLog << buffer << '\n';
+        _appLog << buffer << newLine;
 
         if (_consoleEnabled)
         {
             if (_timeEnabled)
                 std::cout << time;
-            std::cout << " APP: " << buffer << '\n';
+            std::cout << " APP: " << buffer << newLine;
         }
 
 #ifdef DEBUG
@@ -56,13 +58,13 @@ void Log::WriteToStream(int target, const char* buffer)
     {
         if (_timeEnabled)
             _clientLog << time;
-        _clientLog << buffer << '\n';
+        _clientLog << buffer << newLine;
 
         if (_consoleEnabled)
         {
             if (_timeEnabled)
                 std::cout << time;
-            std::cout << "CLNT: " << buffer << '\n';
+            std::cout << "CLNT: " << buffer << newLine;
         }
 #ifdef DEBUG
         _clientLog.flush();
@@ -73,13 +75,13 @@ void Log::WriteToStream(int target, const char* buffer)
     {
         if (_timeEnabled)
             _serverLog << time;
-        _serverLog << buffer << '\n';
+        _serverLog << buffer << newLine;
 
         if (_consoleEnabled)
         {
             if (_timeEnabled)
                 std::cout << time;
-            std::cout << "SRVR: " << buffer << '\n';
+            std::cout << "SRVR: " << buffer << newLine;
         }
 #ifdef DEBUG
         _serverLog.flush();
@@ -96,7 +98,35 @@ void Log::WriteToStream(int target, const char* buffer)
     }
 }
 
-std::string Log::GetTime() const
+void Log::WriteToStreamSimple( int target, const char* buffer )
+{
+    if (target & LOG_APP)
+    {
+        _appLog << buffer;
+
+#ifdef DEBUG
+        _appLog.flush();
+#endif
+    }
+
+    if (target & LOG_CLIENT)
+    {
+        _clientLog << buffer;
+#ifdef DEBUG
+        _clientLog.flush();
+#endif
+    }
+
+    if (target & LOG_SERVER)
+    {
+        _serverLog << buffer;
+#ifdef DEBUG
+        _serverLog.flush();
+#endif
+    }
+}
+
+std::string Log::GetTime()
 {
     boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
     std::string time = boost::posix_time::to_iso_extended_string(now);
@@ -105,4 +135,34 @@ std::string Log::GetTime() const
     time.append("] ");
 
     return time;
+}
+
+Log& Log::operator <<(const char* buffer)
+{
+    WriteToStreamSimple(_lastFilter, buffer);
+    return *this;
+}
+
+Log& Log::operator <<(const std::string& str)
+{
+    WriteToStreamSimple(_lastFilter, str.c_str());
+    return *this;
+}
+
+Log& Log::operator <<(const LogFilter filter)
+{
+    if (filter == NL)
+    {
+        WriteNewLine(_lastFilter);
+        _lastFilter = INVALID;
+    }
+    else if (_lastFilter == INVALID)
+    {
+        Write(filter, "", false);
+        _lastFilter = filter;
+    }
+    else
+        _lastFilter = filter;
+
+    return *this;
 }

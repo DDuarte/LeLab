@@ -159,7 +159,7 @@ bool Mesh::InitMaterials( const aiScene* pScene, const std::string& Filename )
                     ret = false;
                 }
                 else
-                    LeLog << LOG_APP << "Loaded texture '" << fullPath.c_str() << "'";
+                    LeLog << LOG_APP << "Loaded texture '" << fullPath.c_str() << "'" << NL;
             }
         }
         // Load a white texture in case the model does not include its own texture

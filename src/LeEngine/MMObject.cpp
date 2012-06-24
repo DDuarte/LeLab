@@ -1,6 +1,8 @@
 #include "MMObject.h"
+#include "Log.h"
 #include <list>
 #include <boost/utility.hpp>
+#include <boost/lexical_cast.hpp>
 
 std::list<MMObject*> MMObject::_liveObjects;
 std::list<MMObject*> MMObject::_deadObjects;
@@ -25,9 +27,8 @@ void MMObject::Release()
 void MMObject::CollectGarbage()
 {
     for (std::list<MMObject*>::iterator itr = _deadObjects.begin(); itr != _deadObjects.end(); ++itr)
-    {
         delete *itr;
-    }
+
     _deadObjects.clear();
 }
 
@@ -38,7 +39,10 @@ void MMObject::CollectRemainingObjects(bool withWarnings /*= false*/)
     {
         if (withWarnings)
         {
-            //! TODO: Implement logging
+            LeLog << LOG_APP <<
+                "CollectRemainingObjects(): Deleting unreleased object (" <<
+                boost::lexical_cast<char*>(*itr) << "," << 
+                boost::lexical_cast<char*>(sizeof(*itr)) << " bytes" << NL;
         }
         delete *itr;
     }

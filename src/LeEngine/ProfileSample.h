@@ -9,6 +9,12 @@ class IProfilerOutputHandler;
 
 #define MAX_PROFILER_SAMPLES 50
 
+#ifdef DEBUG
+#define PROFILE(name) ProfileSample _profile_sample(name);
+#else
+#define PROFILE(name)
+#endif
+
 class ProfileSample
 {
 public:

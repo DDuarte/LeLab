@@ -13,16 +13,20 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Dator.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Functor.h" />
+    <ClInclude Include="ITask.h" />
+    <ClInclude Include="Kernel.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="MathExt.h" />
+    <ClInclude Include="MathDefines.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MMBlob.h" />
     <ClInclude Include="MMObject.h" />
     <ClInclude Include="MMPointer.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="IProfilerOutputHandler.h" />
     <ClInclude Include="ProfileLogHandler.h" />
@@ -31,12 +35,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MMBlob.cpp" />
     <ClCompile Include="MMObject.cpp" />
-    <ClCompile Include="MMPointer.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="ProfileSample.cpp" />
@@ -49,7 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -73,7 +78,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(BOOST_HOME);$(SolutionDir)/../dep/includes;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_HOME)/stage/lib;$(SolutionDir)/../dep/lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)..\bin\</OutDir>
+    <OutDir>$(SolutionDir)/../dep/lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,6 +101,10 @@
       <AdditionalDependencies>IL.lib;ILU.lib;ILUT.lib;glew_static.lib;assimp.lib;freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libc.lib;libcmt.lib;msvcrt.lib;libcd.lib;libcmtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
+    <Lib>
+      <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

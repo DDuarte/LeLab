@@ -1,3 +1,4 @@
+/*
 #include "Log.h"
 #include "Application.h"
 #include "ProfileLogHandler.h"
@@ -29,3 +30,4 @@ int main(int argc, char **argv)
     std::cin.get();
     return 0;
 }
+*/
