@@ -12,9 +12,9 @@ int main(int argc, char* argv[])
     MMObject::CollectRemainingObjects(true);
 
     SoundTask a;
-    a.AddRef();
-    //a->Update();
-    //a->Stop();
+    a.Start();
+    a.Update();
+    a.Stop();
 
     return 0;
 }
