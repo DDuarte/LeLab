@@ -21,7 +21,7 @@ public:
     operator T*() { return _buffer; }
 
     //! Constructor
-    MMDynamicBlob(uint32 size);
+    MMDynamicBlob(uint32 size) { _dataSize=size; _buffer=new T[size]; }
     //! Destructor
     ~MMDynamicBlob() { if (_buffer) delete[] _buffer; }
 
