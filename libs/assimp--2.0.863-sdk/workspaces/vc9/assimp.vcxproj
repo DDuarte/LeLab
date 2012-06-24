@@ -288,8 +288,8 @@
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>copy /y "$(ProjectDir)..\..\include\*"  "$(SolutionDir)..\dep\includes\assimp\"
-copy /y "$(ProjectDir)..\..\include\Compiler\*"  "$(SolutionDir)..\dep\includes\assimp\Compiler\"</Command>
+      <Command>xcopy /D /Y /E "$(ProjectDir)..\..\include\*"  "$(SolutionDir)..\dep\includes\assimp\"
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying include files...</Message>

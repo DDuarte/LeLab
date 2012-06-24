@@ -12,8 +12,6 @@
 #include "VideoUpdate.h"
 #include "TestTask.h"
 
-#include <string>
-
 void Application::Run(int argc, char* argv[])
 {
     new Log;

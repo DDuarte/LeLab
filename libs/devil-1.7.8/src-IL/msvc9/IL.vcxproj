@@ -144,7 +144,7 @@
       <OutputFile>../src/obj/debug/DevIL.bsc</OutputFile>
     </Bscmake>
     <PostBuildEvent>
-      <Command>copy /y "$(ProjectDir)..\..\include\IL\*"  "$(SolutionDir)..\dep\includes\IL\"</Command>
+      <Command>xcopy /D /Y /E "$(ProjectDir)..\..\include\IL\*"  "$(SolutionDir)..\dep\includes\IL\"</Command>
       <Message>Copying include files...</Message>
     </PostBuildEvent>
     <Lib>
