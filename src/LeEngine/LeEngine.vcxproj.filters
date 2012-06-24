@@ -113,9 +113,11 @@
     <ClInclude Include="InputTask.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="VideoUpdate.h">
+      <Filter>Rending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="MMObject.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
@@ -170,6 +172,9 @@
     <ClCompile Include="InputTask.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="VideoUpdate.cpp">
+      <Filter>Rending</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -206,6 +211,9 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{9a5309e4-1a32-44b0-8a8b-7f360e71f461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rending">
+      <UniqueIdentifier>{cf2a5b4d-0770-49bc-ba67-286250fe9f9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

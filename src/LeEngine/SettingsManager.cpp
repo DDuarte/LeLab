@@ -3,6 +3,7 @@
 #include "Dator.h"
 #include "MMObject.h"
 #include "MMPointer.h"
+#include "VideoUpdate.h"
 #include <list>
 #include <fstream>
 #include <string>
@@ -102,10 +103,16 @@ void SettingsManager::ParseSetting(std::string str)
 
 void SettingsManager::CreateStandardSettings()
 {
-    //SETTING(int, CVideoUpdate::screenWidth, CVideoUpdate::scrWidth, "screenX");
+    SETTING(int,  VideoUpdate::ScreenWidth,  VideoUpdate::SourceWidth,      "screenX");
+    SETTING(int,  VideoUpdate::ScreenHeight, VideoUpdate::SourceHeight,     "screenY");
+    SETTING(int,  VideoUpdate::ScreenBPP,    VideoUpdate::SourceBPP,        "screenBPP");
+    SETTING(bool, VideoUpdate::Fullscreen,   VideoUpdate::SourceFullscreen, "fullscreen")
 }
 
 void SettingsManager::DestroyStandardSettings()
 {
-    //CVideoUpdate::screenWidth	= 0;
+    VideoUpdate::ScreenWidth  = NULL;
+    VideoUpdate::ScreenHeight = NULL;
+    VideoUpdate::ScreenBPP    = NULL;
+    VideoUpdate::Fullscreen = NULL;
 }

@@ -4,6 +4,13 @@
 #include "Kernel.h"
 #include "ProfileLogHandler.h"
 #include "ProfileSample.h"
+#include "GlobalTimer.h"
+#include "MMPointer.h"
+#include "ITask.h"
+#include "InputTask.h"
+#include "SoundTask.h"
+#include "VideoUpdate.h"
+#include "TestTask.h"
 
 #include <string>
 
@@ -25,6 +32,31 @@ void Application::Run(int argc, char* argv[])
 
     ProfileLogHandler profileLogHandler;
     ProfileSample::OutputHandler = &profileLogHandler;
+
+    // Init tasks
+
+    MMPointer<GlobalTimer> globalTimer = new GlobalTimer();
+    globalTimer->Priority = 10;
+    Kernel::Get().AddTask(MMPointer<ITask>(globalTimer));
+
+    MMPointer<VideoUpdate> videoTask = new VideoUpdate();
+    videoTask->Priority = 10000;
+    Kernel::Get().AddTask(MMPointer<ITask>(videoTask));
+    
+
+    MMPointer<InputTask> inputTask = new InputTask();
+    inputTask->Priority = 20;
+    Kernel::Get().AddTask(MMPointer<ITask>(inputTask));
+
+    MMPointer<SoundTask> soundTask = new SoundTask();
+    soundTask->Priority = 50;
+    Kernel::Get().AddTask(MMPointer<ITask>(soundTask));
+
+    //game-specific tasks:
+
+    MMPointer<TestTask> tt = new TestTask();
+    tt->Priority = 100;
+    Kernel::Get().AddTask(MMPointer<ITask>(tt));
 
     //**********************
     Kernel::Get().Execute();

@@ -4,27 +4,13 @@
 
 #include <algorithm>
 #include <list>
-#include <GL/glfw.h>
 
 Kernel::Kernel()
 {
-    if (!glfwInit())
-    {
-        std::cout << "Could not initialize glfw." << std::endl;
-        exit(1);
-    }
-
-    if(!glfwOpenWindow(800, 600, 0,0,0,0,0,0, GLFW_WINDOW))
-    {
-        std::cout << "Could not open glfw window." << std::endl;
-        glfwTerminate();
-        exit(1);
-    }
 }
 
 Kernel::~Kernel()
 {
-    glfwTerminate();
 }
 
 int Kernel::Execute()
@@ -32,7 +18,7 @@ int Kernel::Execute()
     while (_taskList.size())
     {
         {
-            PROFILE("Kernel task loop");
+            //PROFILE("Kernel task loop");
 
             std::list< MMPointer<ITask> >::iterator it;
             for (it = _taskList.begin(); it != _taskList.end();)
@@ -57,7 +43,7 @@ int Kernel::Execute()
             MMObject::CollectGarbage();
         }
 #ifdef DEBUG
-        ProfileSample::Output();
+        //ProfileSample::Output();
 #endif
     }
 
