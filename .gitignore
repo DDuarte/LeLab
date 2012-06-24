@@ -29,6 +29,7 @@ ipch/
 
 # Specific files (needs more generic rules)
 dep/lib/*.lib
+dep/includes/*.h
 dep/includes/assimp/*.h
 dep/includes/assimp/*.inl
 dep/includes/assimp/*.hpp
@@ -36,4 +37,3 @@ dep/includes/assimp/Compiler/*.h
 dep/includes/GL/*.h
 dep/includes/IL/*.h
 dep/includes/IL/*.hpp
-
