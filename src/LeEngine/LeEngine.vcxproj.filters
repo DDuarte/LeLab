@@ -110,6 +110,9 @@
     <ClInclude Include="Technique.h">
       <Filter>Application</Filter>
     </ClInclude>
+    <ClInclude Include="InputTask.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -164,6 +167,9 @@
     <ClCompile Include="Technique.cpp">
       <Filter>Application</Filter>
     </ClCompile>
+    <ClCompile Include="InputTask.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Memory">
@@ -197,6 +203,9 @@
     </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{5565734e-9bea-49fa-8786-93cbf4086076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{9a5309e4-1a32-44b0-8a8b-7f360e71f461}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -18,6 +18,7 @@
     <ClInclude Include="Functor.h" />
     <ClInclude Include="GlobalTimer.h" />
     <ClInclude Include="IApplication.h" />
+    <ClInclude Include="InputTask.h" />
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Kernel.h" />
     <ClInclude Include="Log.h" />
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GlobalTimer.cpp" />
+    <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -111,6 +113,7 @@
     <Lib>
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>fmodvc.lib;opengl32.lib;GLFW.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies>fmodvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>

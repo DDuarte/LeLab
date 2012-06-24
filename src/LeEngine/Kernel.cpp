@@ -4,24 +4,27 @@
 
 #include <algorithm>
 #include <list>
-
 #include <GL/glfw.h>
 
 Kernel::Kernel()
 {
-    /*if ( glfwInit() )
-    LeLog << LOG_APP << "GLFW version " <<*/
     if (!glfwInit())
     {
-        LeLog << LOG_APP << "Failed to initialize GLFW" << NL;
-        exit(EXIT_FAILURE);
+        std::cout << "Could not initialize glfw." << std::endl;
+        exit(1);
+    }
+
+    if(!glfwOpenWindow(800, 600, 0,0,0,0,0,0, GLFW_WINDOW))
+    {
+        std::cout << "Could not open glfw window." << std::endl;
+        glfwTerminate();
+        exit(1);
     }
 }
 
 Kernel::~Kernel()
 {
-    // SDLNet_Quit();
-    // SDL_Quit();
+    glfwTerminate();
 }
 
 int Kernel::Execute()

@@ -1,6 +1,8 @@
 #ifndef MMPOINTER_H
 #define MMPOINTER_H
 
+#include <cassert>
+
 //! Smart pointer, interacts with MObject
 template <class T>
 class MMPointer
