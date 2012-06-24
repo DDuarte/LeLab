@@ -288,7 +288,7 @@
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy /D /Y /E "$(ProjectDir)..\..\include\*"  "$(SolutionDir)..\dep\includes\assimp\"
+      <Command>xcopy /D /E /Y "$(ProjectDir)..\..\include\*"  "$(SolutionDir)..\dep\includes\assimp\"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>

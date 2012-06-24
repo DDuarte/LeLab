@@ -113,7 +113,7 @@
       <AdditionalDependencies>fmodvc.lib;opengl32.lib;GLFW.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy /D /Y /E "$(SolutionDir)..\dep\bin\*" "$(SolutionDir)..\bin\"</Command>
+      <Command>xcopy /D /E /Y "$(SolutionDir)..\dep\bin\*" "$(SolutionDir)..\bin\"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying dlls</Message>

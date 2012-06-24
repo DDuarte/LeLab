@@ -196,7 +196,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>xcopy /Y /E "$(ProjectDir)..\..\include\GL\*"  "$(SolutionDir)..\dep\includes\GL\"</Command>
+      <Command>xcopy /D /E /Y "$(ProjectDir)..\..\include\GL\*"  "$(SolutionDir)..\dep\includes\GL\"</Command>
       <Message>Copying include files...</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
