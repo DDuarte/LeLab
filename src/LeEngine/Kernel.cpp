@@ -21,7 +21,7 @@ int Kernel::Execute()
     while (_taskList.size())
     {
         {
-            //PROFILE("Kernel task loop");
+            PROFILE("Kernel task loop");
 
             std::list< MMPointer<ITask> >::iterator it;
             for (it = _taskList.begin(); it != _taskList.end();)

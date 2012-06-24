@@ -7,6 +7,7 @@ class ITask : public MMObject
 {
 public:
     ITask(std::string name) : CanKill(false), Priority(5000), _name(name) {}
+    ITask() : CanKill(false), Priority(5000), _name("") {}
     virtual bool Start() = 0;
     virtual void OnSuspend() {}
     virtual void Update() = 0;

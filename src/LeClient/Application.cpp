@@ -26,9 +26,9 @@ void Application::Run(int argc, char* argv[])
     ProfileLogHandler profileLogHandler;
     ProfileSample::OutputHandler = &profileLogHandler;
 
+    //**********************
     Kernel::Get().Execute();
-
-    LeLog << LOG_APP << "Test1" << "yep" << NL;
+    //**********************
 
     delete Kernel::GetPtr();
     delete SettingsManager::GetPtr();

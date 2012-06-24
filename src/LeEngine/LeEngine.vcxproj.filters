@@ -96,6 +96,18 @@
     <ClInclude Include="MathDefines.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="IApplication.h">
+      <Filter>Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalTimer.h">
+      <Filter>Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundTask.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MMDynamicBlob.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -143,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="Kernel.cpp">
       <Filter>Kernel</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalTimer.cpp">
+      <Filter>Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundTask.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

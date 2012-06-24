@@ -14,39 +14,12 @@ protected:
 
 public:
     //! Indexer
-    T& operator [](int index);
+    T& operator [](int index) { assert(index < i && "Bad index on MMBlob::[]"); return buffer[index]; }
     //! Indirection
     operator T*() { return _buffer; }
 
     //! Sizeof
     AUTO_SIZE
-};
-
-//! Managed buffer, dynamic size
-template <class T>
-class MMDynamicBlob : public MMObject
-{
-protected:
-    //! Length
-    uint32 _dataSize;
-    //! Inner buffer
-    T* _buffer;
-
-public:
-    //! Indexer
-    T& operator [](int index);
-    //! Indirection
-    operator T*() { return _buffer; }
-
-    //! Constructor
-    MMDynamicBlob(uint32 size);
-    //! Destructor
-    ~MMDynamicBlob() { if (_buffer) delete[] _buffer; }
-
-    //! Sizeof
-    uint32 Size() { return _dataSize+sizeof(this); } // override
-    //! Blob size
-    uint32 BlobSize() { return _dataSize; }
 };
 
 #endif // MMBLOB_H

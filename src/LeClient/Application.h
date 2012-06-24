@@ -1,9 +1,9 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Singleton.h"
+#include "IApplication.h"
 
-class Application : public Singleton<Application>
+class Application : public IApplication
 {
 public:
     void Run(int argc, char* argv[]);
