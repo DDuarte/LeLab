@@ -21,6 +21,12 @@ enum LogFilter // flags
 };
 
 //! Simple file logging
+/*!
+    Example usages:
+        - LeLog << LOG_INTERNAL << "This is a test: " << variable << "." << NL;
+        - LeLog.WriteP(LOG_INTERNAL, "This is a test: %s", variable);
+        - LeLog.Write(LOG_INTERNAL, boost::format("This is a test: %1%") % variable);
+*/
 class Log : public Singleton<Log>
 {
 public:

@@ -111,6 +111,12 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>fmodvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <PostBuildEvent>
+      <Command>copy /y "$(SolutionDir)..\dep\bin\*" "$(SolutionDir)..\bin\"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying dlls</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

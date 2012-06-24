@@ -43,6 +43,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ILUT", "..\libs\devil-1.7.8
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "assimp", "..\libs\assimp--2.0.863-sdk\workspaces\vc9\assimp.vcxproj", "{5691E159-2D9B-407F-971F-EA5C592DC524}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "..\libs\glfw-2.7.5\support\msvc100\GLFW.vcxproj", "{4DA03747-F505-4A98-9124-03B3B73B9B3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -114,6 +116,12 @@ Global
 		{5691E159-2D9B-407F-971F-EA5C592DC524}.Release|Win32.Build.0 = release|Win32
 		{5691E159-2D9B-407F-971F-EA5C592DC524}.Release|x64.ActiveCfg = release|x64
 		{5691E159-2D9B-407F-971F-EA5C592DC524}.Release|x64.Build.0 = release|x64
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Debug|Win32.Build.0 = Debug|Win32
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Debug|x64.ActiveCfg = Debug|Win32
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Release|Win32.ActiveCfg = Release|Win32
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Release|Win32.Build.0 = Release|Win32
+		{4DA03747-F505-4A98-9124-03B3B73B9B3B}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
