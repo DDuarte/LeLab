@@ -2,10 +2,7 @@
 #define TECHNIQUE_H
 
 #include "Defines.h"
-
 #include <list>
-
-#include <GL/glew.h>
 
 class Technique
 {

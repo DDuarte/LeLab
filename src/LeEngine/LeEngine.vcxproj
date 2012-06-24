@@ -114,7 +114,6 @@
       <OutputFile>$(SolutionDir)/../dep/lib/$(TargetName).lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>fmodvc.lib;opengl32.lib;GLFW.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies>fmodvc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)..\dep\bin\*" "$(SolutionDir)..\bin\"</Command>

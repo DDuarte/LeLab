@@ -1,12 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#include <cmath>
-#include <string>
 #include <sstream>
-
-#include <GL/glfw.h>
-
 #include <boost/integer.hpp>
 
 #define INVALID_OGL_VALUE 0xFFFFFFFF
@@ -48,25 +43,20 @@ inline void SAFE_DELETE(T* p)
     delete p;
     p = NULL;
 }
-template<typename T>
-std::string ToString(T value)
-{
-    std::ostringstream oss;
-    oss << value;
-    return oss.str();
-}
+
+#define ToStringA(X) (boost::lexical_cast<std::string>((X)))
 
 class Version
 {
 public:
-    uint8 maj, min, rev;
-
-    ostream& operator<<(ostream out)
+    uint8 Major, Minor, Revision;
+    friend std::ostream& operator<<(std::ostream &out, Version &v)
     {
-        out << maj << "." << min "." << rev;
+        out << v.Major << "." << v.Minor << "." << v.Revision;
         return out;
     }
 };
+
 
 
 #endif // DEFINES_H

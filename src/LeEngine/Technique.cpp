@@ -1,8 +1,8 @@
 #include "Technique.h"
 
 #include <cstdio>
-#include <string.h>
 #include <string>
+#include <GL/glew.h>
 
 Technique::Technique()
 {
@@ -40,7 +40,7 @@ bool Technique::AddShader(uint32 shaderType, const char* shaderText)
     uint32 shaderObj = glCreateShader(shaderType);
 
     if (shaderObj == 0)
-        throw std::runtime_error("Error creating shader type " + ToString(shaderType) + ".");
+        throw std::runtime_error("Error creating shader type " + ToStringA(shaderType) + ".");
 
     _shaderObjList.push_back(shaderObj);
 
@@ -59,6 +59,6 @@ bool Technique::AddShader(uint32 shaderType, const char* shaderText)
     {
         char InfoLog[1024];
         glGetShaderInfoLog(shaderObj, 1024, NULL, InfoLog);
-        throw std::runtime_error("Error compiling shader type " + ToString(shaderType) + ": '" + InfoLog + "'.");
+        throw std::runtime_error("Error compiling shader type " + ToStringA(shaderType) + ": '" + InfoLog + "'.");
     }
 }
