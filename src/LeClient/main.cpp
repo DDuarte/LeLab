@@ -8,5 +8,7 @@ int main(int argc, char* argv[])
     Application::Get().Run(argc, argv);
     delete Application::GetPtr();
 
+    system("PAUSE");
+
     return 0;
 }

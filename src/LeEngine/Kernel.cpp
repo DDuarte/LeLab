@@ -1,5 +1,4 @@
 #include "Kernel.h"
-#include "ProfileSample.h"
 #include "Log.h"
 
 #include <algorithm>
@@ -15,34 +14,27 @@ int Kernel::Execute()
 {
     while (_taskList.size())
     {
+        std::list< shared_ptr<ITask> >::iterator it, thisIt;
+        for (it = _taskList.begin(); it != _taskList.end();)
         {
-            //PROFILE("Kernel task loop");
+            ITask* t = (*it).get();
+            ++it;
+            if (!t->CanKill)
+                t->Update();
+        }
 
-            std::list< shared_ptr<ITask> >::iterator it, thisIt;
-            for (it = _taskList.begin(); it != _taskList.end();)
+        for (it = _taskList.begin(); it != _taskList.end();)
+        {
+            ITask* t = (*it).get();
+            thisIt = it;
+            ++it;
+            if (t->CanKill)
             {
-                ITask* t = (*it).get();
-                ++it;
-                if (!t->CanKill)
-                    t->Update();
-            }
-
-            for (it = _taskList.begin(); it != _taskList.end();)
-            {
-                ITask* t = (*it).get();
-                thisIt = it;
-                ++it;
-                if (t->CanKill)
-                {
-                    t->Stop();
-                    _taskList.erase(thisIt);
-                    t = NULL;
-                }
+                t->Stop();
+                _taskList.erase(thisIt);
+                t = NULL;
             }
         }
-//#ifdef DEBUG
-//        ProfileSample::Output();
-//#endif
     }
 
     return 0;

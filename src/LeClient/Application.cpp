@@ -2,8 +2,6 @@
 #include "Log.h"
 #include "SettingsManager.h"
 #include "Kernel.h"
-#include "ProfileLogHandler.h"
-#include "ProfileSample.h"
 #include "GlobalTimer.h"
 #include "ITask.h"
 #include "InputTask.h"
@@ -29,9 +27,6 @@ void Application::Run(int argc, char* argv[])
     if (argc > 1)
         for (int i = 0; i < argc; ++i)
             SettingsManager::Get().ParseSetting(argv[i]);
-
-    ProfileLogHandler profileLogHandler;
-    ProfileSample::OutputHandler = &profileLogHandler;
 
     // Init tasks
 

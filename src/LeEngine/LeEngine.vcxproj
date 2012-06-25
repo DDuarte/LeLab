@@ -27,9 +27,6 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SettingsManager.h" />
-    <ClInclude Include="IProfilerOutputHandler.h" />
-    <ClInclude Include="ProfileLogHandler.h" />
-    <ClInclude Include="ProfileSample.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundTask.h" />
     <ClInclude Include="VideoUpdate.h" />
@@ -43,8 +40,6 @@
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="ProfileSample.cpp" />
-    <ClCompile Include="ProfileLogHandler.cpp" />
     <ClCompile Include="SoundTask.cpp" />
     <ClCompile Include="VideoUpdate.cpp" />
   </ItemGroup>
