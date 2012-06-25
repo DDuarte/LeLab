@@ -2,8 +2,11 @@
 #define KERNEL_H
 
 #include "Singleton.h"
-#include "MMPointer.h"
 #include "ITask.h"
+
+#include <list>
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 class Kernel : public Singleton<Kernel>
 {
@@ -13,15 +16,15 @@ public:
 
     int Execute();
 
-    bool AddTask(MMPointer<ITask>& t);
-    void SuspendTask(MMPointer<ITask>& t);
-    void ResumeTask(MMPointer<ITask>& t);
-    void RemoveTask(MMPointer<ITask>& t);
+    bool AddTask(const shared_ptr<ITask>& t);
+    void SuspendTask(const shared_ptr<ITask>& t);
+    void ResumeTask(const shared_ptr<ITask>& t);
+    void RemoveTask(const shared_ptr<ITask>& t);
     void KillAllTasks();
 
 protected:
-    std::list< MMPointer<ITask> > _taskList;
-    std::list< MMPointer<ITask> > _pausedTaskList;
+    std::list< shared_ptr<ITask> > _taskList;
+    std::list< shared_ptr<ITask> > _pausedTaskList;
 };
 
 #endif // KERNEL_H

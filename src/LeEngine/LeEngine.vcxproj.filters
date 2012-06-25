@@ -2,15 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="MMBlob.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="MMObject.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
-    <ClInclude Include="MMPointer.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
@@ -98,9 +89,6 @@
     <ClInclude Include="SoundTask.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="MMDynamicBlob.h">
-      <Filter>Memory</Filter>
-    </ClInclude>
     <ClInclude Include="Technique.h">
       <Filter>Application</Filter>
     </ClInclude>
@@ -112,9 +100,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MMObject.cpp">
-      <Filter>Memory</Filter>
-    </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>Logging</Filter>
     </ClCompile>
@@ -159,11 +144,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Memory">
-      <UniqueIdentifier>{933bbafb-4f41-466e-b65f-25486ce13c6a}</UniqueIdentifier>
-      <Extensions>
-      </Extensions>
-    </Filter>
     <Filter Include="Logging">
       <UniqueIdentifier>{ddd98ac9-0c0d-4245-993b-74eeb5a34b1e}</UniqueIdentifier>
     </Filter>

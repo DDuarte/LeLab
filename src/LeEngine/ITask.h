@@ -1,9 +1,9 @@
 #ifndef ITASK_H
 #define ITASK_H
 
-#include "MMObject.h"
+#include <string>
 
-class ITask : public MMObject
+class ITask
 {
 public:
     ITask(std::string name) : CanKill(false), Priority(5000), _name(name) {}

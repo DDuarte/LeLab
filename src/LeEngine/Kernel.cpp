@@ -4,14 +4,12 @@
 
 #include <algorithm>
 #include <list>
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
-Kernel::Kernel()
-{
-}
+Kernel::Kernel() {}
 
-Kernel::~Kernel()
-{
-}
+Kernel::~Kernel() {}
 
 int Kernel::Execute()
 {
@@ -20,10 +18,10 @@ int Kernel::Execute()
         {
             //PROFILE("Kernel task loop");
 
-            std::list< MMPointer<ITask> >::iterator it, thisIt;
+            std::list< shared_ptr<ITask> >::iterator it, thisIt;
             for (it = _taskList.begin(); it != _taskList.end();)
             {
-                ITask* t = *it;
+                ITask* t = (*it).get();
                 ++it;
                 if (!t->CanKill)
                     t->Update();
@@ -31,7 +29,7 @@ int Kernel::Execute()
 
             for (it = _taskList.begin(); it != _taskList.end();)
             {
-                ITask* t = *it;
+                ITask* t = (*it).get();
                 thisIt = it;
                 ++it;
                 if (t->CanKill)
@@ -41,7 +39,6 @@ int Kernel::Execute()
                     t = NULL;
                 }
             }
-            MMObject::CollectGarbage();
         }
 //#ifdef DEBUG
 //        ProfileSample::Output();
@@ -51,7 +48,7 @@ int Kernel::Execute()
     return 0;
 }
 
-bool Kernel::AddTask(MMPointer<ITask>& t)
+bool Kernel::AddTask(const shared_ptr<ITask>& t)
 {
     if (!t->Start())
     {
@@ -59,7 +56,7 @@ bool Kernel::AddTask(MMPointer<ITask>& t)
         return false;
     }
 
-    std::list< MMPointer<ITask> >::iterator itr;
+    std::list< shared_ptr<ITask> >::iterator itr;
     for (itr = _taskList.begin(); itr != _taskList.end(); ++itr)
         if ((*itr)->Priority > t->Priority)
             break;
@@ -68,9 +65,9 @@ bool Kernel::AddTask(MMPointer<ITask>& t)
     return true;
 }
 
-void Kernel::ResumeTask(MMPointer<ITask>& t)
+void Kernel::ResumeTask(const shared_ptr<ITask>& t)
 {
-    std::list< MMPointer<ITask> >::iterator itr = std::find(_pausedTaskList.begin(), _pausedTaskList.end(), t);
+    std::list< shared_ptr<ITask> >::iterator itr = std::find(_pausedTaskList.begin(), _pausedTaskList.end(), t);
 
     if (itr != _pausedTaskList.end())
     {
@@ -88,7 +85,7 @@ void Kernel::ResumeTask(MMPointer<ITask>& t)
 }
 
 
-void Kernel::RemoveTask(MMPointer<ITask>& t)
+void Kernel::RemoveTask(const shared_ptr<ITask>& t)
 {
     if (std::find(_taskList.begin(), _taskList.end(), t) != _taskList.end())
         t->CanKill = true;

@@ -25,10 +25,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="MathDefines.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MMBlob.h" />
-    <ClInclude Include="MMDynamicBlob.h" />
-    <ClInclude Include="MMObject.h" />
-    <ClInclude Include="MMPointer.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="IProfilerOutputHandler.h" />
@@ -44,7 +40,6 @@
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MMObject.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="Texture.cpp" />

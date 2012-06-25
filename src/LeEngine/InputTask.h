@@ -3,8 +3,6 @@
 
 #include "ITask.h"
 #include "Defines.h"
-#include "MMPointer.h"
-#include "MMDynamicBlob.h"
 
 #include <map>
 #include <GL/glfw.h>
@@ -23,7 +21,6 @@ public:
 
     static std::map<int, bool> Keys;
     static std::map<int, bool> OldKeys;
-    //static int KeyCount;
 
     //! glfwSetKeyCallback
     static void GLFWCALL KeyHandler(int key, int action) { OldKeys[key] = Keys[key]; Keys[key] = (action == GLFW_PRESS); }
@@ -57,8 +54,6 @@ public:
     static bool MouseStillDown(int button) { return CurMouse(button) && OldMouse(button); }
     static bool MouseUp(int button)        { return !CurMouse(button) && OldMouse(button); }
     static bool MouseStillUp(int button)   { return !CurMouse(button) && !OldMouse(button); }
-
-    AUTO_SIZE;
 };
 
 #endif // INPUTTASK_H

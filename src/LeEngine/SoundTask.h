@@ -1,14 +1,15 @@
 #ifndef SOUNDTASK_H
 #define SOUNDTASK_H
 
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
+
 #include "ITask.h"
-#include "MMPointer.h"
-#include "MMDynamicBlob.h"
 
 class SoundTask : public ITask
 {
 protected:
-    MMPointer< MMDynamicBlob<bool> > _isPaused;
+    bool* _isPaused; // I couldn't use a scoped_array or shared_array
 public:
     SoundTask() {}
 
@@ -17,8 +18,6 @@ public:
     void Update() {}
     void OnResume();
     void Stop();
-
-    AUTO_SIZE;
 };
 
 #endif // SOUNDTASK_H

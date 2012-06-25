@@ -5,12 +5,14 @@
 #include "ProfileLogHandler.h"
 #include "ProfileSample.h"
 #include "GlobalTimer.h"
-#include "MMPointer.h"
 #include "ITask.h"
 #include "InputTask.h"
 #include "SoundTask.h"
 #include "VideoUpdate.h"
 #include "TestTask.h"
+
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 void Application::Run(int argc, char* argv[])
 {
@@ -33,27 +35,27 @@ void Application::Run(int argc, char* argv[])
 
     // Init tasks
 
-    MMPointer<GlobalTimer> globalTimer = new GlobalTimer();
+    shared_ptr<GlobalTimer> globalTimer(new GlobalTimer);
     globalTimer->Priority = 10;
-    Kernel::Get().AddTask(MMPointer<ITask>(globalTimer));
+    Kernel::Get().AddTask(globalTimer);
 
-    MMPointer<VideoUpdate> videoTask = new VideoUpdate();
+    shared_ptr<VideoUpdate> videoTask(new VideoUpdate);
     videoTask->Priority = 10000;
-    Kernel::Get().AddTask(MMPointer<ITask>(videoTask));
+    Kernel::Get().AddTask(videoTask);
 
-    MMPointer<InputTask> inputTask = new InputTask();
+    shared_ptr<InputTask> inputTask(new InputTask);
     inputTask->Priority = 20;
-    Kernel::Get().AddTask(MMPointer<ITask>(inputTask));
+    Kernel::Get().AddTask(inputTask);
 
-    MMPointer<SoundTask> soundTask = new SoundTask();
+    shared_ptr<SoundTask> soundTask(new SoundTask);
     soundTask->Priority = 50;
-    Kernel::Get().AddTask(MMPointer<ITask>(soundTask));
+    Kernel::Get().AddTask(soundTask);
 
     // Game specific tasks
 
-    MMPointer<TestTask> tt = new TestTask();
+    shared_ptr<TestTask> tt(new TestTask);
     tt->Priority = 100;
-    Kernel::Get().AddTask(MMPointer<ITask>(tt));
+    Kernel::Get().AddTask(tt);
 
     //**********************
     Kernel::Get().Execute();

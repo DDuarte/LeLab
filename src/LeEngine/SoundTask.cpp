@@ -1,8 +1,8 @@
 #include "SoundTask.h"
-#include "MMPointer.h"
-#include "MMDynamicBlob.h"
 #include "Defines.h"
 #include <fmod.h>
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 bool SoundTask::Start()
 {
@@ -14,7 +14,7 @@ bool SoundTask::Start()
 void SoundTask::OnSuspend()
 {
     int channelCount = FSOUND_GetMaxChannels();
-    _isPaused = new MMDynamicBlob<bool>(channelCount);
+    _isPaused = new bool[channelCount];
 
     for (int i = 0; i < channelCount; ++i)
         _isPaused[i] = FSOUND_IsPlaying(i);
@@ -31,7 +31,7 @@ void SoundTask::OnResume()
             if (_isPaused[i])
                 FSOUND_SetPaused(i, 0);
 
-        _isPaused = NULL;
+        delete[] _isPaused;
     }
 }
 

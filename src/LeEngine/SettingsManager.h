@@ -3,9 +3,10 @@
 
 #include "Dator.h"
 #include "Singleton.h"
-#include "MMPointer.h"
 #include <string>
 #include <map>
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 class SettingsManager : public Singleton<SettingsManager>
 {
@@ -13,7 +14,7 @@ public:
     SettingsManager() { _settingMap.clear(); CreateStandardSettings(); }
     virtual ~SettingsManager() { DestroyStandardSettings(); }
 
-    void RegisterVariable(std::string& name, MMPointer<BaseDator>& var) { _settingMap[name] = var; }
+    void RegisterVariable(std::string& name, shared_ptr<BaseDator>& var) { _settingMap[name] = var; }
     void SetVariable(std::string& name, std::string& value, int bias = 0);
 
     void CreateStandardSettings();;
@@ -23,7 +24,7 @@ public:
     void ParseFile(std::string fileName);
 
 protected:
-    std::map< std::string, MMPointer<BaseDator> > _settingMap;
+    std::map< std::string, shared_ptr<BaseDator> > _settingMap;
 };
 
 #endif // SETTINGSMANAGER_H

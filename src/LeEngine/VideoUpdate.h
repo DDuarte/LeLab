@@ -2,20 +2,21 @@
 #define VIDEOUPDATE_H
 
 #include "ITask.h"
-#include "MMPointer.h"
 #include "Dator.h"
+
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 class VideoUpdate : public ITask
 {
 public:
     VideoUpdate() {}
     virtual ~VideoUpdate() {}
-    AUTO_SIZE;
 
     static int SourceWidth, SourceHeight, SourceBPP;
     static bool SourceFullscreen;
-    static MMPointer< Dator<int> > ScreenWidth, ScreenHeight, ScreenBPP;
-    static MMPointer< Dator<bool> > Fullscreen;
+    static shared_ptr< Dator<int> > ScreenWidth, ScreenHeight, ScreenBPP;
+    static shared_ptr< Dator<bool> > Fullscreen;
 
     bool Start();
     void Update();

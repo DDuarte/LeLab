@@ -18,7 +18,6 @@ public:
     }
 
     void Stop() {}
-    AUTO_SIZE;
 };
 
 #endif // TESTTASK_H

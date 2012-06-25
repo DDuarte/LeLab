@@ -7,8 +7,6 @@
 class GlobalTimer : public ITask
 {
 public:
-    AUTO_SIZE;
-
     //! Difference between last and current frame (s)
     static float dT;
     //! Time of the previous frame (ms)

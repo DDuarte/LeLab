@@ -1,12 +1,13 @@
 #include "SettingsManager.h"
 #include "Log.h"
 #include "Dator.h"
-#include "MMObject.h"
-#include "MMPointer.h"
 #include "VideoUpdate.h"
 #include <list>
 #include <fstream>
 #include <string>
+
+#include <boost/scoped_array.hpp>
+using boost::shared_ptr;
 
 void SettingsManager::ParseFile(std::string fileName)
 {
@@ -98,11 +99,14 @@ void SettingsManager::ParseSetting(std::string str)
     SetVariable(name, value, bias);
 }
 
-#define SETTING(type, target, var, name) target=new Dator<type>(var);RegisterVariable(std::string(name),MMPointer<BaseDator>(target));
-#define LIST(type, target, var, name) target=new ListDator<type>(var);RegisterVariable(std::string(name),MMPointer<BaseDator>(target));
+#define SETTING(type, target, var, name) target = shared_ptr<Dator<type>>(new Dator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
+#define LIST(type, target, var, name) target=shared_ptr<ListDator<type>>(new ListDator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
 
 void SettingsManager::CreateStandardSettings()
 {
+
+    //target(new Dator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
+
     SETTING(int,  VideoUpdate::ScreenWidth,  VideoUpdate::SourceWidth,      "screenX");
     SETTING(int,  VideoUpdate::ScreenHeight, VideoUpdate::SourceHeight,     "screenY");
     SETTING(int,  VideoUpdate::ScreenBPP,    VideoUpdate::SourceBPP,        "screenBPP");
@@ -111,8 +115,4 @@ void SettingsManager::CreateStandardSettings()
 
 void SettingsManager::DestroyStandardSettings()
 {
-    VideoUpdate::ScreenWidth  = NULL;
-    VideoUpdate::ScreenHeight = NULL;
-    VideoUpdate::ScreenBPP    = NULL;
-    VideoUpdate::Fullscreen = NULL;
 }

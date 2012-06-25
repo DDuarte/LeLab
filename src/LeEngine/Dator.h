@@ -1,12 +1,12 @@
 #ifndef DATOR_H
 #define DATOR_H
 
-#include "MMObject.h"
 #include <string>
 #include <list>
 #include <algorithm>
+#include <boost/lexical_cast.hpp>
 
-class BaseDator : public MMObject
+class BaseDator
 {
 protected:
     BaseDator() {}
@@ -42,8 +42,6 @@ public:
     operator std::string() { return ToString(_target); }
 
     bool HasMultipleValues() const { return false; }
-
-    AUTO_SIZE;
 };
 
 template <class T>
@@ -67,8 +65,6 @@ public:
     operator std::list<T>&() { return _values; }
  
     bool HasMultipleValues() const { return true; }
-
-    AUTO_SIZE;
 };
 
 

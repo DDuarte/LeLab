@@ -4,15 +4,17 @@
 #include <GL/glfw.h>
 #include <cassert>
 #include <boost/format.hpp>
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 int VideoUpdate::SourceWidth  = 800;
 int VideoUpdate::SourceHeight = 600;
 int VideoUpdate::SourceBPP    = 16;
 bool VideoUpdate::SourceFullscreen = true;
-MMPointer< Dator<int> > VideoUpdate::ScreenWidth  = 0;
-MMPointer< Dator<int> > VideoUpdate::ScreenHeight = 0;
-MMPointer< Dator<int> > VideoUpdate::ScreenBPP    = 0;
-MMPointer< Dator<bool> > VideoUpdate::Fullscreen  = 0;
+shared_ptr< Dator<int> > VideoUpdate::ScreenWidth;
+shared_ptr< Dator<int> > VideoUpdate::ScreenHeight;
+shared_ptr< Dator<int> > VideoUpdate::ScreenBPP;
+shared_ptr< Dator<bool> > VideoUpdate::Fullscreen;
 
 bool VideoUpdate::Start()
 {
