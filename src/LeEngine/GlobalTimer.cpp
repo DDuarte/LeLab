@@ -18,5 +18,5 @@ void GlobalTimer::Update()
 {
     LastFrameIndex = ThisFrameIndex;
     ThisFrameIndex = clock();
-    dT = ((float)(ThisFrameIndex - LastFrameIndex))/1000.0f;
+    dT = (float)(ThisFrameIndex - LastFrameIndex);
 }
