@@ -89,6 +89,9 @@
     <ClInclude Include="VideoUpdate.h">
       <Filter>Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
