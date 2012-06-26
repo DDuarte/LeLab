@@ -21,6 +21,7 @@
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Kernel.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Technique.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="MathDefines.h" />

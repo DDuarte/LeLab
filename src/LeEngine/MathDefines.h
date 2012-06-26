@@ -22,4 +22,7 @@ inline bool IsNaN(T val)  { return boost::math::fpclassify(val) == FP_NAN; }
 template <typename T>
 inline bool IsInfinite(T val) { return boost::math::fpclassify(val) == FP_INFINITE; }
 
+template <typename T>
+inline T Sqr(T val) { return val * val; }
+
 #endif // MATHDEFINES_H
