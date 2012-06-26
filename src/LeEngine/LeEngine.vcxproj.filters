@@ -89,6 +89,9 @@
     <ClInclude Include="Vector2.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
     <ClInclude Include="Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>

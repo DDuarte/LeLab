@@ -49,23 +49,23 @@ public:
     Vector3<T> operator *(const Vector3<T>& vec) const
     {
         Quaternion<T> other(vec.Normalize(), 0);
-        other =  other * Conjugate() * *this;
+        other =  other * Conjugate() * (*this);
         return Vector3<T>(other.X, other.Y, other.Z);
     }
 
     T Magnitude() const { return sqrt(X*X + Y*Y + Z*Z + W*W); }
+    T MagnitudeSqr() const { return X*X + Y*Y + Z*Z + W*W; }
 
     void Normalise()
     {
-        T mag2 = X*X + Y*Y + Z*Z + W*W;
-        if (Abs(mag2) > 0 && Abs(mag2 - 1) > 0)
+        if (!IsZero(MagnitudeSqr() - static_cast<T>(1))
         {
-            mag = Magnitude();
+            T mag = Magnitude();
+            assert(!IsZero(mag));
             X /= mag;
             Y /= mag;
             Z /= mag;
             W /= mag;
-
         }
     }
 

@@ -126,13 +126,15 @@ public:
 	//! Normalizes this vector
     void Normalize()
     {
-        T length = Magnitude();
-        assert(length != 0);
-        X /= length;
-        Y /= length;
-        Z /= length;
-
-		assert(IsZero(MagnitudeSqr() - static_cast<T>(1.0)));
+        if (!IsZero(MagnitudeSqr() - static_cast<T>(1))
+        {
+            T length = Magnitude();
+            assert (!IsZero(length));
+            X /= length;
+            Y /= length;
+            Z /= length;
+            assert(IsZero(MagnitudeSqr() - static_cast<T>(1.0)));
+        }
     }
 
 	//! Returns the dot product (a scalar) between this vector and some other
