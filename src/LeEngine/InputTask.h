@@ -5,6 +5,7 @@
 #include "Defines.h"
 
 #include <map>
+#include <GL/glew.h>
 #include <GL/glfw.h>
 
 class InputTask : public ITask
@@ -35,6 +36,7 @@ public:
 
     // Mouse
 
+    static int MouseX, MouseY;
     static int dX, dY;
     static int Wheel, OldWheel;
     static std::map<int, bool> Buttons;
@@ -43,7 +45,7 @@ public:
     //! glfwSetMouseButtonCallback
     static void GLFWCALL MouseButtonHandler(int button, int action) { OldButtons[button] = Buttons[button]; Buttons[button] = (button == GLFW_PRESS); }
     //! glfwSetMousePosCallback
-    static void GLFWCALL MousePosHandler(int x, int y) { dX = x; dY = y; }
+    static void GLFWCALL MousePosHandler(int x, int y) { dX = x - MouseX; dY = y - MouseY; MouseX = x; MouseY = y; }
     //! glfwSetMouseWheelCallback
     static void GLFWCALL MouseWheelHandler(int pos) { OldWheel = Wheel; Wheel = pos; }
 

@@ -1,9 +1,12 @@
 #include "InputTask.h"
+#include <GL/glew.h>
 #include <GL/glfw.h>
 #include <map>
 
 int InputTask::dX = 0;
 int InputTask::dY = 0;
+int InputTask::MouseX = 0;
+int InputTask::MouseY = 0;
 int InputTask::Wheel = 0;
 int InputTask::OldWheel = 0;
 std::map<int, bool> InputTask::Buttons = std::map<int, bool>();
