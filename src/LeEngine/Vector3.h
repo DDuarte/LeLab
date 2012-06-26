@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef VECTOR3_H
+#define VECTOR3_H
 
 #include <cmath>
 #include "MathDefines.h"
@@ -38,7 +38,7 @@ public:
     Vector3<T> operator /(const T scalar) const { assert(!IsZero(scalar)); return Vector3<T>(X / scalar, Y / scalar, Z / scalar); }
 
     Vector3<T> operator +() const { return *this; }
-    Vector3<T> operator -() const { return Vector<T>(-X, -Y, -Z); }
+    Vector3<T> operator -() const { return Vector3<T>(-X, -Y, -Z); }
 
     Vector3<T>& operator =(const Vector3<T>& other)
     {
@@ -113,10 +113,14 @@ public:
         return *this;
     }
 
+    //! The magnitude or length of this vector
     T Magnitude() const { return sqrt(X*X + Y*Y + Z*Z); }
+    //! The squared magnitude or length of this vector (more efficient)
     T MagnitudeSqr() const { return X*X + Y*Y + Z*Z; }
 
+    //! The distance of this vector to other vector
     T Distance(const Vector3<T>& other) const { return (*this - other).Magnitude(); }
+    //! The squared distance of this vector to other vector (more efficient)
     T DistanceSqr(const Vector3<T>& other) const { return (*this - other).MagnitudeSqr(); }
 
 	//! Normalizes this vector
@@ -166,4 +170,4 @@ public:
 	}
 };
 
-#endif // VECTOR_H
+#endif // VECTOR3_H
