@@ -5,12 +5,6 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
-    <ClInclude Include="ProfileSample.h">
-      <Filter>Profiling</Filter>
-    </ClInclude>
-    <ClInclude Include="ProfileLogHandler.h">
-      <Filter>Profiling</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Application</Filter>
     </ClInclude>
@@ -96,12 +90,6 @@
   <ItemGroup>
     <ClCompile Include="Log.cpp">
       <Filter>Logging</Filter>
-    </ClCompile>
-    <ClCompile Include="ProfileSample.cpp">
-      <Filter>Profiling</Filter>
-    </ClCompile>
-    <ClCompile Include="ProfileLogHandler.cpp">
-      <Filter>Profiling</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Application</Filter>

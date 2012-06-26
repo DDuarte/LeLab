@@ -5,7 +5,7 @@
 #include <boost/math/special_functions/fpclassify.hpp>
 #include <limits>
 
-const double PI = boost::math::constants::pi<float>();
+const float PI = boost::math::constants::pi<float>();
 
 inline float DegToRad(float degrees) { return degrees * (PI / 180.0f); }
 inline float RadToDeg(float radians) { return radians * (180.0f / PI); }
