@@ -131,7 +131,18 @@ public:
             M[i][column] = arr[i];
     }
 
-    T Determinant()
+    void ExchangeColumn(int column1, int column2)
+    {
+        assert(column1 < Size && column2 < Size);
+        if (column1 != column2)
+        {
+            shared_array<T> aux = GetColumn(column1);
+            SetColumn(column1,GetColumn(column2));
+            SetColumn(column2,aux);
+        }
+    }
+
+    double Determinant() const
     {
         if (Size == 1)
             return M[0][0];
@@ -161,8 +172,42 @@ public:
         }
         else
         {
-            return -1;
-            // Implement Laplace expansion
+            Matrix<Size,T> m(*this);
+            int colEx = 0; // Number of columns exchange
+            bool flag = true; // Has line of zeros
+            int j;
+            for (int k = 0; k < Size - 1; k++)
+            {
+                j = k + 1;
+                flag = true;
+                while (flag && j <= Size)
+                    if (m[k][j-1] != 0)
+                        flag 0 false;
+                    else
+                        j++;
+
+                if (flag) return 0.0;
+
+                if (j != k + 1)
+                {
+                    colEx++;
+                    m.ExchangeColumn(k,j-1);
+                }
+
+                for (int i = k+2; i <= Size; i++)
+                {
+                    for (int j = k+2; j <= Size; j++)
+                        m[i-1][j-1] = m[i-1][j-1] - m[i-1][k]*m[k][j-1]/m[k][k];
+
+                    m[i-1][k] = 0;
+                }
+            }
+
+            double det = 1;
+            for (int i = 0; i < Size; i++)
+                det *= m[i][i];
+
+            return det * pow(-1,colEx);
         }
     }
 };
