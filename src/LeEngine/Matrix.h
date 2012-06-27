@@ -49,7 +49,7 @@ public:
 
     T* operator[](int row) const { assert(row < Size); return (T*)M[row]; }
 
-    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(M, other.M, Size * Size * sizeof(T)); }
+    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(M, other.M, Size * Size * sizeof(T)); return *this; }
 
     bool operator ==(const Matrix<Size, T>& other) const { return memcmp(M, other.M, Size * Size * sizeof(T)) == 0; }
     bool operator !=(const Matrix<Size, T>& other) const { return !operator ==(other); }
@@ -69,6 +69,15 @@ public:
         for (int row = 0; row < Size; ++row)
             for (int col = 0; col < Size; ++col)
                 result.M[row][col] = M[row][col] - other.M[row][col];
+        return result;
+    }
+
+    Matrix<Size, T> operator -() const
+    {
+        Matrix<Size, T> result;
+        for (int row = 0; row < Size; ++row)
+            for (int col = 0; col < Size; ++col)
+                result.M[row][col] = -M[row][col];
         return result;
     }
 
@@ -92,6 +101,15 @@ public:
         return result;
     }
 
+    Matrix<Size, T> operator *(const T& scalar) const
+    {
+        Matrix<Size, T> result;
+        for (int row = 0; row < Size; ++row)
+            for (int col = 0; col < Size; ++col)
+                result[row][col] = M[row][col] * scalar;
+        return result;
+    }
+
     shared_array<T> GetRow(int row) const
     {
         assert(row < Size);
@@ -107,8 +125,6 @@ public:
         assert(column < Size);
 
         shared_array<T> col(new T[Size]);
-
-        T col[Size];
         for (int i = 0; i < Size; ++i)
             col[i] = M[i][column];
         return col;
@@ -118,7 +134,7 @@ public:
     {
         assert(row < Size);
         for (int i = 0; i < Size; ++i)
-            M[row][i] = r[i];
+            M[row][i] = arr[i];
 
         return *this;
     }
@@ -138,8 +154,8 @@ public:
         if (column1 != column2)
         {
             shared_array<T> aux = GetColumn(column1);
-            SetColumn(column1,GetColumn(column2));
-            SetColumn(column2,aux);
+            SetColumn(column1, GetColumn(column2).get());
+            SetColumn(column2, aux.get());
         }
 
         return *this;
@@ -170,8 +186,8 @@ public:
                 M[1][1] * (M[2][0] * M[3][3] - M[2][3] * M[3][0]) +
                 M[1][3] * (M[2][0] * M[3][1] - M[2][1] * M[3][0])) -
                 M[0][3] * (M[1][0] * (M[2][1] * M[3][2] - M[2][2] * M[3][1]) -
-                M[1][1] * (M[2][0] * M[3][2] - M[2][2] M[3][0]) +
-                M[1][2] * (M[2][0] * M[3][1] - M[2][1] M[3][0]));
+                M[1][1] * (M[2][0] * M[3][2] - M[2][2] * M[3][0]) +
+                M[1][2] * (M[2][0] * M[3][1] - M[2][1] * M[3][0]));
         }
         else
         {
@@ -210,7 +226,7 @@ public:
             for (int i = 0; i < Size; ++i)
                 det *= m[i][i];
 
-            return det * pow(-1, colEx);
+            return det * pow(-1.0, colEx);
         }
     }
 
@@ -219,7 +235,7 @@ public:
         Matrix<Size, T> aux(*this);
 
         for (size_t i = 0; i < Size; ++i)
-            SetRow(i, aux.GetColumn(i));
+            SetRow(i, aux.GetColumn(i).get());
 
         return *this;
     }
@@ -228,6 +244,27 @@ public:
     {
         Matrix<Size, T> aux(*this);
         return aux.Transpose();
+    }
+
+    Matrix<Size, T> CofactorsMatrix() const
+    {
+        assert(false && "Not implemented yet.");
+        return Matrix<Size, T>();
+    }
+
+    //! Returns true if matrix is invertible. Result is stored in first argument, result.
+    bool Inverse(Matrix<Size, T>& result) const
+    {
+        double determinant = Determinant();
+
+        if (IsZero(determinant))
+            return false;
+
+        Matrix<Size, T> mcopy(*this);
+
+        determinant = 1.0 / determinant;
+        result = mcopy.Transpose().CofactorsMatrix() * (T)determinant;
+        return true;
     }
 };
 
