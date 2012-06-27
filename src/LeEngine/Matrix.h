@@ -117,21 +117,25 @@ public:
         return col;
     }
 
-    void SetRow(int row, const T arr[Size])
+    Matrix<Size,T>& SetRow(int row, const T arr[Size])
     {
         assert(row < Size);
         for (int i = 0; i < Size; ++i)
             M[row][i] = r[i];
+
+        return *this;
     }
 
-    void SetColumn(int column, const T arr[Size])
+    Matrix<Size,T>& SetColumn(int column, const T arr[Size])
     {
         assert(column < Size);
         for (int i = 0; i < Size; ++i)
             M[i][column] = arr[i];
+
+        return *this;
     }
 
-    void ExchangeColumn(int column1, int column2)
+    Matrix<Size,T>& ExchangeColumn(int column1, int column2)
     {
         assert(column1 < Size && column2 < Size);
         if (column1 != column2)
@@ -140,6 +144,8 @@ public:
             SetColumn(column1,GetColumn(column2));
             SetColumn(column2,aux);
         }
+
+        return *this;
     }
 
     double Determinant() const
@@ -209,6 +215,22 @@ public:
 
             return det * pow(-1,colEx);
         }
+    }
+
+    Matrix<Size,T>& Transpose()
+    {
+        Matrix<Size, T> Aux(*this);
+
+        for (size_t i = 0; i < Size; i++)
+            SetRow(i,Aux.GetColumn(i));
+
+        return *this;
+    }
+
+    Matrix<Size,T> GetTransposed()
+    {
+        Matrix<Size,T> Aux(*this);
+        return Aux.Transpose();
     }
 };
 
