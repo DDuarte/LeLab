@@ -1,17 +1,17 @@
-#ifndef VECTOR3_H
-#define VECTOR3_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <cmath>
 #include "MathDefines.h"
 
-template<int Size = 3, typename T = int>
+template<int Size, typename T = int>
 class Vector
 {
 private:
     T V[Size];
 
 public:
-    Vector() { memset(V, 0, Size*sizeof(T)); }
+    Vector() { memset(V, 0, Size * sizeof(T)); }
     Vector(T x, T y)
     {
         assert(Size == 2);
@@ -33,8 +33,8 @@ public:
         V[2] = z;
         V[3] = w;
     }
-    Vector(const Vector<Size, T>& other) { memcpy(V, other.V, Size*sizeof(T)); }
-    Vector(const T arr[Size]) { memcpy(V, arr, Size*sizeof(T)); }
+    Vector(const Vector<Size, T>& other) { memcpy(V, other.V, Size * sizeof(T)); }
+    Vector(const T arr[Size]) { memcpy(V, arr, Size * sizeof(T)); }
     Vector(T val) { for (int i = 0; i < Size; ++i) V[i] = val; }
 
     T X() const { assert(Size >= 1); return V[0]; }
@@ -53,7 +53,7 @@ public:
     void Set(T x, T y, T z) { assert(Size >= 3); V[0] = x; V[1] = y; V[2] = z; }
     void Set(T x, T y, T z, T w) { assert(Size >= 4); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
 
-    bool operator ==(const Vector<Size, T>& other) const { return memcmp(V, other.V, Size*sizeof(T)); }
+    bool operator ==(const Vector<Size, T>& other) const { return memcmp(V, other.V, Size * sizeof(T)); }
     bool operator !=(const Vector<Size, T>& other) const { return !operator ==(other); }
 
     Vector<Size, T> operator +(const Vector<Size, T>& other) const
@@ -99,7 +99,7 @@ public:
         return result;
     }
 
-    Vector<Size, T>& operator =(const Vector<Size, T>& other) { memcpy(V, other.V, Size*sizeof(T)); return *this; }
+    Vector<Size, T>& operator =(const Vector<Size, T>& other) { memcpy(V, other.V, Size * sizeof(T)); return *this; }
 
     Vector<Size, T>& operator =(const T& val)
     {
@@ -108,7 +108,7 @@ public:
         return *this;
     }
 
-    Vector<Size, T>& operator =(const T arr[Size]) { memcpy(V, arr, Size*sizeof(T)); return *this; }
+    Vector<Size, T>& operator =(const T arr[Size]) { memcpy(V, arr, Size * sizeof(T)); return *this; }
     
     Vector<Size, T>& operator +=(const Vector<Size, T>& other)
     {
@@ -160,14 +160,14 @@ public:
     {
         T sum;
         for (int i = 0; i < Size; ++i)
-            sum += V[i]*V[i];
+            sum += V[i] * V[i];
         return sum;
     }
 
     //! The distance of this vector to other vector
-    T Distance(const Vector<Size, T>& other) const { return (*this - other).Magnitude(); }
+    T Distance(const Vector<Size, T>& other) const { return ((*this) - other).Magnitude(); }
     //! The squared distance of this vector to other vector (more efficient)
-    T DistanceSqr(const Vector<Size, T>& other) const { return (*this - other).MagnitudeSqr(); }
+    T DistanceSqr(const Vector<Size, T>& other) const { return ((*this) - other).MagnitudeSqr(); }
 
 	//! Normalizes this vector
     void Normalize()
@@ -227,16 +227,17 @@ public:
         {
             Vector<Size, T> try1 = CrossProduct(Vector<Size, T>(1, 0, 0));
 
-            if (IsZero(try1.MagnitudeSqr()))
+            if (IsZero(try1.MagnitudeSqr())) // vector is perpendicular to xx, pick a different one
                 return CrossProduct(Vector<Size, T>(0, 1, 0));
 
             return try1;
         }
+        else
         {
             assert(false && "Perpendicular vector is not defined for more than 3 dimensions");
+            return Vector<Size, T>();
         }
-		
 	}
 };
 
-#endif // VECTOR3_H
+#endif // VECTOR_H

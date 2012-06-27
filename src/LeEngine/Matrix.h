@@ -1,5 +1,5 @@
-#ifndef MATRIX2_H
-#define MATRIX2_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
 #include "Vector.h"
 #include <cstring> // memcpy, memset
@@ -16,22 +16,22 @@ private:
     T M[Size][Size];
 
 public:
-    Matrix() { memset(M, 0, Size*Size*sizeof(T)); }
+    Matrix() { memset(M, 0, Size * Size * sizeof(T)); }
 
-    Matrix(const T arr[Size][Size]) { memcpy(M, arr, Size*Size*sizeof(T)); }
+    Matrix(const T arr[Size][Size]) { memcpy(M, arr, Size * Size * sizeof(T)); }
 
-    Matrix(const Matrix<Size, T>& matrix) { memcpy(M, matrix.M, Size*Size*sizeof(T)); }
+    Matrix(const Matrix<Size, T>& matrix) { memcpy(M, matrix.M, Size * Size * sizeof(T)); }
 
-    Matrix(const T vals[Size*Size])
+    Matrix(const T vals[Size * Size])
     {
         for (int i = 0; i < Size; ++i)
             for (int j = 0; j < Size; ++j)
-                M[i][j] = vals[Size*i+j];
+                M[i][j] = vals[Size * i + j];
     }
 
     Matrix(int num, ...)
     {
-        assert(num == Size*Size);
+        assert(num == Size * Size);
 
         va_list arguments;
 
@@ -49,9 +49,9 @@ public:
 
     T* operator[](int row) const { assert(row < Size); return (T*)M[row]; }
 
-    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(M, other.M, Size*Size*sizeof(T)); }
+    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(M, other.M, Size * Size * sizeof(T)); }
 
-    bool operator ==(const Matrix<Size, T>& other) const { return memcmp(M, other.M, Size*Size*sizeof(T)) == 0; }
+    bool operator ==(const Matrix<Size, T>& other) const { return memcmp(M, other.M, Size * Size * sizeof(T)) == 0; }
     bool operator !=(const Matrix<Size, T>& other) const { return !operator ==(other); }
 
     Matrix<Size, T> operator +(const Matrix<Size, T>& other) const
@@ -97,7 +97,7 @@ public:
         assert(row < Size);
 
         shared_array<T> r(new T[Size]);
-        memcpy(r, M[row], Size);
+        memcpy(r, M[row], Size * sizeof(T));
 
         return r;
     }
@@ -114,7 +114,7 @@ public:
         return col;
     }
 
-    Matrix<Size,T>& SetRow(int row, const T arr[Size])
+    Matrix<Size, T>& SetRow(int row, const T arr[Size])
     {
         assert(row < Size);
         for (int i = 0; i < Size; ++i)
@@ -123,7 +123,7 @@ public:
         return *this;
     }
 
-    Matrix<Size,T>& SetColumn(int column, const T arr[Size])
+    Matrix<Size, T>& SetColumn(int column, const T arr[Size])
     {
         assert(column < Size);
         for (int i = 0; i < Size; ++i)
@@ -132,7 +132,7 @@ public:
         return *this;
     }
 
-    Matrix<Size,T>& ExchangeColumn(int column1, int column2)
+    Matrix<Size, T>& ExchangeColumn(int column1, int column2)
     {
         assert(column1 < Size && column2 < Size);
         if (column1 != column2)
@@ -175,60 +175,60 @@ public:
         }
         else
         {
-            Matrix<Size,T> m(*this);
+            Matrix<Size, T> m(*this);
             int colEx = 0; // Number of columns exchange
             bool flag = true; // Has line of zeros
             int j;
-            for (int k = 0; k < Size - 1; k++)
+            for (int k = 0; k < Size - 1; ++k)
             {
                 j = k + 1;
                 flag = true;
                 while (flag && j <= Size)
-                    if (m[k][j-1] != 0)
-                        flag 0 false;
+                    if (m[k][j - 1] != 0)
+                        flag = false;
                     else
-                        j++;
+                        ++j;
 
                 if (flag) return 0.0;
 
                 if (j != k + 1)
                 {
-                    colEx++;
-                    m.ExchangeColumn(k,j-1);
+                    ++colEx;
+                    m.ExchangeColumn(k, j - 1);
                 }
 
-                for (int i = k+2; i <= Size; i++)
+                for (int i = k + 2; i <= Size; ++i)
                 {
-                    for (int j = k+2; j <= Size; j++)
-                        m[i-1][j-1] = m[i-1][j-1] - m[i-1][k]*m[k][j-1]/m[k][k];
+                    for (int j = k + 2; j <= Size; ++j)
+                        m[i - 1][j - 1] = m[i - 1][j - 1] - m[i - 1][k] * m[k][j - 1] / m[k][k];
 
-                    m[i-1][k] = 0;
+                    m[i - 1][k] = 0;
                 }
             }
 
             double det = 1;
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < Size; ++i)
                 det *= m[i][i];
 
-            return det * pow(-1,colEx);
+            return det * pow(-1, colEx);
         }
     }
 
-    Matrix<Size,T>& Transpose()
+    Matrix<Size, T>& Transpose()
     {
-        Matrix<Size, T> Aux(*this);
+        Matrix<Size, T> aux(*this);
 
-        for (size_t i = 0; i < Size; i++)
-            SetRow(i,Aux.GetColumn(i));
+        for (size_t i = 0; i < Size; ++i)
+            SetRow(i, aux.GetColumn(i));
 
         return *this;
     }
 
-    Matrix<Size,T> GetTransposed()
+    Matrix<Size, T> GetTransposed() const
     {
-        Matrix<Size,T> Aux(*this);
-        return Aux.Transpose();
+        Matrix<Size, T> aux(*this);
+        return aux.Transpose();
     }
 };
 
-#endif // MATRIX2_H
+#endif // MATRIX_H
