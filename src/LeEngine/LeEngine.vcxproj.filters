@@ -83,16 +83,13 @@
     <ClInclude Include="VideoUpdate.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>

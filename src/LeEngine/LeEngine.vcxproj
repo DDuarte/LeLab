@@ -31,8 +31,7 @@
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundTask.h" />
-    <ClInclude Include="Vector2.h" />
-    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoUpdate.h" />
   </ItemGroup>
   <ItemGroup>

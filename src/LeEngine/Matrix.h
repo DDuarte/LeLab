@@ -1,7 +1,7 @@
 #ifndef MATRIX2_H
 #define MATRIX2_H
 
-#include "Vector2.h"
+#include "Vector.h"
 #include <cstring> // memcpy, memset
 #include <cassert>
 #include <cstdarg>
@@ -83,12 +83,9 @@ public:
         return result;
     }
 
-    Vector3 operator *(const Vector3& other) const
-    //Vector<Size> operator *(const Vector<Size>& other) const
+    Vector<Size, T> operator *(const Vector<Size, T>& other) const
     {
-        assert(Size == 3);
-
-        Vector3 result;
+        Vector<Size, T> result;
         for (int row = 0; row < Size; ++row)
             for (int i = 0; i < Size; ++i)
                 result[row] += M[row][i] * other[i];
