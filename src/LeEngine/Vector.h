@@ -181,6 +181,14 @@ public:
         }
     }
 
+    //! Return a normalized copy of this vector
+    Vector<Size, T> NormalizeCopy() const
+    {
+        Vector<Size, T> copy(*this);
+        copy.Normalize();
+        return copy;
+    }
+
 	//! Returns the dot product (a scalar) between this vector and some other
     T DotProduct(const Vector<Size, T>& other) const
     {
