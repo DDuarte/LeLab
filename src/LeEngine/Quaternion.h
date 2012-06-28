@@ -39,13 +39,19 @@ public:
     bool operator !=(const Quaternion<T>& other) const { return !operator ==(other); }
 
     Quaternion<T> operator +(const Quaternion<T>& other) const { return Quaternion<T>(X + other.X, Y + other.Y, Z + other.Z, W + other.W); }
+    Quaternion<T> operator +=(const Quaternion<T>& other) { X += other.x; Y += other.y; Z += other.z; W += other.w; return *this; }
+
     Quaternion<T> operator -(const Quaternion<T>& other) const { return Quaternion<T>(X - other.X, Y - other.Y, Z - other.Z, W - other.W); }
-    
+    Quaternion<T> operator -=(const Quaternion<T>& other) { X -= other.x; Y -= other.y; Z -= other.z; W -= other.w; return *this; }
+
     Quaternion<T> operator *(const Quaternion<T>& other) const { return Quaternion<T>(W * other.X + X * other.W + Y * other.Z - Z * other.Y,
                                                                                       W * other.Y + Y * other.W + Z * other.X - X * other.Z,
                                                                                       W * other.Z + Z * other.W + X * other.Y - Y * other.X,
                                                                                       W * other.W - X * other.X - Y * other.Y - Z * other.Z); }
-    
+
+    Quaternion<T> operator *(T val) { return Quaternion<T>(X * val, Y * val, Z * val, W * val); }
+    Quaternion<T> operator *=(T val) { X *= val; Y *= val; Z *= val; W *= val; return *this; }
+
     Vector3<T> operator *(const Vector3<T>& vec) const
     {
         Quaternion<T> other(vec.Normalize(), 0);
@@ -56,7 +62,7 @@ public:
     T Magnitude() const { return sqrt(X*X + Y*Y + Z*Z + W*W); }
     T MagnitudeSqr() const { return X*X + Y*Y + Z*Z + W*W; }
 
-    void Normalise()
+    void Normalize() const
     {
         if (!IsZero(MagnitudeSqr() - static_cast<T>(1)))
         {
@@ -69,9 +75,9 @@ public:
         }
     }
 
-    Quaternion<T> Conjugate()
+    inline Quaternion<T> Conjugate() const
     {
-        return Quaternion<T>(-X, -Y, -Z, -W),
+        return Quaternion<T>(-X, -Y, -Z, W);
     }
 };
 
