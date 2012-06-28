@@ -3,7 +3,7 @@
 
 #include <cmath>
 #include "MathDefines.h"
-#include "Vector3.h"
+#include "Vector.h"
 
 template<typename T>
 class Quaternion
@@ -17,7 +17,7 @@ private:
 public:
     Quaternion() : X(0), Y(0), Z(0), W(0) {}
     Quaternion(T x, T y, T z, T w) : X(x), Y(y), Z(z), W(w) {}
-    Quaternion(const Quaternion<T>& other) : X(other.X), Y(other.Y), Z.(other.Z), W(other.W) {}
+    Quaternion(const Quaternion<T>& other) : X(other.X), Y(other.Y), Z(other.Z), W(other.W) {}
     Quaternion(const T arr[4]) : X(arr[0]), Y(arr[1]), Z(arr[2]), W(arr[3]) {}
     Quaternion(T val, T angle = 1) : X(val), Y(val), Z(val), W(angle) {}
     Quaternion(const Vector3<T>& vec, T angle = 1) : X(vec.GetX()), Y(vec.GetY()), Z(vec.GetZ()), W(angle) {}
@@ -58,7 +58,7 @@ public:
 
     void Normalise()
     {
-        if (!IsZero(MagnitudeSqr() - static_cast<T>(1))
+        if (!IsZero(MagnitudeSqr() - static_cast<T>(1)))
         {
             T mag = Magnitude();
             assert(!IsZero(mag));
