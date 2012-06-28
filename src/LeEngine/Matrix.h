@@ -250,32 +250,30 @@ public:
 
     double Cofactor(int l, int c) const
     {
-        const Matrix<Size,T>& M = *this;
-        std::vector<double> Mij;
+        const Matrix<Size,T>& m = *this;
+        std::vector<double> subMatrixVec;
         
         for (int i = 0; i < Size; i++)
             if (i != l)
                 for (int j = 0; j < Size; j++)
                     if (j != c)
-                        Mij.push_back(M[i][j]);
+                        subMatrixVec.push_back(m[i][j]);
 
-        Matrix<Size-1, double> Mat(&Mij[0]);
+        Matrix<Size-1, double> subMat(&subMatrixVec[0]);
 
-        return pow(-1, l+c) * Mat.Determinant(); 
+        return pow(-1, l+c) * subMat.Determinant(); 
     }
 
     Matrix<Size, T> CofactorsMatrix() const
     {
-        Matrix<Size,T> Mat();
-
-        const Matrix<Size,T>& M = *this;
+        Matrix<Size,T> mat();
 
         if (Size == 1)
-            Mat = M;
+            mat = M;
         else if (Size == 2)
-            Mat = Matrix<Size,T>( { M[1][1], -M[1][0], -M[0][1], M[0][0] } );
+            mat = Matrix<Size,T>( { M[1][1], -M[1][0], -M[0][1], M[0][0] } );
         else if (Size == 3)
-            Mat = Matrix<Size,T>( { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
+            mat = Matrix<Size,T>( { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
                                     M[1][2]*M[2][0]-M[1][0]*M[2][2],
                                     M[1][0]*M[2][1]-M[1][1]*M[2][0],
                                     M[0][2]*M[2][1]-M[0][1]*M[2][2],
@@ -286,14 +284,14 @@ public:
                                     M[0][0]*M[1][1]-M[0][1]*M[1][0] } );
         else
         {
-            std::vector<T> CM;
+            std::vector<T> cofactorMatrixVec;
             for (int i = 0; i < Size; i++)
                 for (int j = 0; j < Size; j++)
-                    CM.push_back(M.Cofactor(i,j));
-            Mat = &CM[0];
+                    cofactorMatrixVec.push_back(Cofactor(i,j));
+            mat = &cofactorMatrixVec[0];
         }
 
-        return Mat;
+        return mat;
     }
 
     //! Returns true if matrix is invertible. Result is stored in first argument, result.
