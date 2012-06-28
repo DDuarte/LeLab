@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "Quaternion.h"
 #include "VideoUpdate.h"
+#include "InputTask.h"
 
 #include <GL/glew.h>
 #include <GL/GLFW.h>
@@ -11,7 +12,13 @@
 class IRenderable
 {
 public:
+    IRenderable() : _name("") {}
+    IRenderable(std::string name) : _name(name) {}
+
     virtual void Render() const = 0;
+    std::string GetName() const { return _name; }
+private:
+    std::string _name;
 };
 
 class Cylinder : public IRenderable
@@ -38,7 +45,7 @@ public:
         glPushMatrix();
         glRotatef(_rotations.GetW(), _rotations.GetX(), _rotations.GetY(), _rotations.GetZ());
         glTranslatef(0, -1, InputTask::Wheel);
-        gluCylinder(_cylinder, _radius, 0, _height, 100, 100);
+        gluCylinder(_cylinder, _radius, _radius, _height, 100, 100);
         glPopMatrix();
     }
 };

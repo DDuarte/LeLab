@@ -9,6 +9,7 @@
 #include "VideoUpdate.h"
 #include "OpenGLTest.h"
 
+#include <Camera.h>
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
@@ -47,11 +48,15 @@ void Application::Run(int argc, char* argv[])
     soundTask->Priority = 50;
     Kernel::Get().AddTask(soundTask);
 
+    shared_ptr<Camera> camera(new Camera);
+    Kernel::Get().AddTask(camera);
+
     // Game specific tasks
     
     shared_ptr<OpenGLTest> test(new OpenGLTest);
     test->Priority = 100;
     Kernel::Get().AddTask(test);
+    Kernel::Get().AddRenderable(test);
 
     //**********************
     Kernel::Get().Execute();

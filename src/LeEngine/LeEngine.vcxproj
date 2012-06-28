@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Dator.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Functor.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="VideoUpdate.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />

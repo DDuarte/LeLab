@@ -1,6 +1,7 @@
 #include "VideoUpdate.h"
 #include "Log.h"
 #include "Defines.h"
+#include "Kernel.h"
 #include <GL/glfw.h>
 #include <cassert>
 #include <boost/format.hpp>
@@ -87,6 +88,10 @@ bool VideoUpdate::Start()
 void VideoUpdate::Update()
 {
     //glClear(GL_COLOR_BUFFER_BIT);
+    if (!glfwGetWindowParam(GLFW_OPENED)) Kernel::Get().KillAllTasks();
+
+    Kernel::Get().RenderObjectList();
+
     glfwSwapBuffers();
 }
 

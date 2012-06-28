@@ -5,7 +5,7 @@
 #include "Kernel.h"
 #include "SOIL.h"
 #include "Shapes.h"
-
+#include "VideoUpdate.h"
 
 
 int OpenGLTest::LoadGLTexture()
@@ -127,10 +127,36 @@ void OpenGLTest::Update()
     xrot += xspeed;
     yrot += yspeed;
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void OpenGLTest::Stop()
+{
+
+}
+
+void GLFWCALL OpenGLTest::WindowResizeHandler( int width, int height )
+{
+    if (height == 0)
+        height = 1;
+
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glTranslatef(0.0f, 0.0f, z);
+    //float aspectRatio = ((float)height) / width;
+    //glFrustum(.5, -.5, -.5 * aspectRatio, .5 * aspectRatio, 1, 50);
+    gluPerspective(45.0f, float(width)/float(height), 0.1f, 100.0f);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+}
+
+void OpenGLTest::Render() const
+{
+
+
+    glTranslatef(0,0,z);
 
     glRotatef(xrot, 1.0f, 0.0f, 0.0f);
     glRotatef(yrot, 0.0f, 1.0f, 0.0f);
@@ -177,27 +203,7 @@ void OpenGLTest::Update()
         glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Point 4 (Left)
     }
     glEnd();
-
-    glfwSwapBuffers();
+ 
 }
 
-void OpenGLTest::Stop()
-{
-
-}
-
-void GLFWCALL OpenGLTest::WindowResizeHandler( int width, int height )
-{
-    if (height == 0)
-        height = 1;
-
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
-    gluPerspective(45.0f, float(width)/float(height), 0.1f, 100.0f);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
 

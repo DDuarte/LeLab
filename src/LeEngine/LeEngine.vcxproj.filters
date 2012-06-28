@@ -65,6 +65,9 @@
     <ClInclude Include="Shapes.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -91,6 +94,7 @@
     <ClCompile Include="VideoUpdate.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">

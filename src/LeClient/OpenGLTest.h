@@ -2,10 +2,12 @@
 #define OPENGLTEST_H
 
 #include "ITask.h"
+#include "Shapes.h"
+
 #include <GL/glew.h>
 #include <GL/glfw.h>
 
-class OpenGLTest : public ITask
+class OpenGLTest : public ITask, public IRenderable
 {
 public:
     OpenGLTest()
@@ -29,8 +31,9 @@ public:
     }
     bool Start();
     void Update();
+    void Render() const;
     void Stop();
-
+    
     //! Called when the window is resized
     static void GLFWCALL WindowResizeHandler(int width, int height);
 
