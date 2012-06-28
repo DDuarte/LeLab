@@ -17,6 +17,9 @@ private:
     T M[Size][Size];
 
 public:
+    static const Matrix<Size, T> IDENTITY;
+    static const Matrix<Size, T> ZERO;
+
     Matrix() { memset(M, 0, Size * Size * sizeof(T)); }
 
     Matrix(const T arr[Size][Size]) { memcpy(M, arr, Size * Size * sizeof(T)); }
@@ -25,11 +28,16 @@ public:
 
     Matrix(const T vals[Size * Size])
     {
-        for (int i = 0; i < Size; ++i)
-            for (int j = 0; j < Size; ++j)
-                M[i][j] = vals[Size * i + j];
+        for (int row = 0; row < Size; ++row)
+            for (int col = 0; j < Size; ++col)
+                M[row][col] = vals[Size * row + col];
     }
 
+    //! First parameter has to be the number of values
+    //! in the matrix (size * size) and it should be
+    //! followed by that exact number of parameters,
+    //! each one representing a value in the matrix
+    //! in a row-major way.
     Matrix(int num, ...)
     {
         assert(num == Size * Size);
@@ -318,7 +326,22 @@ public:
         return true;
     }
 
+private:
+    static Matrix<Size, T> BuildIdentityMatrix()
+    {
+        Matrix<Size, T> result;
+        for (int row = 0; row < Size; ++row)
+            for (int col = 0; col < Size; ++col)
+                result(row, col) = (row == col) ? 1 : 0;
+        return result;
+    }
     
 };
+
+template <int Size, typename T>
+const Matrix<Size, T> Matrix<Size, T>::ZERO;
+
+template <int Size, typename T>
+const Matrix<Size, T> Matrix<Size, T>::IDENTITY = BuildIdentityMatrix();
 
 #endif // MATRIX_H

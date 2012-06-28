@@ -10,8 +10,8 @@ using boost::shared_ptr;
 
 int VideoUpdate::SourceWidth  = 800;
 int VideoUpdate::SourceHeight = 600;
-int VideoUpdate::SourceBPP    = 16;
-bool VideoUpdate::SourceFullscreen = true;
+int VideoUpdate::SourceBPP    = 24;
+bool VideoUpdate::SourceFullscreen = false;
 shared_ptr< Dator<int> > VideoUpdate::ScreenWidth;
 shared_ptr< Dator<int> > VideoUpdate::ScreenHeight;
 shared_ptr< Dator<int> > VideoUpdate::ScreenBPP;

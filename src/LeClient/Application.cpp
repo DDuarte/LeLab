@@ -36,7 +36,6 @@ void Application::Run(int argc, char* argv[])
     Kernel::Get().AddTask(globalTimer);
 
     shared_ptr<VideoUpdate> videoTask(new VideoUpdate);
-    VideoUpdate::SourceFullscreen = false;
     videoTask->Priority = 10000;
     Kernel::Get().AddTask(videoTask);
 
