@@ -55,6 +55,9 @@ public:
     bool operator ==(const Matrix<Size, T>& other) const { return memcmp(M, other.M, Size * Size * sizeof(T)) == 0; }
     bool operator !=(const Matrix<Size, T>& other) const { return !operator ==(other); }
 
+    T operator ()(int row, int column) const { return M[row][column]; }
+    T& operator ()(int row, int column) { return M[row][column]; }
+
     Matrix<Size, T> operator +(const Matrix<Size, T>& other) const
     {
         Matrix<Size, T> result;

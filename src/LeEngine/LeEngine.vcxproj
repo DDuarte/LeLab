@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Dator.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Functor.h" />
@@ -23,11 +22,9 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Shapes.h" />
     <ClInclude Include="Technique.h" />
-    <ClInclude Include="Texture.h" />
     <ClInclude Include="MathDefines.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundTask.h" />
@@ -39,10 +36,8 @@
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Log.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="Technique.cpp" />
-    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="SoundTask.cpp" />
     <ClCompile Include="VideoUpdate.cpp" />
   </ItemGroup>

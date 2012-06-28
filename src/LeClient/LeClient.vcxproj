@@ -13,10 +13,11 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenGLTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="TestTask.h" />
+    <ClInclude Include="OpenGLTest.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC5D23A3-53BB-45E5-B841-6E902CB3832D}</ProjectGuid>

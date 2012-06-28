@@ -7,7 +7,7 @@
 #include "InputTask.h"
 #include "SoundTask.h"
 #include "VideoUpdate.h"
-#include "TestTask.h"
+#include "OpenGLTest.h"
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -47,10 +47,10 @@ void Application::Run(int argc, char* argv[])
     Kernel::Get().AddTask(soundTask);
 
     // Game specific tasks
-
-    shared_ptr<TestTask> tt(new TestTask);
-    tt->Priority = 100;
-    Kernel::Get().AddTask(tt);
+    
+    shared_ptr<OpenGLTest> test(new OpenGLTest);
+    test->Priority = 100;
+    Kernel::Get().AddTask(test);
 
     //**********************
     Kernel::Get().Execute();

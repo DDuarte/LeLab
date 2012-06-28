@@ -1,7 +1,5 @@
 #include "Application.h"
 
-#include "SoundTask.h"
-
 int main(int argc, char* argv[])
 {
     new Application();

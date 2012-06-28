@@ -5,36 +5,6 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="Dator.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -92,16 +62,13 @@
     <ClInclude Include="Vector.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
       <Filter>Logging</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="SettingsManager.cpp">
       <Filter>Settings</Filter>
