@@ -261,27 +261,33 @@ public:
 
         Matrix<Size-1, double> subMat(&subMatrixVec[0]);
 
-        return pow(-1, l+c) * subMat.Determinant(); 
+        return pow(-1.0, l+c) * subMat.Determinant(); 
     }
 
     Matrix<Size, T> CofactorsMatrix() const
     {
-        Matrix<Size,T> mat();
+        Matrix<Size,T> mat;
 
         if (Size == 1)
-            mat = M;
+            mat = (*this);
         else if (Size == 2)
-            mat = Matrix<Size,T>( { M[1][1], -M[1][0], -M[0][1], M[0][0] } );
+        {
+            T matArr[] = { M[1][1], -M[1][0], -M[0][1], M[0][0] };
+            mat = matArr;
+        }
         else if (Size == 3)
-            mat = Matrix<Size,T>( { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
-                                    M[1][2]*M[2][0]-M[1][0]*M[2][2],
-                                    M[1][0]*M[2][1]-M[1][1]*M[2][0],
-                                    M[0][2]*M[2][1]-M[0][1]*M[2][2],
-                                    M[0][0]*M[2][2]-M[0][2]*M[2][0],
-                                    M[0][1]*M[2][0]-M[0][0]*M[2][1],
-                                    M[0][1]*M[1][2]-M[0][2]*M[1][1],
-                                    M[0][2]*M[1][0]-M[0][0]*M[1][2],
-                                    M[0][0]*M[1][1]-M[0][1]*M[1][0] } );
+        {
+            T matArr[] = { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
+                M[1][2]*M[2][0]-M[1][0]*M[2][2],
+                M[1][0]*M[2][1]-M[1][1]*M[2][0],
+                M[0][2]*M[2][1]-M[0][1]*M[2][2],
+                M[0][0]*M[2][2]-M[0][2]*M[2][0],
+                M[0][1]*M[2][0]-M[0][0]*M[2][1],
+                M[0][1]*M[1][2]-M[0][2]*M[1][1],
+                M[0][2]*M[1][0]-M[0][0]*M[1][2],
+                M[0][0]*M[1][1]-M[0][1]*M[1][0] };
+            mat = matArr;
+        }
         else
         {
             std::vector<T> cofactorMatrixVec;
