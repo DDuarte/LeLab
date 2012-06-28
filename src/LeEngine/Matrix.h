@@ -5,6 +5,7 @@
 #include <cstring> // memcpy, memset
 #include <cassert>
 #include <cstdarg>
+#include <vector>
 
 #include <boost/shared_array.hpp>
 using boost::shared_array;
@@ -101,7 +102,8 @@ public:
         return result;
     }
 
-    Matrix<Size, T> operator *(const T& scalar) const
+    template <typename S>
+    Matrix<Size, T> operator *(const S& scalar) const
     {
         Matrix<Size, T> result;
         for (int row = 0; row < Size; ++row)
@@ -246,10 +248,51 @@ public:
         return aux.Transpose();
     }
 
+    double Cofactor(int l, int c) const
+    {
+        const Matrix<Size,T>& M = *this;
+        std::vector<double> Mij;
+        
+        for (int i = 0; i < Size; i++)
+            if (i != l)
+                for (int j = 0; j < Size; j++)
+                    if (j != c)
+                        Mij.push_back(M[i][j]);
+
+        Matrix<Size-1, double> Mat(&Mij[0]);
+
+        return pow(-1, l+c) * Mat.Determinant(); 
+    }
+
     Matrix<Size, T> CofactorsMatrix() const
     {
-        assert(false && "Not implemented yet.");
-        return Matrix<Size, T>();
+        Matrix<Size,T> Mat();
+
+        const Matrix<Size,T>& M = *this;
+
+        if (Size == 1)
+            Mat = M;
+        else if (Size == 2)
+            Mat = Matrix<Size,T>( { M[1][1], -M[1][0], -M[0][1], M[0][0] } );
+        else if (Size == 3)
+            Mat = Matrix<Size,T>( { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
+                                    M[1][2]*M[2][0]-M[1][0]*M[2][2],
+                                    M[1][0]*M[2][1]-M[1][1]*M[2][0],
+                                    M[0][2]*M[2][1]-M[0][1]*M[2][2],
+                                    M[0][0]*M[2][2]-M[0][2]*M[2][0],
+                                    M[0][1]*M[2][0]-M[0][0]*M[2][1],
+                                    M[0][1]*M[1][2]-M[0][2]*M[1][1],
+                                    M[0][2]*M[1][0]-M[0][0]*M[1][2],
+                                    M[0][0]*M[1][1]-M[0][1]*M[1][0] } );
+        else
+        {
+            std::vector<T> CM;
+            for (int i = 0; i < Size; i++)
+                for (int j = 0; j < Size; j++)
+                    CM.push_back(M.Cofactor(i,j));
+        }
+
+        return Mat;
     }
 
     //! Returns true if matrix is invertible. Result is stored in first argument, result.
@@ -266,6 +309,8 @@ public:
         result = mcopy.Transpose().CofactorsMatrix() * (T)determinant;
         return true;
     }
+
+    
 };
 
 #endif // MATRIX_H
