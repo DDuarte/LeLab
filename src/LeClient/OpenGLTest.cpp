@@ -6,48 +6,179 @@
 #include "SOIL.h"
 #include "Shapes.h"
 
-int texture[1];
-int LoadGLTexture()
-{
-    texture[0] = SOIL_load_OGL_texture("star.bmp", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 
-    if (texture[0] == 0)
+
+int OpenGLTest::LoadGLTexture()
+{
+    texture[0] = texture[1] = SOIL_load_OGL_texture
+        (
+        "Data/glass.bmp", 
+        SOIL_LOAD_AUTO, 
+        SOIL_CREATE_NEW_ID, 
+        SOIL_FLAG_INVERT_Y
+        );
+
+    texture[2]= SOIL_load_OGL_texture
+        (
+        "Data/glass.bmp",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
+        );
+
+    if (!texture[0] || !texture[1] || !texture[2])
         return false;
 
-    //glBindTexture(GL_TEXTURE_2D, texture[0]);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    glBindTexture(GL_TEXTURE_2D, texture[1]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D, texture[2]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     return true;
 }
 
 bool OpenGLTest::Start()
 {
+    
+    if (!LoadGLTexture())
+        return false;
+
+    glfwSetWindowTitle("NeHe's OpenGL Framework");
     glfwSetWindowSizeCallback(WindowResizeHandler);
 
     glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_SMOOTH);
     glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-
     glClearDepth(1.0f);
-    glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
-
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    glEnable(GL_DEPTH_TEST);
 
-    //if (!LoadGLTexture())
-    //    return false;
+    glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
+    glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
 
-    //glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+    glEnable(GL_LIGHT1);
 
     return true;
 }
 
 void OpenGLTest::Update()
 {
+    if (glfwGetKey('L') == GLFW_PRESS && !lp)
+    {
+        lp = true;
+        light = !light;
+        (light ? glEnable(GL_LIGHTING) : glDisable(GL_LIGHTING));
+    }
+    else if (glfwGetKey('L') != GLFW_PRESS)
+        lp = false;
+
+    if (glfwGetKey('F') == GLFW_PRESS && !fp)
+    {
+        fp = true;
+        filter = (filter + 1) % 3;
+    }
+    else if (glfwGetKey('F') != GLFW_PRESS)
+        fp = false;
+
+    if (glfwGetKey('B') == GLFW_PRESS && !bp)
+    {
+        bp = true;
+        blend = !blend;
+
+        if (blend)
+        {
+            glEnable(GL_BLEND);
+            glDisable(GL_DEPTH_TEST);
+        }
+        else
+        {
+            glDisable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
+        }
+    }
+    else if (glfwGetKey('B') != GLFW_PRESS)
+        bp = false;
+
+    if (glfwGetKey(GLFW_KEY_PAGEUP) == GLFW_PRESS)
+        z -= 0.02f;
+    if (glfwGetKey(GLFW_KEY_PAGEDOWN) == GLFW_PRESS)
+        z += 0.02f;
+    if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS)
+        xspeed -=0.01f;
+    if (glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS)
+        xspeed += 0.01f;
+    if (glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS)
+        yspeed += 0.01f;
+    if (glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS)
+        yspeed -= 0.01f;
+
+    xrot += xspeed;
+    yrot += yspeed;
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // ...
+    glLoadIdentity();
+
+    glTranslatef(0.0f, 0.0f, z);
+
+    glRotatef(xrot, 1.0f, 0.0f, 0.0f);
+    glRotatef(yrot, 0.0f, 1.0f, 0.0f);
+
+    glBindTexture(GL_TEXTURE_2D, texture[filter]);
+
+    glBegin(GL_QUADS);
+    {
+        // Front Face
+        glNormal3f( 0.0f, 0.0f, 1.0f);                  // Normal Pointing Towards Viewer
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Point 1 (Front)
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Point 2 (Front)
+        glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Point 3 (Front)
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Point 4 (Front)
+        // Back Face
+        glNormal3f( 0.0f, 0.0f,-1.0f);                  // Normal Pointing Away From Viewer
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Point 1 (Back)
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Point 2 (Back)
+        glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Point 3 (Back)
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Point 4 (Back)
+        // Top Face
+        glNormal3f( 0.0f, 1.0f, 0.0f);                  // Normal Pointing Up
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Point 1 (Top)
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Point 2 (Top)
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Point 3 (Top)
+        glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Point 4 (Top)
+        // Bottom Face
+        glNormal3f( 0.0f,-1.0f, 0.0f);                  // Normal Pointing Down
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Point 1 (Bottom)
+        glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Point 2 (Bottom)
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Point 3 (Bottom)
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Point 4 (Bottom)
+        // Right face
+        glNormal3f( 1.0f, 0.0f, 0.0f);                  // Normal Pointing Right
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Point 1 (Right)
+        glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Point 2 (Right)
+        glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Point 3 (Right)
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Point 4 (Right)
+        // Left Face
+        glNormal3f(-1.0f, 0.0f, 0.0f);                  // Normal Pointing Left
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Point 1 (Left)
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Point 2 (Left)
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Point 3 (Left)
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Point 4 (Left)
+    }
+    glEnd();
+
+    glfwSwapBuffers();
 }
 
 void OpenGLTest::Stop()
