@@ -10,7 +10,7 @@
 #include <boost/shared_array.hpp>
 using boost::shared_array;
 
-template <int Size, typename T = int>
+template <int Size, typename T = float>
 class Matrix
 {
 private:

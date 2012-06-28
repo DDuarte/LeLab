@@ -20,7 +20,7 @@ public:
     Quaternion(const Quaternion& other) : X(other.X), Y(other.Y), Z(other.Z), W(other.W) {}
     Quaternion(const float arr[4]) : X(arr[0]), Y(arr[1]), Z(arr[2]), W(arr[3]) {}
     Quaternion(float val, float angle = 1) : X(val), Y(val), Z(val), W(angle) {}
-    Quaternion(const Vector<3, float>& vec, float angle = 1) : X(vec.X()), Y(vec.Y()), Z(vec.Z()), W(angle) {}
+    Quaternion(const Vector<3>& vec, float angle = 1) : X(vec.X()), Y(vec.Y()), Z(vec.Z()), W(angle) {}
 
     float GetX() const { return X; }
     float GetY() const { return Y; }
@@ -32,8 +32,8 @@ public:
     void SetZ(float z) { Z = z; }
     void SetW(float w) { W = w; }
     void Set(float x, float y, float z, float w) { X = x; Y = y; Z = z; W = w; }
-    void Set(const Vector<3, float>& vec) { X = vec.X(); Y = vec.Y(); Z = vec.Z(); W = 0.0f; }
-    void Set(const Vector<3, float>& vec, float w) { Set(vec); W = w; }
+    void Set(const Vector<3>& vec) { X = vec.X(); Y = vec.Y(); Z = vec.Z(); W = 0.0f; }
+    void Set(const Vector<3>& vec, float w) { Set(vec); W = w; }
 
     bool operator ==(const Quaternion& other) const { return IsZero(X - other.X) && IsZero(Y - other.Y) && IsZero(Z - other.Z) && IsZero(Z - other.Z); }
     bool operator !=(const Quaternion& other) const { return !operator ==(other); }
@@ -52,20 +52,20 @@ public:
     Quaternion operator *(float val) const { return Quaternion(X * val, Y * val, Z * val, W * val); }
     Quaternion& operator *=(float val) { X *= val; Y *= val; Z *= val; W *= val; return *this; }
 
-    Vector<3, float> operator *(const Vector<3, float>& vec) const
+    Vector<3> operator *(const Vector<3>& vec) const
     {
         Quaternion other(vec.NormalizeCopy(), 0);
         other = other * Conjugate();
         other = (*this) * other;
-        return Vector<3, float>(other.X, other.Y, other.Z);
+        return Vector<3>(other.X, other.Y, other.Z);
     }
 
     //! Convert from axis angles
-    void FromAxis(const Vector<3, float>& vec, float angle)
+    void FromAxis(const Vector<3>& vec, float angle)
     {
         float sinAngle;
         angle *= 0.5f;
-        Vector<3, float> vn(vec);
+        Vector<3> vn(vec);
         vn.Normalize();
 
         sinAngle = sin(angle);
@@ -99,7 +99,7 @@ public:
         Normalize();
     }
 
-    Matrix<4, float> GetMatrix() const
+    Matrix<4> GetMatrix() const
     {
         float x2 = X * X;
         float y2 = Y * Y;
@@ -112,13 +112,13 @@ public:
         float wz = W * Z;
 
         // TODO: Verify that this is setting the right columns/rows
-        return Matrix<4, float>(16, 1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy), 0.0f,
+        return Matrix<4>(16, 1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy), 0.0f,
             2.0f * (xy + wz), 1.0f - 2.0f * (x2 + z2), 2.0f * (yz - wx), 0.0f,
             2.0f * (xz - wy), 2.0f * (yz + wx), 1.0f - 2.0f * (x2 + y2), 0.0f,
             0.0f, 0.0f, 0.0f, 1.0f);
     }
 
-    void GetAxisAngles(Vector<3, float>* axis, float* angle) const
+    void GetAxisAngles(Vector<3>* axis, float* angle) const
     {
         float scale = sqrt(X*X + Y*Y + Z*Z);
         axis->SetX(X / scale);

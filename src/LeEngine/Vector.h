@@ -4,7 +4,7 @@
 #include <cmath>
 #include "MathDefines.h"
 
-template<int Size, typename T = int>
+template<int Size, typename T = float>
 class Vector
 {
 private:

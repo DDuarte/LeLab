@@ -18,7 +18,7 @@ inline T Abs(T val) { return val > 0 ? val : -val; }
 
 //! True if value is zero (within an epsilon)
 template <typename T>
-inline bool IsZero(T val, T epsilon = std::numeric_limits<T>::epsilon()) { return Abs(val) <= epsilon; }
+inline bool IsZero(T val, T epsilon = std::numeric_limits<T>::epsilon()) { return !val || (Abs(val) <= epsilon); }
 
 //! True if value is not a number (useful for floats and doubles)
 template <typename T>
