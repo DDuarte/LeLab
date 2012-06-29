@@ -24,11 +24,6 @@ void Application::Run(int argc, char* argv[])
     new SettingsManager();
     new Kernel();
 
-    SettingsManager::Get().ParseFile("settings.conf");
-    if (argc > 1)
-        for (int i = 0; i < argc; ++i)
-            SettingsManager::Get().ParseSetting(argv[i]);
-
     // Init tasks
 
     shared_ptr<GlobalTimer> globalTimer(new GlobalTimer);
@@ -60,6 +55,8 @@ void Application::Run(int argc, char* argv[])
     //**********************
     Kernel::Get().Execute();
     //**********************
+
+    SettingsManager::Get().SaveConfig();
 
     delete Kernel::GetPtr();
     delete SettingsManager::GetPtr();

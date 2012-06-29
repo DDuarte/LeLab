@@ -12,9 +12,9 @@ Kernel::~Kernel() {}
 
 int Kernel::Execute()
 {
+    std::list< shared_ptr<ITask> >::iterator it, thisIt;
     while (_taskList.size())
     {
-        std::list< shared_ptr<ITask> >::iterator it, thisIt;
         for (it = _taskList.begin(); it != _taskList.end();)
         {
             ITask* t = (*it).get();

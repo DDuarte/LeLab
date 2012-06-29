@@ -1,30 +1,46 @@
 #ifndef SETTINGSMANAGER_H
 #define SETTINGSMANAGER_H
 
-#include "Dator.h"
 #include "Singleton.h"
 #include <string>
-#include <map>
-#include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
+#include <boost/noncopyable.hpp>
+
+#define SETTINGS_FILENAME "settings.conf"
+#define GetConfig(name) SettingsManager::Get().GetSettings()->name
 
 class SettingsManager : public Singleton<SettingsManager>
 {
 public:
-    SettingsManager() { _settingMap.clear(); CreateStandardSettings(); }
-    virtual ~SettingsManager() { DestroyStandardSettings(); }
+    struct Settings
+    {
+        // screen
+        int ScreenWidth;
+        int ScreenHeight;
+        int ScreenBPP;
+        bool ScreenFullScreen;
 
-    void RegisterVariable(std::string& name, shared_ptr<BaseDator>& var) { _settingMap[name] = var; }
-    void SetVariable(std::string& name, std::string& value, int bias = 0);
+        // logging
+        std::string LogClientFileName;
+        std::string LogApplicationFileName;
+        std::string LogServerFileName;
+        bool LogWriteToConsole;
+        bool LogWithTimestamp;
 
-    void CreateStandardSettings();;
-    void DestroyStandardSettings();;
+        void Load(const std::string& fileName);
+        void Save(const std::string& fileName);
+    };
+private:
+    std::string _fileName;
+    bool _loaded;
+    Settings _settings;
 
-    void ParseSetting(std::string str);
-    void ParseFile(std::string fileName);
+public:
+    SettingsManager();
 
-protected:
-    std::map< std::string, shared_ptr<BaseDator> > _settingMap;
+    void LoadConfig();
+    void SaveConfig();
+    void ReloadConfig();
+    Settings* GetSettings() const { return _loaded ? const_cast<Settings*>(&_settings) : NULL;}
 };
 
 #endif // SETTINGSMANAGER_H

@@ -1,118 +1,100 @@
 #include "SettingsManager.h"
 #include "Log.h"
-#include "Dator.h"
-#include "VideoUpdate.h"
-#include <list>
-#include <fstream>
 #include <string>
+#include <exception>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/info_parser.hpp>
 
-#include <boost/scoped_array.hpp>
-using boost::shared_ptr;
-
-void SettingsManager::ParseFile(std::string fileName)
+SettingsManager::SettingsManager() : _fileName(SETTINGS_FILENAME), _loaded(false)
 {
-    std::ifstream in(fileName.c_str());
-    if (!in.is_open())
+    LoadConfig();
+}
+
+void SettingsManager::LoadConfig()
+{
+    LeLog.WriteP(LOG_APP, "Loading configuration file %s...", _fileName.c_str());
+    try
     {
-        LeLog << LOG_APP << "Error, could not open file " << fileName << " in SettingsManager::ParseFile" << NL;
+        _settings.Load(_fileName);
+        _loaded = true;
+    }
+    catch (std::exception &e)
+    {
+    	_loaded = false;
+        LeLog.WriteP(LOG_APP, "Loading configuration file %s failed: %s", _fileName.c_str(), e.what());
+    }
+}
+
+void SettingsManager::SaveConfig()
+{
+    if (!_loaded)
+    {
+        LeLog.Write(LOG_APP, "Saving configuration file failed because configuration was not loaded before.");
         return;
     }
 
-    while (!in.eof())
+    LeLog.WriteP(LOG_APP, "Saving configuration file %s...", _fileName.c_str());
+    try
     {
-        std::string str;
-        std::getline(in, str);
-        ParseSetting(str);
+        _settings.Save(_fileName);
+    }
+    catch (std::exception &e)
+    {
+        _loaded = false;
+        LeLog.WriteP(LOG_APP, "Saving configuration file %s failed: %s", _fileName.c_str(), e.what());
     }
 }
 
-void SettingsManager::SetVariable(std::string& name, std::string& value, int bias /*= 0*/)
+void SettingsManager::ReloadConfig()
 {
-    if (!_settingMap[name])
+    if (!_loaded)
+    {
+        LeLog.Write(LOG_APP, "Reloading configuration file failed because configuration was not loaded before.");
         return;
-
-    if (_settingMap[name]->HasMultipleValues())
-    {
-        std::list<std::string> valuesList;
-        
-        if (value.find(';') != -1)
-        {
-            int first = 0;
-            int last;
-
-            while ((last = value.find(';', first)) != -1)
-            {
-                valuesList.push_back(value.substr(first, last - first));
-                first = last + 1;
-            }
-
-            valuesList.push_back(value.substr(first));
-        }
-        else
-            valuesList.push_back(value);
-
-        for (auto it = valuesList.begin(); it != valuesList.end(); it++)
-        {
-            if (bias > 0)
-                (*_settingMap[name]) += (*it);
-            else if (bias < 0)
-                (*_settingMap[name]) -= (*it);
-            else
-                (*_settingMap[name]) = (*it);
-        }
     }
-    else
-        (*_settingMap[name]) = value;
+    
+    LeLog.Write(LOG_APP, "Reloading configuration file...");
+    LoadConfig();
 }
 
-void SettingsManager::ParseSetting(std::string str)
+void SettingsManager::Settings::Load(const std::string& fileName)
 {
-    int bias = 0;
-    std::string name, value;
+    using boost::property_tree::ptree;
+    ptree pt;
 
-    if (str[0] == '+')
-    {
-        bias = 1;
-        str = str.substr(1);
-    }
-    else if (str[0] == '-')
-    {
-        bias = -1;
-        str = str.substr(1);
-    }
+    read_info(fileName, pt);
 
-    int eqPos = str.find('=');
-    if (eqPos != -1)
-    {
-        name = str.substr(0, eqPos);
-        value = str.substr(eqPos + 1);
-    }
-    else
-    {
-        name = str;
-        if (bias == 1 || bias == 0)
-            value = "1";
-        else
-            value = "0";
-    }
+    // screen
+    ScreenWidth = pt.get("screen.X", 800);
+    ScreenHeight = pt.get("screen.Y", 600);
+    ScreenBPP = pt.get("screen.BPP", 24);
+    ScreenFullScreen = pt.get("screen.fullscreen", false);
 
-    SetVariable(name, value, bias);
+    // logging
+    LogClientFileName = pt.get("logging.files.client", "clntlog.log");
+    LogApplicationFileName = pt.get("logging.files.app", "applog.log");
+    LogServerFileName = pt.get<std::string>("logging.files.server", "srvrlog.log");
+    LogWriteToConsole = pt.get("logging.write_to_console", true);
+    LogWithTimestamp = pt.get("logging.with_timestamp", true);
 }
 
-#define SETTING(type, target, var, name) target = shared_ptr<Dator<type>>(new Dator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
-#define LIST(type, target, var, name) target=shared_ptr<ListDator<type>>(new ListDator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
-
-void SettingsManager::CreateStandardSettings()
+void SettingsManager::Settings::Save( const std::string& fileName )
 {
+    using boost::property_tree::ptree;
+    ptree pt;
 
-    //target(new Dator<type>(var));RegisterVariable(std::string(name),shared_ptr<BaseDator>(target));
+    // screen
+    pt.put("screen.X", ScreenWidth);
+    pt.put("screen.Y", ScreenHeight);
+    pt.put("screen.BPP", ScreenBPP);
+    pt.put("screen.fullscreen", ScreenFullScreen);
 
-    SETTING(int,  VideoUpdate::ScreenWidth,  VideoUpdate::SourceWidth,      "screenX");
-    SETTING(int,  VideoUpdate::ScreenHeight, VideoUpdate::SourceHeight,     "screenY");
-    SETTING(int,  VideoUpdate::ScreenBPP,    VideoUpdate::SourceBPP,        "screenBPP");
-    SETTING(bool, VideoUpdate::Fullscreen,   VideoUpdate::SourceFullscreen, "fullscreen")
-}
+    // logging
+    pt.put("logging.files.client", LogClientFileName);
+    pt.put("logging.files.app", LogApplicationFileName);
+    pt.put("logging.files.server", LogServerFileName);
+    pt.put("logging.write_to_console", LogWriteToConsole);
+    pt.put("logging.with_timestamp", LogWithTimestamp);
 
-void SettingsManager::DestroyStandardSettings()
-{
+    write_info(fileName, pt);
 }

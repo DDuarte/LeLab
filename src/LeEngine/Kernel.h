@@ -7,9 +7,10 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
+#include <boost/noncopyable.hpp>
 using boost::shared_ptr;
 
-class Kernel : public Singleton<Kernel>
+class Kernel : public Singleton<Kernel>, private boost::noncopyable
 {
 public:
     Kernel();

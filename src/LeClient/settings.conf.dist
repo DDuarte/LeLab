@@ -1,0 +1,19 @@
+screen
+{
+    X 800                              ; Width
+    Y 600                              ; Height
+    BPP 24                             ; Bits per pixel
+    fullscreen false                   ; Fullscreen on/off
+}
+
+logging
+{
+    files
+    {
+        client "clntlog.log"           ; Filename for client related logs
+        app "applog.log"               ; Filename for application related logs
+        server "srvrlog.log"           ; Filename for server related logs
+    }
+    write_to_console true              ; Enable/disable writing all logs to standard output
+    with_timestamp true                ; Enable/disable writing current timestamp in each log entry
+}
