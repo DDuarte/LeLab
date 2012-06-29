@@ -1,8 +1,5 @@
 #include "Kernel.h"
 #include "Log.h"
-#include "Shapes.h"
-
-#include <GL/glfw.h>
 
 #include <algorithm>
 #include <list>
@@ -92,31 +89,4 @@ void Kernel::KillAllTasks()
 {
     for (auto itr = _taskList.begin(); itr != _taskList.end(); ++itr)
         (*itr)->CanKill = true;
-}
-
-bool Kernel::AddRenderable( const shared_ptr<IRenderable>& r )
-{
-    _objectList.push_back(r);
-    return true;
-}
-
-void Kernel::RemoveRenderable( const shared_ptr<IRenderable>& r )
-{
-    std::list< shared_ptr<IRenderable>>::iterator it = std::find(_objectList.begin(), _objectList.end(), r);
-    if ( it != _objectList.end())
-        _objectList.erase(it);
-    else
-         LeLog << LOG_APP << "Tried to remove " << r->GetName() << " but renderable does not exist in rederable list" << NL;
-        
-}
-
-void Kernel::RenderObjectList()
-{
-    std::list< shared_ptr<IRenderable> >::iterator itr;
-    for (itr = _objectList.begin(); itr != _objectList.end();)
-    {
-        IRenderable* r = (*itr).get();
-        ++itr;
-        r->Render();
-    }
 }

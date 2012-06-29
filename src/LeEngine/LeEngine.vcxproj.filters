@@ -68,6 +68,16 @@
     <ClInclude Include="Camera.h">
       <Filter>Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -95,6 +105,13 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Scene.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">

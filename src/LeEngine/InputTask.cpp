@@ -33,10 +33,8 @@ bool InputTask::Start()
 
 void InputTask::Update()
 {
-    //OldButtons = Buttons;
-    //OldKeys = Keys;
-    //OldWheel = Wheel;
-
+    // GLFW_AUTO_POLL_EVENTS is enabled,
+    // SwapBuffers will call PollEvents
     glfwPollEvents();
 }
 

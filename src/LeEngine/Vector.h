@@ -53,10 +53,7 @@ public:
     void Set(T x, T y, T z) { assert(Size >= 3); V[0] = x; V[1] = y; V[2] = z; }
     void Set(T x, T y, T z, T w) { assert(Size >= 4); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
 
-    bool operator ==(const Vector<Size, T>& other) const 
-    {
-        return !memcmp(V, other.V, Size * sizeof(T)); 
-    }
+    bool operator ==(const Vector<Size, T>& other) const { return memcmp(V, other.V, Size * sizeof(T)) != 0; }
     bool operator !=(const Vector<Size, T>& other) const { return !operator ==(other); }
 
     Vector<Size, T> operator +(const Vector<Size, T>& other) const

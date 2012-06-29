@@ -23,7 +23,10 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shapes.h" />
+    <ClInclude Include="SystemInfo.h" />
     <ClInclude Include="Technique.h" />
     <ClInclude Include="MathDefines.h" />
     <ClInclude Include="SettingsManager.h" />
@@ -31,6 +34,7 @@
     <ClInclude Include="SoundTask.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="VideoUpdate.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -38,10 +42,13 @@
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
+    <ClCompile Include="SystemInfo.cpp" />
     <ClCompile Include="Technique.cpp" />
     <ClCompile Include="SoundTask.cpp" />
     <ClCompile Include="VideoUpdate.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{29A79727-C3C8-49B2-AC86-1DAD9EFAEF3A}</ProjectGuid>

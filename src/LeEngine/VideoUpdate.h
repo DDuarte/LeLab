@@ -3,12 +3,16 @@
 
 #include "ITask.h"
 #include "Dator.h"
+#include "Window.h"
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
 class VideoUpdate : public ITask
 {
+private:
+    Window* _window;
+
 public:
     VideoUpdate() {}
     virtual ~VideoUpdate() {}

@@ -27,7 +27,7 @@ public:
         LightPosition[3] = 1.0f;
         filter = 0;
         xrot = yrot = 0.0f;
-        xspeed = yspeed = 1.2f;
+        xspeed = yspeed = 0.0012f;
     }
     bool Start();
     void Update();

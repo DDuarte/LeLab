@@ -10,21 +10,11 @@
 
 int OpenGLTest::LoadGLTexture()
 {
-    texture[0] = texture[1] = SOIL_load_OGL_texture
-        (
-        "Data/glass.bmp", 
-        SOIL_LOAD_AUTO, 
-        SOIL_CREATE_NEW_ID, 
-        SOIL_FLAG_INVERT_Y
-        );
+    texture[0] = texture[1] = SOIL_load_OGL_texture("Data/glass.bmp", SOIL_LOAD_AUTO, 
+        SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 
-    texture[2]= SOIL_load_OGL_texture
-        (
-        "Data/glass.bmp",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y
-        );
+    texture[2] = SOIL_load_OGL_texture("Data/glass.bmp", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y);
 
     if (!texture[0] || !texture[1] || !texture[2])
         return false;
@@ -46,11 +36,9 @@ int OpenGLTest::LoadGLTexture()
 
 bool OpenGLTest::Start()
 {
-    
     if (!LoadGLTexture())
         return false;
 
-    glfwSetWindowTitle("NeHe's OpenGL Framework");
     glfwSetWindowSizeCallback(WindowResizeHandler);
 
     glEnable(GL_TEXTURE_2D);
@@ -112,21 +100,22 @@ void OpenGLTest::Update()
         bp = false;
 
     if (glfwGetKey(GLFW_KEY_PAGEUP) == GLFW_PRESS)
-        z -= 0.02f;
+        z -= 0.002f;
     if (glfwGetKey(GLFW_KEY_PAGEDOWN) == GLFW_PRESS)
-        z += 0.02f;
+        z += 0.002f;
     if (glfwGetKey(GLFW_KEY_UP) == GLFW_PRESS)
-        xspeed -=0.01f;
+        xspeed -=0.001f;
     if (glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS)
-        xspeed += 0.01f;
+        xspeed += 0.001f;
     if (glfwGetKey(GLFW_KEY_RIGHT) == GLFW_PRESS)
-        yspeed += 0.01f;
+        yspeed += 0.001f;
     if (glfwGetKey(GLFW_KEY_LEFT) == GLFW_PRESS)
-        yspeed -= 0.01f;
+        yspeed -= 0.001f;
 
     xrot += xspeed;
     yrot += yspeed;
 
+    Render();
 }
 
 void OpenGLTest::Stop()
@@ -154,8 +143,6 @@ void GLFWCALL OpenGLTest::WindowResizeHandler( int width, int height )
 
 void OpenGLTest::Render() const
 {
-
-
     glTranslatef(0,0,z);
 
     glRotatef(xrot, 1.0f, 0.0f, 0.0f);
@@ -203,7 +190,4 @@ void OpenGLTest::Render() const
         glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Point 4 (Left)
     }
     glEnd();
- 
 }
-
-

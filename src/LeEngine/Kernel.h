@@ -23,13 +23,7 @@ public:
     void RemoveTask(const shared_ptr<ITask>& t);
     void KillAllTasks();
 
-    bool AddRenderable(const shared_ptr<IRenderable>& r);
-    void RemoveRenderable(const shared_ptr<IRenderable>& r);
-
-    void RenderObjectList();
-
 protected:
-    std::list< shared_ptr<IRenderable> > _objectList;
     std::list< shared_ptr<ITask> > _taskList;
     std::list< shared_ptr<ITask> > _pausedTaskList;
 };
