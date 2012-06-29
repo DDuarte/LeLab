@@ -5,13 +5,7 @@
     <ClInclude Include="Log.h">
       <Filter>Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Dator.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Functor.h">
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="SettingsManager.h">
@@ -44,9 +38,6 @@
     <ClInclude Include="SoundTask.h">
       <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Technique.h">
-      <Filter>Application</Filter>
-    </ClInclude>
     <ClInclude Include="InputTask.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -62,9 +53,6 @@
     <ClInclude Include="Vector.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Shapes.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Rendering</Filter>
     </ClInclude>
@@ -78,6 +66,9 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="SystemInfo.h" />
+    <ClInclude Include="Shapes.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -94,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="SoundTask.cpp">
       <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Technique.cpp">
-      <Filter>Application</Filter>
     </ClCompile>
     <ClCompile Include="InputTask.cpp">
       <Filter>Input</Filter>
@@ -118,9 +106,6 @@
   <ItemGroup>
     <Filter Include="Logging">
       <UniqueIdentifier>{ddd98ac9-0c0d-4245-993b-74eeb5a34b1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application">
-      <UniqueIdentifier>{4f03fe23-4feb-4966-9a0d-128454332560}</UniqueIdentifier>
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{28c02e89-06cb-4ef5-bf7c-dc56d7f4e3d2}</UniqueIdentifier>

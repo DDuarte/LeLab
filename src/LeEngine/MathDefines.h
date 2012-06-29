@@ -28,7 +28,12 @@ inline bool IsNaN(T val)  { return boost::math::fpclassify(val) == FP_NAN; }
 template <typename T>
 inline bool IsInfinite(T val) { return boost::math::fpclassify(val) == FP_INFINITE; }
 
+//! Returns the square of a number
 template <typename T>
 inline T Sqr(T val) { return val * val; }
+
+//! Limits a number between min and max
+template <typename T>
+inline T Clamp(T val, T min, T max) { return (val < min ? min : (val > max ? max : val)); }
 
 #endif // MATHDEFINES_H

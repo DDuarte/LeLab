@@ -6,6 +6,7 @@
 #include "SOIL.h"
 #include "Shapes.h"
 #include "VideoUpdate.h"
+#include "Window.h"
 
 
 int OpenGLTest::LoadGLTexture()

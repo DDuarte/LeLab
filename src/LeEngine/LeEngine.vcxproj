@@ -12,9 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Dator.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="Functor.h" />
     <ClInclude Include="GlobalTimer.h" />
     <ClInclude Include="IApplication.h" />
     <ClInclude Include="InputTask.h" />
@@ -27,7 +25,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="SystemInfo.h" />
-    <ClInclude Include="Technique.h" />
     <ClInclude Include="MathDefines.h" />
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="Singleton.h" />
@@ -45,7 +42,6 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SystemInfo.cpp" />
-    <ClCompile Include="Technique.cpp" />
     <ClCompile Include="SoundTask.cpp" />
     <ClCompile Include="VideoUpdate.cpp" />
     <ClCompile Include="Window.cpp" />
