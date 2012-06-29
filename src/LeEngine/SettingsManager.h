@@ -33,9 +33,13 @@ private:
     std::string _fileName;
     bool _loaded;
     Settings _settings;
+    void (*_onLoadCallback)();
 
 public:
     SettingsManager();
+    SettingsManager(void (*f)());
+
+    void SetOnLoadCallback(void (*f)()) { _onLoadCallback = f; }
 
     void LoadConfig();
     void SaveConfig();

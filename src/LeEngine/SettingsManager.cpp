@@ -5,10 +5,17 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/info_parser.hpp>
 
-SettingsManager::SettingsManager() : _fileName(SETTINGS_FILENAME), _loaded(false)
+SettingsManager::SettingsManager() : _fileName(SETTINGS_FILENAME), _loaded(false), _onLoadCallback(NULL)
 {
     LoadConfig();
 }
+
+SettingsManager::SettingsManager(void (*f)()) : _fileName(SETTINGS_FILENAME), _loaded(false), _onLoadCallback(NULL)
+{
+    SetOnLoadCallback(f);
+    LoadConfig();
+}
+
 
 void SettingsManager::LoadConfig()
 {
@@ -17,6 +24,9 @@ void SettingsManager::LoadConfig()
     {
         _settings.Load(_fileName);
         _loaded = true;
+
+        if (_onLoadCallback)
+            _onLoadCallback();
     }
     catch (std::exception &e)
     {

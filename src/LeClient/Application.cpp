@@ -13,15 +13,21 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
+void OnConfigLoad()
+{
+    LeLog.EnableConsole(GetConfig(LogWriteToConsole));
+    LeLog.EnabledTime(GetConfig(LogWithTimestamp));
+    // TODO: Change used .log files
+}
+
 void Application::Run(int argc, char* argv[])
 {
     new Log;
     if (!LeLog.Init())
         return;
 
-    LeLog.EnableConsole();
+    new SettingsManager(OnConfigLoad);
 
-    new SettingsManager();
     new Kernel();
 
     // Init tasks

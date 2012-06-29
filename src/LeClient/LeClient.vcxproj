@@ -69,7 +69,7 @@
       <AdditionalDependencies>glew_static.lib;GLFW.lib;GlU32.Lib;LeEngine.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(ProjectDir)settings.conf.dist" "$(SolutionDir)..\bin\settings.conf"</Command>
+      <Command>copy /Y "$(ProjectDir)settings.conf.dist" "$(SolutionDir)..\bin\settings.conf.dist"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Copying settings file</Message>

@@ -31,7 +31,7 @@ class Log : public Singleton<Log>
 {
 public:
     //! Constructor
-    Log() : _consoleEnabled(false), _timeEnabled(true), _lastFilter(INVALID) { /*Init();*/ };
+    Log() : _consoleEnabled(true), _timeEnabled(true), _lastFilter(INVALID) { /*Init();*/ };
 
     //! Initializes streams
     bool Init();
