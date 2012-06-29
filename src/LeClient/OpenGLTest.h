@@ -7,7 +7,7 @@
 #include <GL/glew.h>
 #include <GL/glfw.h>
 
-class OpenGLTest : public ITask, public IRenderable
+class OpenGLTest : public ITask
 {
 public:
     OpenGLTest()

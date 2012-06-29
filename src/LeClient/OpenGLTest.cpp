@@ -39,7 +39,7 @@ bool OpenGLTest::Start()
     if (!LoadGLTexture())
         return false;
 
-    glfwSetWindowSizeCallback(WindowResizeHandler);
+    VideoUpdate::GetWindow()->SetWindowResizeCallback(WindowResizeHandler);
 
     glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_SMOOTH);
@@ -123,7 +123,7 @@ void OpenGLTest::Stop()
 
 }
 
-void GLFWCALL OpenGLTest::WindowResizeHandler( int width, int height )
+void GLFWCALL OpenGLTest::WindowResizeHandler(int width, int height)
 {
     if (height == 0)
         height = 1;

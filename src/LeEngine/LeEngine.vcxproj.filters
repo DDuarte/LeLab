@@ -104,7 +104,6 @@
     <ClCompile Include="VideoUpdate.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Scene.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
@@ -112,6 +111,9 @@
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="Camera.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">

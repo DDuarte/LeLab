@@ -9,6 +9,8 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
+
+Window* VideoUpdate::_window  = NULL;
 int VideoUpdate::SourceWidth  = 800;
 int VideoUpdate::SourceHeight = 600;
 int VideoUpdate::SourceBPP    = 24;
@@ -35,7 +37,7 @@ bool VideoUpdate::Start()
         return false;
     }
 
-    //glfwDisable(GLFW_MOUSE_CURSOR);
+    //_window->EnableMouse(false);
     return true;
 }
 
@@ -44,7 +46,7 @@ void VideoUpdate::Update()
     if (!glfwGetWindowParam(GLFW_OPENED))
         Kernel::Get().KillAllTasks();
 
-    glfwSwapBuffers();
+    _window->SwapBuffers();
 }
 
 void VideoUpdate::Stop()

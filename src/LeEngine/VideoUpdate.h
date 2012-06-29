@@ -11,7 +11,7 @@ using boost::shared_ptr;
 class VideoUpdate : public ITask
 {
 private:
-    Window* _window;
+    static Window* _window;
 
 public:
     VideoUpdate() {}
@@ -21,6 +21,8 @@ public:
     static bool SourceFullscreen;
     static shared_ptr< Dator<int> > ScreenWidth, ScreenHeight, ScreenBPP;
     static shared_ptr< Dator<bool> > Fullscreen;
+
+    static Window* GetWindow() { return _window;}
 
     bool Start();
     void Update();
