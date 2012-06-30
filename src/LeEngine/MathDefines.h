@@ -4,13 +4,12 @@
 #include <boost/math/constants/constants.hpp>
 #include <boost/math/special_functions/fpclassify.hpp>
 #include <limits>
-
-const float PI = boost::math::constants::pi<float>();
+#include "DMath.h"
 
 //! Convert degrees to radians
-inline float DegToRad(float degrees) { return degrees * (PI / 180.0f); }
+inline float DegToRad(float degrees) { return degrees * Mathf::PI_OVER_180; }
 //! Convert radians to degrees
-inline float RadToDeg(float radians) { return radians * (180.0f / PI); }
+inline float RadToDeg(float radians) { return radians * Mathf::INV_PI_OVER_180; }
 
 //! Absolute value
 template <typename T>

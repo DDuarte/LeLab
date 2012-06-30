@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <cmath>
+#include "DMath.h"
 #include "MathDefines.h"
 
 template<int Size, typename T = float>
@@ -154,7 +154,7 @@ public:
     }
 
     //! The magnitude or length of this vector
-    T Magnitude() const { return sqrt(MagnitudeSqr()); }
+    T Magnitude() const { return Mathf::Sqrt(MagnitudeSqr()); }
     //! The squared magnitude or length of this vector (more efficient)
     T MagnitudeSqr() const
     {

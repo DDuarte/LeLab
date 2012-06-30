@@ -1,9 +1,8 @@
 #include "Camera.h"
 #include "InputTask.h"
-
+#include "DMath.h"
 #include <GL/glfw.h>
 
-#include <cmath>
 
 bool Camera::Start()
 {
@@ -26,31 +25,31 @@ void Camera::Update()
     if (InputTask::KeyDown('S'))
     {
         Vector<2> rotrad;
-        rotrad = (_rot / 180.0f * PI);
-        _pos[0] += float(sin(rotrad[1]));
-        _pos[1] -= float(sin(rotrad[0]));
-        _pos[2] -= float(cos(rotrad[1]));
+        rotrad = (_rot / 180.0f * Mathf::PI);
+        _pos[0] += float(Mathf::Sin(rotrad[1]));
+        _pos[1] -= float(Mathf::Sin(rotrad[0]));
+        _pos[2] -= float(Mathf::Cos(rotrad[1]));
     }
     if (InputTask::KeyDown('W'))
     {
         Vector<2> rotrad;
-        rotrad = (_rot / 180.0f * PI);
-        _pos[0] -= float(sin(rotrad[1]));
-        _pos[1] += float(sin(rotrad[0]));
-        _pos[2] += float(cos(rotrad[1]));
+        rotrad = (_rot / 180.0f * Mathf::PI);
+        _pos[0] -= float(Mathf::Sin(rotrad[1]));
+        _pos[1] += float(Mathf::Sin(rotrad[0]));
+        _pos[2] += float(Mathf::Cos(rotrad[1]));
     }
     if (InputTask::KeyDown('D'))
     { 
-        float yRotRad = (_rot[1] / 180.0f * PI);
-        _pos[0] += float(cos(yRotRad)) * 0.2f;
-        _pos[2] += float(sin(yRotRad)) * 0.2f;
+        float yRotRad = (_rot[1] / 180.0f * Mathf::PI);
+        _pos[0] += float(Mathf::Cos(yRotRad)) * 0.2f;
+        _pos[2] += float(Mathf::Sin(yRotRad)) * 0.2f;
 
     }
     if (InputTask::KeyDown('A'))
     {
-        float yRotRad = (_rot[1] / 180.0f * PI);
-        _pos[0] -= float(cos(yRotRad)) * 0.2f;
-        _pos[2] -= float(sin(yRotRad)) * 0.2f;
+        float yRotRad = (_rot[1] / 180.0f * Mathf::PI);
+        _pos[0] -= float(Mathf::Cos(yRotRad)) * 0.2f;
+        _pos[2] -= float(Mathf::Sin(yRotRad)) * 0.2f;
     }
 
     static int oldMousePosX = InputTask::MouseX, oldMousePosY = InputTask::MouseY;

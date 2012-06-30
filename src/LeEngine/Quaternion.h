@@ -1,8 +1,8 @@
 #ifndef QUATERNION_H
 #define QUATERNION_H
 
-#include <cmath>
 #include "MathDefines.h"
+#include "DMath.h"
 #include "Vector.h"
 #include "Matrix.h"
 
@@ -68,7 +68,7 @@ public:
         Vector<3> vn(vec);
         vn.Normalize();
 
-        sinAngle = sin(angle);
+        sinAngle = Mathf::Sin(angle);
 
         X = (vn.X() * sinAngle);
         Y = (vn.Y() * sinAngle);
@@ -79,17 +79,17 @@ public:
     //! Convert from Euler angles
     void FromEuler(float pitch, float yaw, float roll)
     {
-        const float f = (PI / 180.0f) / 2.0f;
+        const float f = Mathf::PI_OVER_180 / 2.0f;
         float p = pitch * f;
         float y = yaw * f;
         float r = roll * f;
 
-        float sinp = sin(p);
-        float siny = sin(y);
-        float sinr = sin(r);
-        float cosp = cos(p);
-        float cosy = cos(y);
-        float cosr = cos(r);
+        float sinp = Mathf::Sin(p);
+        float siny = Mathf::Sin(y);
+        float sinr = Mathf::Sin(r);
+        float cosp = Mathf::Cos(p);
+        float cosy = Mathf::Cos(y);
+        float cosr = Mathf::Cos(r);
 
         X = sinr * cosp * cosy - cosr * sinp * siny;
         Y = cosr * sinp * cosy + sinr * cosp * siny;
@@ -120,15 +120,15 @@ public:
 
     void GetAxisAngles(Vector<3>* axis, float* angle) const
     {
-        float scale = sqrt(X*X + Y*Y + Z*Z);
+        float scale = Mathf::Sqrt(X*X + Y*Y + Z*Z);
         axis->SetX(X / scale);
         axis->SetY(Y / scale);
         axis->SetZ(Z / scale);
-        *angle = acos(W) * 2.0f;
+        *angle = Mathf::ACos(W) * 2.0f;
     }
 
     //! The magnitude or length of this vector
-    float Magnitude() const { return sqrt(X*X + Y*Y + Z*Z + W*W); }
+    float Magnitude() const { return Mathf::Sqrt(X*X + Y*Y + Z*Z + W*W); }
     //! The squared magnitude or length of this vector (more efficient)
     float MagnitudeSqr() const { return X*X + Y*Y + Z*Z + W*W; }
 
@@ -148,8 +148,6 @@ public:
     }
 
     Quaternion Conjugate() const { return Quaternion(-X, -Y, -Z, W); }
-
-
 };
 
 #endif // QUATERNION_H

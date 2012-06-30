@@ -19,6 +19,7 @@
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Kernel.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="DMath.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Renderer.h" />
