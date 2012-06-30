@@ -72,6 +72,9 @@
     <ClInclude Include="DMath.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -105,6 +108,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">
@@ -133,6 +139,9 @@
     </Filter>
     <Filter Include="Rendering">
       <UniqueIdentifier>{cf2a5b4d-0770-49bc-ba67-286250fe9f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files">
+      <UniqueIdentifier>{64675fde-2677-45c3-beb2-18fa030d4bbb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

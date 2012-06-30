@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="GlobalTimer.h" />
     <ClInclude Include="IApplication.h" />
     <ClInclude Include="InputTask.h" />
@@ -36,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />
