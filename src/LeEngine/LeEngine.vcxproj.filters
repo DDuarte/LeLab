@@ -75,6 +75,9 @@
     <ClInclude Include="File.h">
       <Filter>Files</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
