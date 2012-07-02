@@ -42,8 +42,16 @@ public:
     T Z() const { assert(Size >= 3); return V[2]; }
     T W() const { assert(Size >= 4); return V[3]; }
 
+    T& X() { assert(Size >= 1); return V[0]; }
+    T& Y() { assert(Size >= 2); return V[1]; }
+    T& Z() { assert(Size >= 3); return V[2]; }
+    T& W() { assert(Size >= 4); return V[3]; }
+
     T operator [](int index) const { assert(index < Size); return V[index]; }
     T& operator [](int index) { assert(index < Size); return V[index]; }
+
+    operator const T* () const { return V; }
+    operator T* () { return V; }
 
     void SetX(T x) { assert(Size >= 1); V[0] = x; }
     void SetY(T y) { assert(Size >= 2); V[1] = y; }
@@ -158,7 +166,7 @@ public:
     //! The squared magnitude or length of this vector (more efficient)
     T MagnitudeSqr() const
     {
-        T sum;
+        T sum = (T)0;
         for (int i = 0; i < Size; ++i)
             sum += V[i] * V[i];
         return sum;
@@ -172,7 +180,7 @@ public:
 	//! Normalizes this vector
     void Normalize()
     {
-        if (!IsZero(MagnitudeSqr()) - static_cast<T>(1))
+        if (!IsZero(MagnitudeSqr() - static_cast<T>(1)))
         {
             T length = Magnitude();
             for (int i = 0; i < Size; ++i)
@@ -192,7 +200,7 @@ public:
 	//! Returns the dot product (a scalar) between this vector and some other
     T DotProduct(const Vector<Size, T>& other) const
     {
-        T sum;
+        T sum = 0;
         for (int i = 0; i < Size; ++i)
             sum += V[i] * other[i];
         return sum;
@@ -201,16 +209,16 @@ public:
 	//! Returns the cross product (a vector) between this vector and some other
     Vector<Size, T> CrossProduct(const Vector<Size, T>& other) const
     {
-        if (Size == 2)
-            return Vector<1, T>(V[0] * other.V[1] - V[1] * other.V[0]);
+        if (Size == 2) // this needs some sort of split
+            return V[0] * other.V[1] - V[1] * other.V[0];
         else if (Size == 3)
-            return V[1] * other.V[2] - V[2] * other.V[1],
+            return Vector<Size, T>(V[1] * other.V[2] - V[2] * other.V[1],
                 V[2] * other.V[0] - V[0] * other.V[2],
-                V[0] * other.V[1] - V[1] * other.V[0];
+                V[0] * other.V[1] - V[1] * other.V[0]);
         else
         {
             assert(false && "Cross product not defined for more than 3 dimensions");
-            return Vector<Size, T>;
+            return Vector<Size, T>();
         }
     }
 

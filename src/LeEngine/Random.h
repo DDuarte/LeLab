@@ -2,6 +2,7 @@
 #define RANDOM_H
 
 #include <boost/random.hpp>
+#include <boost/concept_check.hpp>
 #include <ctime>
 #include <iterator>
 
@@ -60,6 +61,7 @@ public:
         // This will work with any container that supports iterators
         // The only requirement is that the iterator must be
         // an input iterator (random or sequential)
+        BOOST_CONCEPT_ASSERT((InputIterator<InputIterator>));
 
         int size = std::distance(begin, end);
         int rand = Interval(0, size);
