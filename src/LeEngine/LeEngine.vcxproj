@@ -19,9 +19,11 @@
     <ClInclude Include="InputTask.h" />
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Kernel.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="DMath.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
@@ -42,7 +44,9 @@
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SettingsManager.cpp" />

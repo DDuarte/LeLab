@@ -78,6 +78,12 @@
     <ClInclude Include="Random.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Math\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Math\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -117,6 +123,12 @@
     <ClCompile Include="Random.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Math\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">
@@ -148,6 +160,9 @@
     </Filter>
     <Filter Include="Files">
       <UniqueIdentifier>{64675fde-2677-45c3-beb2-18fa030d4bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Geometry">
+      <UniqueIdentifier>{ba23005e-1c32-44a5-8025-8f9f7671bd01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
