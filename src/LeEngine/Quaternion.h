@@ -121,6 +121,8 @@ public:
     void GetAxisAngles(Vector<3>* axis, float* angle) const
     {
         float scale = Mathf::Sqrt(X*X + Y*Y + Z*Z);
+        assert(!IsZero(scale));
+
         axis->SetX(X / scale);
         axis->SetY(Y / scale);
         axis->SetZ(Z / scale);
