@@ -33,16 +33,6 @@ public:
     template <typename T> void ReadSkip();
     void ReadSkip(uint32 size);
 
-    template <typename T> T Read();
-    void Read(Byte* dest, uint32 count);
-
-    template <typename T> void Append(T val);
-    template <typename T> void Put(uint32 pos, T val);
-    template <typename T> void Append(const T* src, uint32 count);
-    void Append(const ByteBuffer& other);
-    void Append(const Byte* src, uint32 count);
-    void Put(uint32 pos, const Byte* src, uint32 count);
-
     uint32 Size() const;
     bool IsEmpty() const;
 
@@ -51,10 +41,47 @@ public:
 
     void Print(std::ostream& stream) const;
 
+    ByteBuffer& operator <<(bool value);
+    ByteBuffer& operator <<(uint8 value);
+    ByteBuffer& operator <<(uint16 value);
+    ByteBuffer& operator <<(uint32 value);
+    ByteBuffer& operator <<(uint64 value);
+    ByteBuffer& operator <<(int8 value);
+    ByteBuffer& operator <<(int16 value);
+    ByteBuffer& operator <<(int32 value);
+    ByteBuffer& operator <<(int64 value);
+    ByteBuffer& operator <<(float value);
+    ByteBuffer& operator <<(double value);
+    ByteBuffer& operator <<(const std::string& value);
+    ByteBuffer& operator <<(const char* str);
+    ByteBuffer& operator <<(const ByteBuffer& other);
+    ByteBuffer& operator >>(bool& value);
+    ByteBuffer& operator >>(uint8& value);
+    ByteBuffer& operator >>(uint16& value);
+    ByteBuffer& operator >>(uint32& value);
+    ByteBuffer& operator >>(uint64& value);
+    ByteBuffer& operator >>(int8& value);
+    ByteBuffer& operator >>(int16& value);
+    ByteBuffer& operator >>(int32& value);
+    ByteBuffer& operator >>(int64& value);
+    ByteBuffer& operator >>(float& value);
+    ByteBuffer& operator >>(double& value);
+    ByteBuffer& operator >>(std::string& value);
+
 protected:
     std::vector<Byte> _buffer;
     uint32 _readPos;
     uint32 _writePos;
+
+    // Use stream operators to read and write
+    template <typename T> T Read();
+    void Read(Byte* dest, uint32 count);
+    template <typename T> void Append(T val);
+    template <typename T> void Append(const T* src, uint32 count);
+    void Append(const ByteBuffer& other);
+    void Append(const Byte* src, uint32 count);
+    template <typename T> void Put(uint32 pos, T val);
+    void Put(uint32 pos, const Byte* src, uint32 count);
 };
 
 template <typename T>

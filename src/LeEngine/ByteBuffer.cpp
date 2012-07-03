@@ -176,3 +176,57 @@ void ByteBuffer::Print(std::ostream& stream) const
 
     stream << "|-------------------------------------------------|---------------------------------|\n";
 }
+
+ByteBuffer& ByteBuffer::operator <<(bool value) { Append<bool>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(uint8 value) { Append<uint8>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(uint16 value) { Append<uint16>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(uint32 value) { Append<uint32>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(uint64 value) { Append<uint64>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(int8 value) { Append<int8>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(int16 value) { Append<int16>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(int32 value) { Append<int32>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(int64 value) { Append<int64>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(float value) { Append<float>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(double value) { Append<double>(value); return *this; }
+ByteBuffer& ByteBuffer::operator <<(const ByteBuffer& other) { Append(other); return *this; }
+ByteBuffer& ByteBuffer::operator <<(const std::string& value)
+{
+    if (size_t length = value.length())
+        Append((uint8 const*)value.c_str(), length);
+    Append((uint8)0); // null terminator
+    return *this;
+}
+
+ByteBuffer& ByteBuffer::operator <<(const char* str)
+{
+    size_t length = 0;
+    if (str && (length = strlen(str)))
+        Append((uint8 const*)str, length);
+    Append((uint8)0); // null terminator
+    return *this;
+}
+
+ByteBuffer& ByteBuffer::operator >>(bool& value) { value = Read<uint8>() > 0 ? true : false; return *this; }
+ByteBuffer& ByteBuffer::operator >>(uint8& value) { value = Read<uint8>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(uint16& value) { value = Read<uint16>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(uint32& value) { value = Read<uint32>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(uint64& value) { value = Read<uint64>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(int8& value) { value = Read<int8>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(int16& value) { value = Read<int16>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(int32& value) { value = Read<int32>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(int64& value) { value = Read<int64>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(float& value) { value = Read<float>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(double& value) { value = Read<double>(); return *this; }
+ByteBuffer& ByteBuffer::operator >>(std::string& value)
+{
+    value.clear();
+    while (_readPos < Size())
+    {
+        char c = Read<char>();
+        if (c == 0)
+            break;
+        value += c;
+    }
+
+    return *this;
+}
