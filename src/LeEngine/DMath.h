@@ -57,6 +57,8 @@ public:
     static Real FMod(Real numerator, Real denominator) { return fmod(numerator, denominator); }
     static Real Clamp(Real val, Real min, Real max) { return (val < min ? min : (val > max ? max : val)); }
     static int Sign(Real val) { return (val > 0 ? 1 : (val < 0 ? -1 : 0)); }
+    static bool IsFuzzyZero(Real val) { return !val || (Abs(val) <= std::numeric_limits<Real>::epsilon()); }
+    static bool IsFuzzyEqual(Real val1, Real val2) { return val1 == val2 || (Abs(val2 - val1) <= std::numeric_limits<Real>::epsilon()); }
 
 private:
     BOOST_STATIC_ASSERT_MSG(boost::is_floating_point<Real>::value, "Math class requires real type.");

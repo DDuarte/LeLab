@@ -84,6 +84,9 @@
     <ClInclude Include="Plane.h">
       <Filter>Math\Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="Line.cpp">
       <Filter>Math\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
