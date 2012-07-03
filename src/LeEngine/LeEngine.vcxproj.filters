@@ -87,6 +87,9 @@
     <ClInclude Include="Color.h">
       <Filter>Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="ByteBuffer.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -135,6 +138,9 @@
     <ClCompile Include="Color.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="ByteBuffer.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">
@@ -169,6 +175,9 @@
     </Filter>
     <Filter Include="Math\Geometry">
       <UniqueIdentifier>{ba23005e-1c32-44a5-8025-8f9f7671bd01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{a96d83f3-8b01-418e-9b33-2a68baaa71fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

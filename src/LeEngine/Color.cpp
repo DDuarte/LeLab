@@ -205,7 +205,6 @@ ColorRGBA::operator ColorRGB()
     return ColorRGB(R(), G(), B());
 }
 
-
 float ColorRGBA::operator[](int i) const
 {
     assert(i < COLOR_RGBA_SIZE);
