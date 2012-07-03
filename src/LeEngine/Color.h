@@ -47,6 +47,23 @@ public:
 
     ColorRGB& operator +=(const ColorRGB& other);
     ColorRGB& operator -=(const ColorRGB& other);
+
+    static const ColorRGB BLACK;
+    static const ColorRGB NAVY;
+    static const ColorRGB GREEN;
+    static const ColorRGB TEAL;
+    static const ColorRGB MAROON;
+    static const ColorRGB PURPLE;
+    static const ColorRGB OLIVE;
+    static const ColorRGB SILVER;
+    static const ColorRGB GRAY;
+    static const ColorRGB BLUE;
+    static const ColorRGB LIME;
+    static const ColorRGB AQUA;
+    static const ColorRGB RED;
+    static const ColorRGB FUCHSIA;
+    static const ColorRGB YELLOW;
+    static const ColorRGB WHITE;
 };
 
 //! A triplet of colors with the range [0,1] plus alpha channel

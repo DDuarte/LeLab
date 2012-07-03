@@ -2,6 +2,23 @@
 
 // ColorRGB
 
+const ColorRGB ColorRGB::BLACK(0.0f, 0.0f, 0.0f);
+const ColorRGB ColorRGB::NAVY(0.0f, 0.0f, 0.5f);
+const ColorRGB ColorRGB::GREEN(0.0f, 0.5f, 0.0f);
+const ColorRGB ColorRGB::TEAL(0.0f, 0.5f, 0.5f);
+const ColorRGB ColorRGB::MAROON(0.5f, 0.0f, 0.0f);
+const ColorRGB ColorRGB::PURPLE(0.5f, 0.0f, 0.5f);
+const ColorRGB ColorRGB::OLIVE(0.5f, 0.5f, 0.0f);
+const ColorRGB ColorRGB::SILVER(0.75f, 0.75f, 0.75f);
+const ColorRGB ColorRGB::GRAY(0.5f, 0.5f, 0.5f);
+const ColorRGB ColorRGB::BLUE(0.0f, 0.0f, 1.0f);
+const ColorRGB ColorRGB::LIME(0.0f, 1.0f, 0.0f);
+const ColorRGB ColorRGB::AQUA(0.0f, 1.0f, 1.0f);
+const ColorRGB ColorRGB::RED(1.0f, 0.0f, 0.0f);
+const ColorRGB ColorRGB::FUCHSIA(1.0f, 0.0f, 1.0f);
+const ColorRGB ColorRGB::YELLOW(1.0f, 1.0f, 0.0f);
+const ColorRGB ColorRGB::WHITE(1.0f, 1.0f, 1.0f);
+
 ColorRGB::ColorRGB()
 {
     memset(_values, 0, COLOR_RGB_SIZE*sizeof(float));
