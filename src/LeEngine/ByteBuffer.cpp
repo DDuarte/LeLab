@@ -191,9 +191,11 @@ ByteBuffer& ByteBuffer::operator <<(double value) { Append<double>(value); retur
 ByteBuffer& ByteBuffer::operator <<(const ByteBuffer& other) { Append(other); return *this; }
 ByteBuffer& ByteBuffer::operator <<(const std::string& value)
 {
-    if (size_t length = value.length())
-        Append((uint8 const*)value.c_str(), length);
-    Append((uint8)0); // null terminator
+    if (uint32 length = value.length())
+    {
+        Append7BitEncodedInt(length);
+        Append((Byte const*)value.c_str(), length);
+    }
     return *this;
 }
 
@@ -201,8 +203,10 @@ ByteBuffer& ByteBuffer::operator <<(const char* str)
 {
     size_t length = 0;
     if (str && (length = strlen(str)))
-        Append((uint8 const*)str, length);
-    Append((uint8)0); // null terminator
+    {
+        Append7BitEncodedInt(length);
+        Append((Byte const*)str, length);
+    }
     return *this;
 }
 
@@ -220,13 +224,39 @@ ByteBuffer& ByteBuffer::operator >>(double& value) { value = Read<double>(); ret
 ByteBuffer& ByteBuffer::operator >>(std::string& value)
 {
     value.clear();
-    while (_readPos < Size())
-    {
-        char c = Read<char>();
-        if (c == 0)
-            break;
-        value += c;
-    }
+
+    uint32 length = Read7BitEncodedInt();
+    Byte* res = new Byte[length];
+    Read(res, length);
+    value.append((const char*)res, length);
+    value.append(1, 0);
+    delete[] res; // is there a way to do this without new?
 
     return *this;
+}
+
+void ByteBuffer::Append7BitEncodedInt(uint32 value)
+{
+    assert(value <= 0xFFFFFFF); // 8*4 - 4 bits
+
+    while (value >= 0x80)
+    {
+        Append((Byte)(value | 0x80));
+        value >>= 7;
+    }
+    Append((Byte)value);
+}
+
+uint32 ByteBuffer::Read7BitEncodedInt()
+{
+    uint32 result = 0;
+    for (uint8 i = 0, shift = 0; i < 4; ++i, shift += 7) // read max 4 bytes (max value 0xFFFFFFF)
+    {
+        Byte val = Read<Byte>();
+        Byte realVal = val & 0x7F;
+        result |= realVal << shift;
+        if (!(val & 0x80)) // if highbit is 1, continue reading otherwise stop
+            break;
+    }
+    return result;
 }

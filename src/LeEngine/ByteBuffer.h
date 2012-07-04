@@ -82,6 +82,10 @@ protected:
     void Append(const Byte* src, uint32 count);
     template <typename T> void Put(uint32 pos, T val);
     void Put(uint32 pos, const Byte* src, uint32 count);
+
+private:
+    void Append7BitEncodedInt(uint32 value);
+    uint32 Read7BitEncodedInt();
 };
 
 template <typename T>
