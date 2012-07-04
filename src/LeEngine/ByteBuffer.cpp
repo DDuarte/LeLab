@@ -6,6 +6,11 @@
 #include <cstdio>
 #include <iomanip>
 #include <cctype>
+#include <malloc.h>
+
+#ifdef _WIN32
+#define alloca _alloca
+#endif
 
 ByteBuffer::ByteBuffer() : _readPos(0), _writePos(0)
 {
@@ -226,11 +231,10 @@ ByteBuffer& ByteBuffer::operator >>(std::string& value)
     value.clear();
 
     uint32 length = Read7BitEncodedInt();
-    Byte* res = new Byte[length];
+    Byte* res = (Byte*)alloca(length);
     Read(res, length);
     value.append((const char*)res, length);
     value.append(1, 0);
-    delete[] res; // is there a way to do this without new?
 
     return *this;
 }
