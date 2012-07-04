@@ -132,20 +132,6 @@ public:
         return *this;
     }
 
-    Vector<Size, T>& operator *=(const Vector<Size, T>& other)
-    {
-        for (int i = 0; i < Size; ++i)
-            V[i] *= other[i];
-        return *this;
-    }
-
-    Vector<Size, T>& operator /=(const Vector<Size, T>& other)
-    {
-        for (int i = 0; i < Size; ++i)
-            V[i] /= scalar;
-        return *this;
-    }
-
     Vector<Size, T>& operator +=(const T& scalar)
     {
         for (int i = 0; i < Size; ++i)
