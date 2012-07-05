@@ -25,6 +25,8 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="DMath.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Opcode.h" />
+    <ClInclude Include="Packet.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Random.h" />

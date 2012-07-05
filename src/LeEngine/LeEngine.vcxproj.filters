@@ -90,6 +90,12 @@
     <ClInclude Include="ByteBuffer.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Opcode.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
