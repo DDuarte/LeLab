@@ -16,7 +16,7 @@ void OpcodeMgr::AddHandler(uint16 opcode, OpcHandler handler)
     _handlers[opcode] = handler;
 }
 
-void OpcodeMgr::BindAndCall(Packet* packet)
+void OpcodeMgr::Handle(Packet* packet)
 {
     OpcHandler* handler = GetHandler(packet->GetOpcode());
     if (!handler)

@@ -4,6 +4,7 @@
 #include <map>
 #include <boost/function.hpp>
 #include "Defines.h"
+//#include "Singleton.h"
 
 class Packet;
 
@@ -15,12 +16,12 @@ enum Direction
 
 typedef boost::function<void (Packet* packet)> OpcHandler;
 
-class OpcodeMgr
+class OpcodeMgr// : Singleton<OpcodeMgr>
 {
 public:
     void AddHandler(uint16 opcode, OpcHandler handler);
 
-    void BindAndCall(Packet* packet);
+    void Handle(Packet* packet);
 
 private:
     std::map<uint16, OpcHandler> _handlers;
