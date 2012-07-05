@@ -6,12 +6,10 @@
 #include "Defines.h"
 
 typedef uint8 Byte;
-#define DEFAULT_BUFFER_SIZE 64 // bytes
 
 class ByteBuffer
 {
 public:
-    ByteBuffer();
     ByteBuffer(uint32 capacity);
     ByteBuffer(const ByteBuffer& other);
 

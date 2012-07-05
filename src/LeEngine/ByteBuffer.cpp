@@ -12,11 +12,6 @@
 #define alloca _alloca
 #endif
 
-ByteBuffer::ByteBuffer() : _readPos(0), _writePos(0)
-{
-    _buffer.reserve(DEFAULT_BUFFER_SIZE);
-}
-
 ByteBuffer::ByteBuffer(uint32 capacity) : _readPos(0), _writePos(0)
 {
     _buffer.reserve(capacity);
@@ -231,10 +226,11 @@ ByteBuffer& ByteBuffer::operator >>(std::string& value)
     value.clear();
 
     uint32 length = Read7BitEncodedInt();
-    Byte* res = (Byte*)alloca(length);
+    assert(length < 250000); // alloca is dangerous when allocating many bytes
+    Byte* res = (Byte*)alloca(length+1);
     Read(res, length);
-    value.append((const char*)res, length);
-    value.append(1, 0);
+    res[length] = 0; // null terminator
+    value = (const char*)res;
 
     return *this;
 }

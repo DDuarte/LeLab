@@ -8,19 +8,20 @@
 class Packet : public ByteBuffer
 {
 protected:
-    // uint32 _time; // unix time
+    // uint64 _time; // unix time
     // uint8 _direction; // enum Direction
     uint16 _opcode; // enum Opcode
-    // uint32 _length;
+    // uint16 _length;
     // Byte* _data;
 
 public:
-    Packet() : ByteBuffer(0), _opcode(0) {}
     Packet(Opcode opcode, uint32 reserveSize) : ByteBuffer(reserveSize), _opcode((uint16)opcode) {}
     Packet(const Packet& other) : ByteBuffer(other), _opcode(other._opcode) {}
 
     Opcode GetOpcode() const { _return (Opcode)_opcode; }
     void SetOpcode(Opcode opcode) { _opcode = opcode; }
+
+    uint32 GetDataSize() const { return _buffer.size(); }
 
 };
 
