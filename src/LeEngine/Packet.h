@@ -2,7 +2,6 @@
 #define PACKET_H
 
 #include "ByteBuffer.h"
-#include "Opcode.h"
 #include "Defines.h"
 
 class Packet : public ByteBuffer
@@ -15,11 +14,11 @@ protected:
     // Byte* _data;
 
 public:
-    Packet(Opcode opcode, uint32 reserveSize) : ByteBuffer(reserveSize), _opcode((uint16)opcode) {}
+    Packet(uint16 opcode, uint32 reserveSize) : ByteBuffer(reserveSize), _opcode(opcode) {}
     Packet(const Packet& other) : ByteBuffer(other), _opcode(other._opcode) {}
 
-    Opcode GetOpcode() const { _return (Opcode)_opcode; }
-    void SetOpcode(Opcode opcode) { _opcode = opcode; }
+    uint16 GetOpcode() const { return _opcode; }
+    void SetOpcode(uint16 opcode) { _opcode = opcode; }
 
     uint32 GetDataSize() const { return _buffer.size(); }
 

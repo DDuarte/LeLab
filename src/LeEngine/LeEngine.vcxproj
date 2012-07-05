@@ -25,7 +25,7 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="DMath.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="Opcode.h" />
+    <ClInclude Include="OpcodeMgr.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Quaternion.h" />
@@ -52,6 +52,7 @@
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="OpcodeMgr.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scene.cpp" />
