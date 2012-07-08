@@ -17,7 +17,7 @@ bool VideoUpdate::Start()
         return false;
     }
 
-    _window = new Window("CHANGEME", GetConfig(ScreenWidth), GetConfig(ScreenHeight), GetConfig(ScreenFullScreen), GetConfig(ScreenBPP));
+    _window = new Window("CHANGEME", GetConfig("screen.X", int), GetConfig("screen.Y", int), GetConfig("screen.fullscreen", bool), GetConfig("screen.BPP", int));
     if (!_window->Create())
     {
         glfwTerminate();

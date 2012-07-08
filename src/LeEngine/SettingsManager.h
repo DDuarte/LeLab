@@ -4,47 +4,52 @@
 #include "Singleton.h"
 #include <string>
 #include <boost/noncopyable.hpp>
+#include <utility>
+#include <boost/lexical_cast.hpp>
+#include <map>
 
-#define SETTINGS_FILENAME "settings.conf"
-#define GetConfig(name) SettingsManager::Get().GetSettings()->name
+#define GetConfig(name, T) SettingsManager::Get().GetSetting<T>(name)
 
 class SettingsManager : public Singleton<SettingsManager>
 {
-public:
-    struct Settings
-    {
-        // screen
-        int ScreenWidth;
-        int ScreenHeight;
-        int ScreenBPP;
-        bool ScreenFullScreen;
-
-        // logging
-        std::string LogClientFileName;
-        std::string LogApplicationFileName;
-        std::string LogServerFileName;
-        bool LogWriteToConsole;
-        bool LogWithTimestamp;
-
-        void Load(const std::string& fileName);
-        void Save(const std::string& fileName);
-    };
 private:
     std::string _fileName;
     bool _loaded;
-    Settings _settings;
     void (*_onLoadCallback)();
 
+    std::map< std::string, std::pair<std::string, std::string> > _settings;
+    void Load(const std::string& fileName);
+    void Save(const std::string& fileName, bool firstLoad = false);
+
 public:
-    SettingsManager();
-    SettingsManager(void (*f)());
+    SettingsManager(const std::string& filename);
+    SettingsManager(const std::string& filename, void (*f)());
 
     void SetOnLoadCallback(void (*f)()) { _onLoadCallback = f; }
 
     void LoadConfig();
     void SaveConfig();
     void ReloadConfig();
-    Settings* GetSettings() const { return _loaded ? const_cast<Settings*>(&_settings) : NULL;}
+    
+    template <typename T>
+    T GetSetting(std::string name);
+
+    template <typename T>
+    void AddSetting(std::string name, T defaultValue);
 };
+
+template <typename T>
+T SettingsManager::GetSetting(std::string name)
+{
+    if (_settings.find(name) != _settings.end())
+        return boost::lexical_cast<T>(_settings[name].first);
+    return T();
+}
+
+template <typename T>
+void SettingsManager::AddSetting(std::string name, T defaultValue)
+{
+    _settings[name] = std::make_pair("", boost::lexical_cast<std::string>(defaultValue));
+}
 
 #endif // SETTINGSMANAGER_H

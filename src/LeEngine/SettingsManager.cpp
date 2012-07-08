@@ -4,25 +4,26 @@
 #include <exception>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/info_parser.hpp>
+#include <boost/filesystem.hpp>
 
-SettingsManager::SettingsManager() : _fileName(SETTINGS_FILENAME), _loaded(false), _onLoadCallback(NULL)
+SettingsManager::SettingsManager(const std::string& filename) : _fileName(filename), _loaded(false), _onLoadCallback(NULL)
 {
-    LoadConfig();
 }
 
-SettingsManager::SettingsManager(void (*f)()) : _fileName(SETTINGS_FILENAME), _loaded(false), _onLoadCallback(NULL)
+SettingsManager::SettingsManager(const std::string& filename, void (*f)()) : _fileName(filename), _loaded(false)
 {
     SetOnLoadCallback(f);
-    LoadConfig();
 }
-
 
 void SettingsManager::LoadConfig()
 {
     LeLog.WriteP("Loading configuration file %s...", _fileName.c_str());
     try
     {
-        _settings.Load(_fileName);
+        if (!boost::filesystem::exists(_fileName))
+            Save(_fileName, true);
+
+        Load(_fileName);
         _loaded = true;
 
         if (_onLoadCallback)
@@ -37,16 +38,10 @@ void SettingsManager::LoadConfig()
 
 void SettingsManager::SaveConfig()
 {
-    if (!_loaded)
-    {
-        LeLog.Write("Saving configuration file failed because configuration was not loaded before.");
-        return;
-    }
-
     LeLog.WriteP( "Saving configuration file %s...", _fileName.c_str());
     try
     {
-        _settings.Save(_fileName);
+        Save(_fileName);
     }
     catch (std::exception &e)
     {
@@ -67,44 +62,26 @@ void SettingsManager::ReloadConfig()
     LoadConfig();
 }
 
-void SettingsManager::Settings::Load(const std::string& fileName)
+void SettingsManager::Load(const std::string& fileName)
 {
     using boost::property_tree::ptree;
     ptree pt;
 
     read_info(fileName, pt);
 
-    // screen
-    ScreenWidth = pt.get("screen.X", 800);
-    ScreenHeight = pt.get("screen.Y", 600);
-    ScreenBPP = pt.get("screen.BPP", 24);
-    ScreenFullScreen = pt.get("screen.fullscreen", false);
-
-    // logging
-    LogClientFileName = pt.get("logging.files.client", "clntlog.log");
-    LogApplicationFileName = pt.get("logging.files.app", "applog.log");
-    LogServerFileName = pt.get<std::string>("logging.files.server", "srvrlog.log");
-    LogWriteToConsole = pt.get("logging.write_to_console", true);
-    LogWithTimestamp = pt.get("logging.with_timestamp", true);
+    for (auto itr = _settings.begin(); itr != _settings.end(); ++itr)
+    {
+        itr->second.first = pt.get(itr->first, itr->second.second);
+    }
 }
 
-void SettingsManager::Settings::Save( const std::string& fileName )
+void SettingsManager::Save(const std::string& fileName, bool firstLoad /*=false*/)
 {
     using boost::property_tree::ptree;
     ptree pt;
 
-    // screen
-    pt.put("screen.X", ScreenWidth);
-    pt.put("screen.Y", ScreenHeight);
-    pt.put("screen.BPP", ScreenBPP);
-    pt.put("screen.fullscreen", ScreenFullScreen);
-
-    // logging
-    pt.put("logging.files.client", LogClientFileName);
-    pt.put("logging.files.app", LogApplicationFileName);
-    pt.put("logging.files.server", LogServerFileName);
-    pt.put("logging.write_to_console", LogWriteToConsole);
-    pt.put("logging.with_timestamp", LogWithTimestamp);
+    for (auto itr = _settings.begin(); itr != _settings.end(); ++itr)
+        pt.put(itr->first, firstLoad ? itr->second.second : itr->second.first);
 
     write_info(fileName, pt);
 }
