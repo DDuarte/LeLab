@@ -15,8 +15,7 @@ using boost::shared_ptr;
 
 void Application::Run(int argc, char* argv[])
 {
-    const std::string logFile = "client.conf";
-    SettingsManager* settings = new SettingsManager(logFile);
+    SettingsManager* settings = new SettingsManager("client.conf");
     settings->AddSetting("screen.X", 800);
     settings->AddSetting("screen.Y", 600);
     settings->AddSetting("screen.BPP", 24);

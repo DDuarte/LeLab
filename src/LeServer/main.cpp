@@ -1,16 +1,12 @@
-#include <iostream>
-#include <string>
-#include <boost/asio.hpp>
+#include "ServerApplication.h"
 
-#include "TcpServer.h"
-
-int main(int argc, char* argv[])
+int main(int argc, char * argv[])
 {
-    const int PORT = 35430;
-    const std::string NAME = "Server1";
+    new ServerApplication();
+    ServerApplication::Get().Run(argc, argv);
+    delete ServerApplication::GetPtr();
 
-    boost::asio::io_service io;
-    TcpServer server(&io, PORT, NAME);
+    system("PAUSE");
 
     return 0;
 }
