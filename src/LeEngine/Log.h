@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <string>
+#include <boost/noncopyable.hpp>
 #include "Singleton.h"
 
 //! Simple file logging
@@ -11,11 +12,11 @@
         - LeLog.WriteP("This is a test: %s", variable);
         - LeLog.Write(boost::format("This is a test: %1%") % variable);
 */
-class Log : public Singleton<Log>
+class Log : public Singleton<Log>, public boost::noncopyable
 {
 public:
     //! Constructor
-    Log() : _consoleEnabled(true), _timeEnabled(true) { /*Init();*/ };
+    Log(const std::string& filename) : _consoleEnabled(true), _timeEnabled(true), _filename(filename) { /*Init();*/ };
 
     //! Initializes streams
     bool Init();
@@ -38,7 +39,10 @@ private:
     //! Returns a formatted string of current time
     static std::string GetTime();
 
-    //! Log stream/file
+    //! Log file
+    std::string _filename;
+
+    //! Log stream
     std::ofstream _stream;
 
     //! Defines if logs should be written to console (cout)

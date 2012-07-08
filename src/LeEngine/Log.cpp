@@ -5,7 +5,7 @@
 
 bool Log::Init()
 {
-    _stream.open("log.log");
+    _stream.open(_filename);
 
     return _stream.is_open();
 }

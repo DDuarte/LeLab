@@ -13,22 +13,10 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-void OnConfigLoad()
-{
-    LeLog.EnableConsole(GetConfig("logging.write_to_console", bool));
-    LeLog.EnableTime(GetConfig("logging.with_timestamp", bool));
-    // TODO: Change used .log files
-    // LeLog.SetLogFile(GetConfig<std::string>("logging.file));
-}
-
 void Application::Run(int argc, char* argv[])
 {
-    new Log;
-    if (!LeLog.Init())
-        return;
-
     const std::string logFile = "client.conf";
-    SettingsManager* settings = new SettingsManager(logFile, OnConfigLoad);
+    SettingsManager* settings = new SettingsManager(logFile);
     settings->AddSetting("screen.X", 800);
     settings->AddSetting("screen.Y", 600);
     settings->AddSetting("screen.BPP", 24);
@@ -37,6 +25,13 @@ void Application::Run(int argc, char* argv[])
     settings->AddSetting("logging.write_to_console", true);
     settings->AddSetting("logging.with_timestamp", true);
     settings->LoadConfig();
+
+    new Log(GetConfig("logging.file", std::string));
+    if (!LeLog.Init())
+        return;
+
+    LeLog.EnableConsole(GetConfig("logging.write_to_console", bool));
+    LeLog.EnableTime(GetConfig("logging.with_timestamp", bool));
 
     new Kernel();
 

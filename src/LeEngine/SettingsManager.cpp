@@ -1,14 +1,12 @@
 #include "SettingsManager.h"
-#include "Log.h"
 #include <string>
 #include <exception>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/info_parser.hpp>
 #include <boost/filesystem.hpp>
 
-SettingsManager::SettingsManager(const std::string& filename) : _fileName(filename), _loaded(false), _onLoadCallback(NULL)
-{
-}
+SettingsManager::SettingsManager(const std::string& filename) : _fileName(filename),
+    _loaded(false), _onLoadCallback(NULL) {}
 
 SettingsManager::SettingsManager(const std::string& filename, void (*f)()) : _fileName(filename), _loaded(false)
 {
@@ -17,7 +15,11 @@ SettingsManager::SettingsManager(const std::string& filename, void (*f)()) : _fi
 
 void SettingsManager::LoadConfig()
 {
-    LeLog.WriteP("Loading configuration file %s...", _fileName.c_str());
+
+#if _DEBUG
+    std::cout << "Loading configuration file " << _fileName << "..." << std::endl;
+#endif
+
     try
     {
         if (!boost::filesystem::exists(_fileName))
@@ -32,13 +34,17 @@ void SettingsManager::LoadConfig()
     catch (std::exception &e)
     {
     	_loaded = false;
-        LeLog.WriteP("Loading configuration file %s failed: %s", _fileName.c_str(), e.what());
+#if _DEBUG
+        std::cout << "Loading configuration file "  << _fileName << " failed: "<< e.what() << ")" << std::endl;
+#endif
     }
 }
 
 void SettingsManager::SaveConfig()
 {
-    LeLog.WriteP( "Saving configuration file %s...", _fileName.c_str());
+#if _DEBUG
+    std::cout << "Saving configuration file " << _fileName << "..." << std::endl;
+#endif
     try
     {
         Save(_fileName);
@@ -46,7 +52,10 @@ void SettingsManager::SaveConfig()
     catch (std::exception &e)
     {
         _loaded = false;
-        LeLog.WriteP("Saving configuration file %s failed: %s", _fileName.c_str(), e.what());
+
+#if _DEBUG
+        std::cout << "Saving configuration file " << _fileName << " failed: " << e.what() << std::endl;
+#endif
     }
 }
 
@@ -54,11 +63,15 @@ void SettingsManager::ReloadConfig()
 {
     if (!_loaded)
     {
-        LeLog.Write("Reloading configuration file failed because configuration was not loaded before.");
+#if _DEBUG
+        std::cout << "Reloading configuration file failed because configuration was not loaded before." << std::endl;
+#endif
         return;
     }
     
-    LeLog.Write( "Reloading configuration file...");
+#if _DEBUG
+    std::cout << "Reloading configuration file..." << std::endl;
+#endif
     LoadConfig();
 }
 
