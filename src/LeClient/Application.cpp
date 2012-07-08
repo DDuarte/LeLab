@@ -9,6 +9,7 @@
 #include "VideoUpdate.h"
 #include "OpenGLTest.h"
 #include "Camera.h"
+#include "NetworkTask.h"
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -23,6 +24,8 @@ void Application::Run(int argc, char* argv[])
     settings->AddSetting("logging.file", "client.log");
     settings->AddSetting("logging.write_to_console", true);
     settings->AddSetting("logging.with_timestamp", true);
+    settings->AddSetting("connection.host", "127.0.0.1");
+    settings->AddSetting("connection.port", 54321);
     settings->LoadConfig();
 
     new Log(GetConfig("logging.file", std::string));
@@ -55,6 +58,10 @@ void Application::Run(int argc, char* argv[])
     shared_ptr<Camera> camera(new Camera);
     camera->Priority = 40;
     Kernel::Get().AddTask(camera);
+
+    shared_ptr<NetworkTask> network(new NetworkTask);
+    network->Priority = 30;
+    Kernel::Get().AddTask(network);
 
     // Game specific tasks
     

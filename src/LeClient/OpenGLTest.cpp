@@ -8,7 +8,6 @@
 #include "VideoUpdate.h"
 #include "Window.h"
 
-
 int OpenGLTest::LoadGLTexture()
 {
     texture[0] = texture[1] = SOIL_load_OGL_texture("Data/glass.bmp", SOIL_LOAD_AUTO, 
