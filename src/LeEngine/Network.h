@@ -100,9 +100,6 @@ public:
     //! starts an a/synchronous connect
     void Connect(const std::string& host, uint16 port);
 
-    //! Posts data to be sent to the connection
-    void Send(const std::vector<uint8>& buffer) { _ioStrand.post(boost::bind(&Connection::DispatchSend, this, buffer)); }
-
     //! Posts a recv for the connection to process.
     /*! If total_bytes is 0, then as many bytes as possible up t
     GetReceiveBufferSize() will be waited for.
@@ -112,6 +109,11 @@ public:
 
     //! Posts an async disconnect event for the object to process
     void Disconnect() { _ioStrand.post(boost::bind(&Connection::HandleTimer, this, boost::asio::error::connection_reset)); }
+
+protected:
+    //! Posts data to be sent to the connection
+    void Send(const std::vector<uint8>& buffer) { _ioStrand.post(boost::bind(&Connection::DispatchSend, this, buffer)); }
+
 };
 
 class Acceptor

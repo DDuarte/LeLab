@@ -81,11 +81,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkTask.cpp" />
     <ClCompile Include="ServerApplication.cpp" />
+    <ClCompile Include="Session.cpp" />
     <ClCompile Include="TcpServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkTask.h" />
     <ClInclude Include="ServerApplication.h" />
+    <ClInclude Include="Session.h" />
     <ClInclude Include="TcpServer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

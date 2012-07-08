@@ -27,6 +27,9 @@
     <ClCompile Include="NetworkTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TcpServer.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NetworkTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

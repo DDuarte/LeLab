@@ -1,16 +1,15 @@
 #include "NetworkTask.h"
+#include "Session.h"
 
 NetworkTask::NetworkTask()
 {
     _hive = new Hive();
-    _acceptor = new TcpAcceptor(_hive);
+    _server = new TcpServer(_hive);
 }
 
 bool NetworkTask::Start()
 {
-    // accept one connection; next one will be accepted in TcpAcceptor::OnAccept
-    TcpConnection* connection = new TcpConnection(_hive);
-    _acceptor->Accept(connection);
+    NewSession();
     return true;
 }
 
@@ -22,9 +21,19 @@ void NetworkTask::Update()
 
 void NetworkTask::Stop()
 {
-    _hive->Stop();
-    _acceptor->Stop();
+    for (std::list<Session*>::iterator itr = _sessions.begin(); itr != _sessions.end(); ++itr)
+    {
+        if (*itr)
+        {
+            (*itr)->Disconnect();
+            delete (*itr);
+        }
+    }
+    _sessions.clear();
 
-    delete _acceptor;
+    _hive->Stop();
+    _server->Stop();
+
+    delete _server;
     delete _hive;
 }

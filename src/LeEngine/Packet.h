@@ -21,7 +21,6 @@ public:
     void SetOpcode(uint16 opcode) { _opcode = opcode; }
 
     uint32 GetDataSize() const { return _buffer.size(); }
-
 };
 
 #endif // PACKET_H
