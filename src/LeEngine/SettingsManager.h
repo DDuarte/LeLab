@@ -17,25 +17,31 @@ private:
     bool _loaded;
     void (*_onLoadCallback)();
 
+    // [setting name, [actual value, default value]]
     std::map< std::string, std::pair<std::string, std::string> > _settings;
     void Load(const std::string& fileName);
     void Save(const std::string& fileName, bool firstLoad = false);
 
 public:
+    //! Constructor
     SettingsManager(const std::string& filename);
+    //! Constructor with OnLoad callback
     SettingsManager(const std::string& filename, void (*f)());
 
+    //! Sets a callback that is called when the config is loaded
     void SetOnLoadCallback(void (*f)()) { _onLoadCallback = f; }
 
+    //! Loads the config file, will create one if it does not exist
     void LoadConfig();
+    //! Save config, requires existing config file
     void SaveConfig();
+    //! Loads the config file once again
     void ReloadConfig();
     
-    template <typename T>
-    T GetSetting(std::string name);
-
-    template <typename T>
-    void AddSetting(std::string name, T defaultValue);
+    //! Retrieves a setting, use the macro GetConfig for ease of use
+    template <typename T> T GetSetting(std::string name);
+    //! Creates a new setting, a default/initial value is required
+    template <typename T> void AddSetting(std::string name, T defaultValue);
 };
 
 template <typename T>
