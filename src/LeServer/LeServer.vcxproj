@@ -79,7 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkTask.cpp" />
     <ClCompile Include="ServerApplication.cpp" />
+    <ClCompile Include="TcpServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkTask.h" />

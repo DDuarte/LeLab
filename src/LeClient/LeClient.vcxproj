@@ -13,7 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkTask.cpp" />
     <ClCompile Include="OpenGLTest.cpp" />
+    <ClCompile Include="TcpClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
