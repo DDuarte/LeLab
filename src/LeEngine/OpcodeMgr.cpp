@@ -10,7 +10,7 @@ void OpcodeMgr::AddHandler(uint16 opcode, OpcHandler handler)
 #ifdef _DEBUG
     std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
     if (itr != _handlers.end())
-        LeLog.WriteP(LOG_APP, "Handler for opcode %u already registered.", opcode);
+        LeLog.WriteP("Handler for opcode %u already registered.", opcode);
 #endif
 
     _handlers[opcode] = handler;
@@ -21,7 +21,7 @@ void OpcodeMgr::Handle(Packet* packet)
     OpcHandler* handler = GetHandler(packet->GetOpcode());
     if (!handler)
     {
-        LeLog.WriteP(LOG_APP, "Handler for opcode %u not found.", packet->GetOpcode());
+        LeLog.WriteP("Handler for opcode %u not found.", packet->GetOpcode());
         return;
     }
 

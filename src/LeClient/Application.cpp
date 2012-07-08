@@ -16,7 +16,7 @@ using boost::shared_ptr;
 void OnConfigLoad()
 {
     LeLog.EnableConsole(GetConfig(LogWriteToConsole));
-    LeLog.EnabledTime(GetConfig(LogWithTimestamp));
+    LeLog.EnableTime(GetConfig(LogWithTimestamp));
     // TODO: Change used .log files
 }
 

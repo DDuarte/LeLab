@@ -30,17 +30,4 @@ inline std::string ToString(T& val)
     return boost::lexical_cast<std::string>(val);
 }
 
-class Version
-{
-public:
-    uint8 Major, Minor, Revision;
-    friend std::ostream& operator<<(std::ostream &out, Version &v)
-    {
-        out << v.Major << "." << v.Minor << "." << v.Revision;
-        return out;
-    }
-};
-
-
-
 #endif // DEFINES_H

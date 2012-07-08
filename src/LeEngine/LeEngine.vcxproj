@@ -25,6 +25,7 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="DMath.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Network.h" />
     <ClInclude Include="OpcodeMgr.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Plane.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="OpcodeMgr.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -104,7 +106,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUG;FREEGLUT_STATIC;GLEW_STATIC;IL_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DEBUG;FREEGLUT_STATIC;GLEW_STATIC;IL_STATIC_LIB;_WIN32_WINNT=0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CompileAsManaged>false</CompileAsManaged>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <UndefinePreprocessorDefinitions>

@@ -19,7 +19,7 @@ SettingsManager::SettingsManager(void (*f)()) : _fileName(SETTINGS_FILENAME), _l
 
 void SettingsManager::LoadConfig()
 {
-    LeLog.WriteP(LOG_APP, "Loading configuration file %s...", _fileName.c_str());
+    LeLog.WriteP("Loading configuration file %s...", _fileName.c_str());
     try
     {
         _settings.Load(_fileName);
@@ -31,7 +31,7 @@ void SettingsManager::LoadConfig()
     catch (std::exception &e)
     {
     	_loaded = false;
-        LeLog.WriteP(LOG_APP, "Loading configuration file %s failed: %s", _fileName.c_str(), e.what());
+        LeLog.WriteP("Loading configuration file %s failed: %s", _fileName.c_str(), e.what());
     }
 }
 
@@ -39,11 +39,11 @@ void SettingsManager::SaveConfig()
 {
     if (!_loaded)
     {
-        LeLog.Write(LOG_APP, "Saving configuration file failed because configuration was not loaded before.");
+        LeLog.Write("Saving configuration file failed because configuration was not loaded before.");
         return;
     }
 
-    LeLog.WriteP(LOG_APP, "Saving configuration file %s...", _fileName.c_str());
+    LeLog.WriteP( "Saving configuration file %s...", _fileName.c_str());
     try
     {
         _settings.Save(_fileName);
@@ -51,7 +51,7 @@ void SettingsManager::SaveConfig()
     catch (std::exception &e)
     {
         _loaded = false;
-        LeLog.WriteP(LOG_APP, "Saving configuration file %s failed: %s", _fileName.c_str(), e.what());
+        LeLog.WriteP("Saving configuration file %s failed: %s", _fileName.c_str(), e.what());
     }
 }
 
@@ -59,11 +59,11 @@ void SettingsManager::ReloadConfig()
 {
     if (!_loaded)
     {
-        LeLog.Write(LOG_APP, "Reloading configuration file failed because configuration was not loaded before.");
+        LeLog.Write("Reloading configuration file failed because configuration was not loaded before.");
         return;
     }
     
-    LeLog.Write(LOG_APP, "Reloading configuration file...");
+    LeLog.Write( "Reloading configuration file...");
     LoadConfig();
 }
 

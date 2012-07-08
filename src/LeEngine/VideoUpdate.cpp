@@ -13,7 +13,7 @@ bool VideoUpdate::Start()
 {
     if (!glfwInit())
     {
-        LeLog << LOG_CLIENT << "Could not initialize glfw." << NL;
+        LeLog.Write("Could not initialize glfw.");
         return false;
     }
 

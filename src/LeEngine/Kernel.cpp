@@ -44,7 +44,7 @@ bool Kernel::AddTask(const shared_ptr<ITask>& t)
 {
     if (!t->Start())
     {
-        LeLog << LOG_APP << "Task " << t->GetName() << " failed to start." << NL;
+        LeLog.WriteP("Task %s failed to start.", t->GetName());
         return false;
     }
 
@@ -73,7 +73,7 @@ void Kernel::ResumeTask(const shared_ptr<ITask>& t)
         _taskList.insert(itr, t);
     }
     else
-        LeLog << LOG_APP << "Tried to resume " << t->GetName() << " but task does not exist in paused task list" << NL;
+        LeLog.WriteP("Tried to resume %s but task does not exist in paused task list", t->GetName());
 }
 
 
@@ -82,7 +82,7 @@ void Kernel::RemoveTask(const shared_ptr<ITask>& t)
     if (std::find(_taskList.begin(), _taskList.end(), t) != _taskList.end())
         t->CanKill = true;
     else
-        LeLog << LOG_APP << "Tried to remove " << t->GetName() << " but task does not exist in task list" << NL;
+        LeLog.WriteP("Tried to remove but task does not exist in task list", t->GetName());
 }
 
 void Kernel::KillAllTasks()

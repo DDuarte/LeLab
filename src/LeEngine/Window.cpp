@@ -15,17 +15,15 @@ bool Window::Create()
 {
     if(!glfwOpenWindow(_width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, FullScreenMode(_fullScreen)))
     {
-        LeLog << LOG_CLIENT <<
-            (boost::format("Window: Could not open glfw window. Width: %1%, height: %2%, r: %3%, g: %4%, b: %5%, a: %6%, d: %7%, s: %8%, mode: %9%") %
-            _width % _height % _redBits % _greenBits % _blueBits % _alphaBits % _depthBits % _stencilBits % _fullScreen).str() << NL;
+        LeLog.WriteP("Window: Could not open glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, mode: %b",
+            _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen);
         return false;
     }
 
     glfwSetWindowTitle(_title.c_str());
 
-    LeLog << LOG_CLIENT <<
-        (boost::format("Window: Opened glfw window. Width: %1%, height: %2%, r: %3%, g: %4%, b: %5%, a: %6%, d: %7%, s: %8%, mode: %9%") %
-        _width % _height % _redBits % _greenBits % _blueBits % _alphaBits % _depthBits % _stencilBits % _fullScreen).str() << NL;
+    LeLog.WriteP("Window: Opened glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, mode: %b",
+        _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen);
 
     return true;
 }
@@ -33,7 +31,7 @@ bool Window::Create()
 void Window::EnableMouse(bool enable)
 {
     enable ? glfwEnable(GLFW_MOUSE_CURSOR) : glfwDisable(GLFW_MOUSE_CURSOR);
-    LeLog.WriteP(LOG_CLIENT, "Window: Mouse cursor %b", enable);;
+    LeLog.WriteP( "Window: Mouse cursor %b", enable);;
 }
 
 void Window::SetRefreshRate(int rate)
@@ -43,7 +41,7 @@ void Window::SetRefreshRate(int rate)
         return;
 
     glfwOpenWindowHint(GLFW_REFRESH_RATE, rate);
-    LeLog.WriteP(LOG_CLIENT, "Window: Changed screen refresh rate to %i", rate);
+    LeLog.WriteP("Window: Changed screen refresh rate to %i", rate);
 }
 
 void Window::ForceOpenGlVersion(int major, int minor)
@@ -51,32 +49,32 @@ void Window::ForceOpenGlVersion(int major, int minor)
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, major);
     glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, minor);
 
-    LeLog.WriteP(LOG_CLIENT, "Window: Forced OpenGl version: (%i, %i)", major, minor);
+    LeLog.WriteP("Window: Forced OpenGl version: (%i, %i)", major, minor);
 }
 
 void Window::SetTitleName(const std::string& title)
 {
     _title = title;
     glfwSetWindowTitle(title.c_str());
-    LeLog.WriteP(LOG_CLIENT, "Window: Changed title to \"%s\"", title.c_str());
+    LeLog.WriteP("Window: Changed title to \"%s\"", title.c_str());
 }
 
 void Window::EnableOpenGlDebugContext(bool enable)
 {
     glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, enable ? GL_TRUE : GL_FALSE);
-    LeLog.WriteP(LOG_CLIENT, "Window: Debug context %b", enable);
+    LeLog.WriteP("Window: Debug context %b", enable);
 }
 
 void Window::SetFSAA(int samples)
 {
     glfwOpenWindowHint(GLFW_FSAA_SAMPLES, samples);
-    LeLog.WriteP(LOG_CLIENT, "Window: Set multisampling samples to %i", samples);
+    LeLog.WriteP("Window: Set multisampling samples to %i", samples);
 }
 
 void Window::DisableResize(bool disable)
 {
     glfwOpenWindowHint(GLFW_WINDOW_NO_RESIZE, disable ? GL_FALSE : GL_TRUE);
-    LeLog.WriteP(LOG_CLIENT, "Window: Disable resize %b", disable);
+    LeLog.WriteP("Window: Disable resize %b", disable);
 }
 
 void Window::BPPToBits(int bpp, int& redBits, int& greenBits, int& blueBits, int& alphaBits)
@@ -117,7 +115,7 @@ void Window::BPPToBits(int bpp, int& redBits, int& greenBits, int& blueBits, int
         }
         default:
         {
-            LeLog.WriteP(LOG_CLIENT, "Bad BPP in Window::BPPToBits (%i). Defaulting to 24.", bpp);
+            LeLog.WriteP("Bad BPP in Window::BPPToBits (%i). Defaulting to 24.", bpp);
             BPPToBits(24, redBits, greenBits, blueBits, alphaBits);
             return;
         }

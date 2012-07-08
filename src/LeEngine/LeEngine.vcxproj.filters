@@ -96,6 +96,9 @@
     <ClInclude Include="OpcodeMgr.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -148,6 +151,9 @@
       <Filter>Networking</Filter>
     </ClCompile>
     <ClCompile Include="OpcodeMgr.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
