@@ -1,4 +1,5 @@
 #include "Session.h"
+#include "Packet.h"
 
 void Session::OnAccept(const std::string& host, uint16 port)
 {
@@ -6,6 +7,11 @@ void Session::OnAccept(const std::string& host, uint16 port)
 
     // Start the next receive
     Recv();
+
+    Packet packet(1, 10);
+    std::string hi = "Hello World";
+    packet << hi;
+    Send(&packet);
 }
 
 void Session::OnConnect(const std::string& host, uint16 port)

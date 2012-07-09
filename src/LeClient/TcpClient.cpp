@@ -1,5 +1,5 @@
 #include "TcpClient.h"
-
+#include "NetworkTask.h"
 
 void TcpConnection::OnAccept(const std::string& host, uint16 port)
 {
@@ -15,12 +15,6 @@ void TcpConnection::OnConnect(const std::string& host, uint16 port)
 
     // Start the next receive
     Recv();
-
-    std::string str = "TEST";
-
-    std::vector<uint8> request;
-    std::copy(str.begin(), str.end(), std::back_inserter(request));
-    Send(request);
 }
 
 void TcpConnection::OnSend(const std::vector<uint8>& buffer)
@@ -52,6 +46,8 @@ void TcpConnection::OnRecv(std::vector<uint8>& buffer)
 
     // Start the next receive
     Recv();
+
+    NetworkTask::Get().AddPacket(Packet(buffer));
 }
 
 void TcpConnection::OnTimer(const boost::posix_time::time_duration& delta)
