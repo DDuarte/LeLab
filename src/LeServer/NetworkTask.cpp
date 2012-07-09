@@ -1,5 +1,4 @@
 #include "NetworkTask.h"
-#include "Session.h"
 
 NetworkTask::NetworkTask()
 {
@@ -9,14 +8,22 @@ NetworkTask::NetworkTask()
 
 bool NetworkTask::Start()
 {
-    NewSession();
+    AcceptNew();
+
+    AddHandler(2, &Session::HandleTest);
+
     return true;
 }
 
 void NetworkTask::Update()
 {
     _hive->Poll();
-    Sleep(1);
+    
+    if (!_packetQueue.empty())
+    {
+        Handle(_packetQueue.front().first, &_packetQueue.front().second);
+        _packetQueue.pop();
+    }
 }
 
 void NetworkTask::Stop()
@@ -36,4 +43,15 @@ void NetworkTask::Stop()
 
     delete _server;
     delete _hive;
+}
+
+void NetworkTask::AcceptNew()
+{
+    Session* session = new Session(_hive);
+    _server->Accept((Connection*)session);
+}
+
+void NetworkTask::AddSession(Session* session)
+{
+    _sessions.push_back(session);
 }

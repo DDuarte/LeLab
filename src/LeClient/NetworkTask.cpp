@@ -25,6 +25,10 @@ void NetworkTask::HandleHello(Packet* packet)
     std::string test;
     (*packet) >> test;
     std::cout << test << std::endl;
+
+    Packet answer(2, 10);
+    answer << "I see what you did there.";
+    NetworkTask::Get().Send(&answer); // this is kinda retarded.
 }
 
 void NetworkTask::Update()

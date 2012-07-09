@@ -17,10 +17,10 @@ public:
     Packet(const Packet& other) : ByteBuffer(other), _opcode(other._opcode) {}
     Packet(const std::vector<uint8>& buffer) : ByteBuffer(buffer.size() - 13)
     {
-        _time = *((uint64 const*)&buffer[0]);
-        _direction = *((uint8 const*)&buffer[8]);
-        _opcode = *((uint16 const*)&buffer[9]);
-        _length = *((uint16 const*)&buffer[11]);
+        _time      = *((uint64 const*)&buffer[0]);
+        _direction = *((uint8  const*)&buffer[8]);
+        _opcode    = *((uint16 const*)&buffer[9]);
+        _length    = *((uint16 const*)&buffer[11]);
         _buffer.insert(_buffer.end(), buffer.begin() + 13, buffer.end());
     }
 

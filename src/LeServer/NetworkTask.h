@@ -5,6 +5,19 @@
 #include "TcpServer.h"
 #include "Session.h"
 #include "Singleton.h"
+#include "Log.h"
+#include <queue>
+#include <utility>
+#include <boost/function.hpp>
+#include <map>
+
+enum Direction
+{
+    ClientToServer = 0, // CMSG
+    ServerToClient = 1, // SMSG
+};
+
+typedef boost::function<void (Session*, Packet*)> OpcHandler;
 
 class NetworkTask : public ITask, public Singleton<NetworkTask>
 {
@@ -13,6 +26,9 @@ private:
     TcpServer* _server;
 
     std::list<Session*> _sessions;
+    std::queue< std::pair<Session*, Packet> > _packetQueue;
+
+    std::map<uint16, OpcHandler> _handlers;
 
 public:
     NetworkTask();
@@ -20,12 +36,35 @@ public:
     void Update();
     void Stop();
 
-    void NewSession()
-    {
-        Session* session = new Session(_hive);
-        _sessions.push_back(session);
+    void AcceptNew();
+    void AddSession(Session* session);
+    void AddPacket(Session* session, Packet packet) { _packetQueue.push(std::make_pair(session, packet)); }
 
-        _server->Accept((Connection*)session);
+    void AddHandler(uint16 opcode, OpcHandler handler)
+    {
+#ifdef _DEBUG
+        std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
+        if (itr != _handlers.end())
+            LeLog.WriteP("Handler for opcode %u already registered.", opcode);
+#endif
+
+        _handlers[opcode] = handler;
+    }
+
+    void Handle(Session* session, Packet* packet)
+    {
+        OpcHandler* handler = GetHandler(packet->GetOpcode());
+        if (handler)
+            (*handler)(session, packet);
+    }
+
+    OpcHandler* GetHandler(uint16 opcode)
+    {
+        std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
+        if (itr == _handlers.end())
+            return NULL;
+
+        return &_handlers[opcode];
     }
 };
 

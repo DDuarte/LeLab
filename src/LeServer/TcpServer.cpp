@@ -11,7 +11,7 @@ bool TcpServer::OnAccept(Connection* connection, const std::string& host, uint16
 {
     std::cout << "[" << __FUNCTION__ << "] " << host << ":" << port << std::endl;
 
-    NetworkTask::Get().NewSession();
+    NetworkTask::Get().AcceptNew();
 
     return true;
 }
