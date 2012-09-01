@@ -8,8 +8,11 @@
 #include "SoundTask.h"
 #include "VideoUpdate.h"
 #include "OpenGLTest.h"
+#include "PolygonTest.h"
 #include "Camera.h"
+#include "Window.h"
 #include "NetworkTask.h"
+#include "Lighting.h"
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -27,6 +30,8 @@ void Application::Run(int argc, char* argv[])
     settings->AddSetting("connection.host", "127.0.0.1");
     settings->AddSetting("connection.port", 54321);
     settings->LoadConfig();
+
+    bool fs = GetConfig("screen.fullscreen", bool);
 
     new Log(GetConfig("logging.file", std::string));
     if (!LeLog.Init())
@@ -59,15 +64,23 @@ void Application::Run(int argc, char* argv[])
     camera->Priority = 40;
     Kernel::Get().AddTask(camera);
 
-    shared_ptr<NetworkTask> network(new NetworkTask);
-    network->Priority = 30;
-    Kernel::Get().AddTask(network);
+    shared_ptr<LightingManager> lightingManager(new LightingManager);
+    lightingManager->Priority = 50;
+    Kernel::Get().AddTask(lightingManager);
+
+    //shared_ptr<NetworkTask> network(new NetworkTask);
+    //network->Priority = 30;
+    //Kernel::Get().AddTask(network);
 
     // Game specific tasks
     
     shared_ptr<OpenGLTest> test(new OpenGLTest);
     test->Priority = 100;
     Kernel::Get().AddTask(test);
+
+    //shared_ptr<PolygonTest> test(new PolygonTest);
+    //test->Priority = 100;
+    //Kernel::Get().AddTask(test);
 
     //**********************
     Kernel::Get().Execute();

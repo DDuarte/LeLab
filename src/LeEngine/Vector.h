@@ -256,4 +256,6 @@ public:
 	}
 };
 
+typedef Vector<3, float> vec3;
+
 #endif // VECTOR_H

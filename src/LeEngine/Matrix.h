@@ -2,10 +2,14 @@
 #define MATRIX_H
 
 #include "Vector.h"
+#include "DMath.h"
+#include "MathDefines.h"
+
 #include <cstring> // memcpy, memset
 #include <cassert>
 #include <cstdarg>
 #include <vector>
+
 
 #include <boost/shared_array.hpp>
 using boost::shared_array;
@@ -29,7 +33,7 @@ public:
     Matrix(const T vals[Size * Size])
     {
         for (int row = 0; row < Size; ++row)
-            for (int col = 0; j < Size; ++col)
+            for (int col = 0; col < Size; ++col)
                 M[row][col] = vals[Size * row + col];
     }
 
@@ -343,5 +347,52 @@ const Matrix<Size, T> Matrix<Size, T>::ZERO;
 
 template <int Size, typename T>
 const Matrix<Size, T> Matrix<Size, T>::IDENTITY = BuildIdentityMatrix();
+
+typedef Matrix<4, float> mat4;
+
+inline mat4 translate(float x, float y, float z)
+{
+    float m[] = { 1, 0, 0, x,
+                  0, 1, 0, y,
+                  0, 0, 1, z,
+                  0, 0, 0, 1 };
+    return mat4(m);
+}
+
+inline mat4 scale(float x, float y, float z)
+{
+    float m[] = { x, 0, 0, 0,
+                  0, y, 0, 0,
+                  0, 0, z, 0,
+                  0, 0, 0, 1 };
+    return mat4(m);
+}
+
+inline mat4 rotate(float rotation, vec3 axis)
+{
+    float a = rotation * Math<float>::ACos(-1.0f) / 180.0f;
+    float c = Math<float>::Cos(a);
+    float s = Math<float>::Sin(a);
+
+    axis.Normalize();
+
+    vec3 temp = axis * (1-c);
+
+    float m[] = { axis[0] * temp[0] + c,
+                  axis[1] * temp[0] - axis[2]*s,
+                  axis[2] * temp[0] + axis[1]*s,
+                  0,
+                  axis[0] * temp[1] + axis[2]*s,
+                  axis[1] * temp[1] + c,
+                  axis[2] * temp[1] - axis[0] * s,
+                  0,
+                  axis[0] * temp[2] - axis[1] * s,
+                  axis[1] * temp[2] + axis[0] * s,
+                  axis[2] * temp[2] + c,
+                  0,
+                  0, 0, 0, 1 };
+
+    return mat4(m);
+}
 
 #endif // MATRIX_H

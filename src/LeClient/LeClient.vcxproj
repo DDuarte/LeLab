@@ -15,12 +15,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkTask.cpp" />
     <ClCompile Include="OpenGLTest.cpp" />
+    <ClCompile Include="OpenGLTest2.cpp" />
+    <ClCompile Include="PolygonTest.cpp" />
     <ClCompile Include="TcpClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="NetworkTask.h" />
     <ClInclude Include="OpenGLTest.h" />
+    <ClInclude Include="OpenGLTest2.h" />
+    <ClInclude Include="PolygonTest.h" />
     <ClInclude Include="TcpClient.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -70,7 +74,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew_static.lib;GLFW.lib;GlU32.Lib;LeEngine.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew_static.lib;GLFW.lib;GlU32.Lib;LeEngine.lib;SOIL.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>

@@ -3,6 +3,7 @@
 
 #include "ITask.h"
 #include "Shapes.h"
+#include "Lighting.h"
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -13,18 +14,6 @@ public:
     OpenGLTest()
     {
         z = -5.0f;
-        LightAmbient[0] = 0.5f;
-        LightAmbient[1] = 0.5f;
-        LightAmbient[2] = 0.5f;
-        LightAmbient[3] = 1.0f;
-        LightDiffuse[0] = 1.0f;
-        LightDiffuse[1] = 1.0f;
-        LightDiffuse[2] = 1.0f;
-        LightDiffuse[3] = 1.0f;
-        LightPosition[0] = 0.0f;
-        LightPosition[1] = 0.0f;
-        LightPosition[2] = 2.0f;
-        LightPosition[3] = 1.0f;
         filter = 0;
         xrot = yrot = 0.0f;
         xspeed = yspeed = 0.0012f;
@@ -47,11 +36,10 @@ public:
         blend,
         lp,
         fp,
-        bp;
+        bp,
+        f1p;
 
-    float LightAmbient[4]/* = { 0.5f, 0.5f, 0.5f, 1.0f }*/,
-        LightDiffuse[4]/* = { 1.0f, 1.0f, 1.0f, 1.0f }*/,
-        LightPosition[4]/* = { 0.0f, 0.0f, 2.0f, 1.0f }*/;
+    Light* light1;
 
     unsigned int filter/* = 0*/,
         texture[3];

@@ -5,9 +5,12 @@
 #include "Quaternion.h"
 #include "VideoUpdate.h"
 #include "Renderer.h"
+#include "Vertex.h"
 
 #include <GL/glew.h>
 #include <GL/GLFW.h>
+
+#include <vector>
 
 /*
 class Cube : public IRenderable
@@ -56,4 +59,52 @@ public:
     }
 };
 
+template<class V = Vertex>
+class Polygon : public IRenderable
+{
+private:
+    std::vector<V> _vertices;
+public:
+	Polygon()
+    {
+        _vertices.resize(0);
+    }
+
+    void Render() const
+    {
+        GLenum face_mode;
+        switch (_vertices.size())
+        {
+        case 0: return;
+        case 1: face_mode = GL_POINTS; break;
+        case 2: face_mode = GL_LINES; break;
+        case 3: face_mode = GL_TRIANGLES; break;
+        case 4: face_mode = GL_QUADS; break;
+        default: face_mode = GL_POLYGON; break;
+        }
+        glBegin(face_mode);
+        {
+            for (std::vector<V>::const_iterator it = _vertices.cbegin(); it != _vertices.cend(); it++)
+            {
+                it->Render();
+            }
+        }
+        glEnd();
+    }
+
+    void SetVertices(std::vector<V> vert)
+    {
+        _vertices = vert;
+    }
+
+    void AddVertex(V vert)
+    {
+        _vertices.push_back(vert);
+    }
+
+    void AddVertices(std::vector<V> vert)
+    {
+        _vertices.insert(_vertices.end(), vert.begin(), vert.end());
+    }
+};
 #endif // SHAPES_H

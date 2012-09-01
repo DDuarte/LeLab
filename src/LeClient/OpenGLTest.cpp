@@ -7,6 +7,7 @@
 #include "Shapes.h"
 #include "VideoUpdate.h"
 #include "Window.h"
+#include "Lighting.h"
 
 int OpenGLTest::LoadGLTexture()
 {
@@ -49,14 +50,15 @@ bool OpenGLTest::Start()
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glEnable(GL_DEPTH_TEST);
 
-    glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);
-    glLightfv(GL_LIGHT1, GL_POSITION, LightPosition);
+    light1 = LightingManager::NewLight();
+    light1->Ambient(Vector<4,float>(0.5f, 0.5f, 0.5f, 1.0f));
+    light1->Diffuse(Vector<4,float>(1.0f, 1.0f, 1.0f, 1.0f));
+    light1->Position(Vector<4,float>(0.0f, 0.0f, 2.0f, 1.0f));
 
     glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    glEnable(GL_LIGHT1);
+    light1->Enabled(true);
 
     return true;
 }
@@ -67,10 +69,18 @@ void OpenGLTest::Update()
     {
         lp = true;
         light = !light;
-        (light ? glEnable(GL_LIGHTING) : glDisable(GL_LIGHTING));
+        LightingManager::Get().LightingEnabled(light);
     }
     else if (glfwGetKey('L') != GLFW_PRESS)
         lp = false;
+
+    if (glfwGetKey(GLFW_KEY_F1) == GLFW_PRESS && !f1p)
+    {
+        f1p = true;
+        light1->Enabled(!light1->IsEnabled());
+    }
+    else if (glfwGetKey(GLFW_KEY_F1) != GLFW_PRESS)
+        f1p = false;
 
     if (glfwGetKey('F') == GLFW_PRESS && !fp)
     {

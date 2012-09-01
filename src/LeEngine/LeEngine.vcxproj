@@ -21,6 +21,7 @@
     <ClInclude Include="InputTask.h" />
     <ClInclude Include="ITask.h" />
     <ClInclude Include="Kernel.h" />
+    <ClInclude Include="Lighting.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="DMath.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundTask.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="VideoUpdate.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -51,6 +53,7 @@
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="InputTask.cpp" />
     <ClCompile Include="Kernel.cpp" />
+    <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Network.cpp" />

@@ -99,6 +99,12 @@
     <ClInclude Include="Network.h">
       <Filter>Networking</Filter>
     </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Rendering\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting.h">
+      <Filter>Rendering\Lighting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Log.cpp">
@@ -156,6 +162,9 @@
     <ClCompile Include="Network.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
+    <ClCompile Include="Lighting.cpp">
+      <Filter>Rendering\Lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Logging">
@@ -193,6 +202,12 @@
     </Filter>
     <Filter Include="Networking">
       <UniqueIdentifier>{a96d83f3-8b01-418e-9b33-2a68baaa71fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Objects">
+      <UniqueIdentifier>{0f40fba3-afb4-458f-a6d4-5d1fb05749db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Lighting">
+      <UniqueIdentifier>{eaf02e96-f7b7-4416-a8f9-21abe9c25085}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -48,7 +48,7 @@ template <typename T>
 T SettingsManager::GetSetting(std::string name)
 {
     if (_settings.find(name) != _settings.end())
-        return boost::lexical_cast<T>(_settings[name].first);
+        return boost::lexical_cast<T>(_settings[name].second);
     return T();
 }
 
