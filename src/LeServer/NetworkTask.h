@@ -5,7 +5,6 @@
 #include "TcpServer.h"
 #include "Session.h"
 #include "Singleton.h"
-#include "Log.h"
 #include <queue>
 #include <utility>
 #include <boost/function.hpp>
@@ -40,32 +39,10 @@ public:
     void AddSession(Session* session);
     void AddPacket(Session* session, Packet packet) { _packetQueue.push(std::make_pair(session, packet)); }
 
-    void AddHandler(uint16 opcode, OpcHandler handler)
-    {
-#ifdef _DEBUG
-        std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
-        if (itr != _handlers.end())
-            LeLog.WriteP("Handler for opcode %u already registered.", opcode);
-#endif
+    void AddHandler(uint16 opcode, OpcHandler handler);
+    OpcHandler* GetHandler(uint16 opcode);
+    void Handle(Session* session, Packet* packet);
 
-        _handlers[opcode] = handler;
-    }
-
-    void Handle(Session* session, Packet* packet)
-    {
-        OpcHandler* handler = GetHandler(packet->GetOpcode());
-        if (handler)
-            (*handler)(session, packet);
-    }
-
-    OpcHandler* GetHandler(uint16 opcode)
-    {
-        std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
-        if (itr == _handlers.end())
-            return NULL;
-
-        return &_handlers[opcode];
-    }
 };
 
 #endif // NETWORKTASK_H

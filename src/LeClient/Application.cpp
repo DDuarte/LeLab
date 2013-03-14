@@ -68,9 +68,9 @@ void Application::Run(int argc, char* argv[])
     lightingManager->Priority = 50;
     Kernel::Get().AddTask(lightingManager);
 
-    //shared_ptr<NetworkTask> network(new NetworkTask);
-    //network->Priority = 30;
-    //Kernel::Get().AddTask(network);
+    shared_ptr<NetworkTask> network(new NetworkTask);
+    network->Priority = 30;
+    Kernel::Get().AddTask(network);
 
     // Game specific tasks
     

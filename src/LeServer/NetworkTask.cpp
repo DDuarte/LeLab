@@ -1,4 +1,5 @@
 #include "NetworkTask.h"
+#include "Log.h"
 
 NetworkTask::NetworkTask()
 {
@@ -54,4 +55,31 @@ void NetworkTask::AcceptNew()
 void NetworkTask::AddSession(Session* session)
 {
     _sessions.push_back(session);
+}
+
+void NetworkTask::AddHandler(uint16 opcode, OpcHandler handler)
+{
+#ifdef _DEBUG
+    std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
+    if (itr != _handlers.end())
+        LeLog.WriteP("Handler for opcode %u already registered.", opcode);
+#endif
+
+    _handlers[opcode] = handler;
+}
+
+void NetworkTask::Handle(Session* session, Packet* packet)
+{
+    OpcHandler* handler = GetHandler(packet->GetOpcode());
+    if (handler)
+        (*handler)(session, packet);
+}
+
+OpcHandler* NetworkTask::GetHandler(uint16 opcode)
+{
+    std::map<uint16, OpcHandler>::iterator itr = _handlers.find(opcode);
+    if (itr == _handlers.end())
+        return NULL;
+
+    return &_handlers[opcode];
 }

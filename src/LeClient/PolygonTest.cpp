@@ -33,45 +33,45 @@ bool PolygonTest::Start()
 
     std::vector<Vertex> v(4);
 
-    v[0] = Vertex(vec3(0.0f, 0.0f, 0.0f));
-    v[1] = Vertex(vec3(1.0f, 0.0f, 0.0f));
-    v[2] = Vertex(vec3(1.0f, 1.0f, 0.0f));
-    v[3] = Vertex(vec3(0.0f, 1.0f, 0.0f));
+    v[0] = Vertex(Vector3f(0.0f, 0.0f, 0.0f));
+    v[1] = Vertex(Vector3f(1.0f, 0.0f, 0.0f));
+    v[2] = Vertex(Vector3f(1.0f, 1.0f, 0.0f));
+    v[3] = Vertex(Vector3f(0.0f, 1.0f, 0.0f));
 
     _polygons[0].AddVertices(v);
 
-    v[0] = Vertex(vec3(0.0f, 0.0f, 0.0f));
-    v[1] = Vertex(vec3(1.0f, 0.0f, 0.0f));
-    v[2] = Vertex(vec3(1.0f, 0.0f, 1.0f));
-    v[3] = Vertex(vec3(0.0f, 0.0f, 1.0f));
+    v[0] = Vertex(Vector3f(0.0f, 0.0f, 0.0f));
+    v[1] = Vertex(Vector3f(1.0f, 0.0f, 0.0f));
+    v[2] = Vertex(Vector3f(1.0f, 0.0f, 1.0f));
+    v[3] = Vertex(Vector3f(0.0f, 0.0f, 1.0f));
 
     _polygons[1].AddVertices(v);
 
-    v[0] = Vertex(vec3(1.0f, 0.0f, 0.0f));
-    v[1] = Vertex(vec3(1.0f, 0.0f, 1.0f));
-    v[2] = Vertex(vec3(1.0f, 1.0f, 1.0f));
-    v[3] = Vertex(vec3(1.0f, 1.0f, 0.0f));
+    v[0] = Vertex(Vector3f(1.0f, 0.0f, 0.0f));
+    v[1] = Vertex(Vector3f(1.0f, 0.0f, 1.0f));
+    v[2] = Vertex(Vector3f(1.0f, 1.0f, 1.0f));
+    v[3] = Vertex(Vector3f(1.0f, 1.0f, 0.0f));
 
     _polygons[2].AddVertices(v);
 
-    v[0] = Vertex(vec3(0.0f, 0.0f, 0.0f));
-    v[1] = Vertex(vec3(0.0f, 0.0f, 1.0f));
-    v[2] = Vertex(vec3(0.0f, 1.0f, 1.0f));
-    v[3] = Vertex(vec3(0.0f, 1.0f, 0.0f));
+    v[0] = Vertex(Vector3f(0.0f, 0.0f, 0.0f));
+    v[1] = Vertex(Vector3f(0.0f, 0.0f, 1.0f));
+    v[2] = Vertex(Vector3f(0.0f, 1.0f, 1.0f));
+    v[3] = Vertex(Vector3f(0.0f, 1.0f, 0.0f));
 
     _polygons[3].AddVertices(v);
 
-    v[0] = Vertex(vec3(0.0f, 0.0f, 1.0f));
-    v[1] = Vertex(vec3(1.0f, 0.0f, 1.0f));
-    v[2] = Vertex(vec3(1.0f, 1.0f, 1.0f));
-    v[3] = Vertex(vec3(0.0f, 1.0f, 1.0f));
+    v[0] = Vertex(Vector3f(0.0f, 0.0f, 1.0f));
+    v[1] = Vertex(Vector3f(1.0f, 0.0f, 1.0f));
+    v[2] = Vertex(Vector3f(1.0f, 1.0f, 1.0f));
+    v[3] = Vertex(Vector3f(0.0f, 1.0f, 1.0f));
 
     _polygons[4].AddVertices(v);
 
-    v[0] = Vertex(vec3(0.0f, 1.0f, 0.0f));
-    v[1] = Vertex(vec3(1.0f, 1.0f, 0.0f));
-    v[2] = Vertex(vec3(1.0f, 1.0f, 1.0f));
-    v[3] = Vertex(vec3(0.0f, 1.0f, 1.0f));
+    v[0] = Vertex(Vector3f(0.0f, 1.0f, 0.0f));
+    v[1] = Vertex(Vector3f(1.0f, 1.0f, 0.0f));
+    v[2] = Vertex(Vector3f(1.0f, 1.0f, 1.0f));
+    v[3] = Vertex(Vector3f(0.0f, 1.0f, 1.0f));
 
     _polygons[5].AddVertices(v);
 
