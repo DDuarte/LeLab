@@ -44,8 +44,8 @@ public:
     static Real ModF(Real val, Real* intPart) { return modf(val, intPart); }
 
     // Power
-    static Real Pow(Real base, int exponent) { return pow(base, exponent); }
-    static Real Powr(Real base, Real exponent) { return pow(base, exponent); }
+    template<typename T>
+    static Real Pow(Real base, T exponent) { return pow(base, exponent); }
     static Real Sqrt(Real val) { return sqrt(val); }
     static Real InvSqrt(Real val) { return 1/Sqrt(val); }
     static Real Sqr(Real val) { return val*val; }

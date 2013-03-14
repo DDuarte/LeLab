@@ -10,7 +10,6 @@
 #include <cstdarg>
 #include <vector>
 
-
 #include <boost/shared_array.hpp>
 using boost::shared_array;
 
@@ -368,7 +367,7 @@ inline mat4 scale(float x, float y, float z)
     return mat4(m);
 }
 
-inline mat4 rotate(float rotation, vec3 axis)
+inline mat4 rotate(float rotation, Vector3f axis)
 {
     float a = rotation * Math<float>::ACos(-1.0f) / 180.0f;
     float c = Math<float>::Cos(a);
@@ -376,7 +375,7 @@ inline mat4 rotate(float rotation, vec3 axis)
 
     axis.Normalize();
 
-    vec3 temp = axis * (1-c);
+    Vector3f temp = axis * (1-c);
 
     float m[] = { axis[0] * temp[0] + c,
                   axis[1] * temp[0] - axis[2]*s,

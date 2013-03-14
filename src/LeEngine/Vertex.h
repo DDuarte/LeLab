@@ -11,10 +11,10 @@
 class Vertex : public IRenderable
 {
 public:
-    vec3 Position;
+    Vector3f Position;
 
-    Vertex() : Position(vec3()) { }
-    Vertex(vec3 pos) : Position(pos) { }
+    Vertex() : Position(Vector3f()) { }
+    Vertex(const Vector3f& pos) : Position(pos) { }
 
     void Render() const
     {
@@ -28,7 +28,7 @@ public:
     ColorRGB Color;
 
     RGBVertex() : Vertex(), Color(ColorRGB::WHITE) { }
-    RGBVertex(vec3 pos, ColorRGB color = ColorRGB::WHITE) : Vertex(pos), Color(color) { }
+    RGBVertex(const Vector3f& pos, ColorRGB color = ColorRGB::WHITE) : Vertex(pos), Color(color) { }
 
     void Render() const
     {
@@ -43,7 +43,7 @@ public:
     ColorRGBA Color;
 
     RGBAVertex() : Vertex(), Color(ColorRGB::WHITE) { }
-    RGBAVertex(vec3 pos, ColorRGB color = ColorRGB::WHITE) : Vertex(pos), Color(color) { }
+    RGBAVertex(Vector3f pos, ColorRGB color = ColorRGB::WHITE) : Vertex(pos), Color(color) { }
 
     void Render() const
     {
@@ -58,7 +58,7 @@ public:
     Vector<2,float> UV;
 
     UVVertex() : Vertex(), UV(Vector<2,float>()) { }
-    UVVertex(vec3 pos, Vector<2,float> uv = Vector<2,float>()) : Vertex(pos), UV(uv) { }
+    UVVertex(Vector3f pos, Vector<2,float> uv = Vector<2,float>()) : Vertex(pos), UV(uv) { }
 
     void Render() const
     {
