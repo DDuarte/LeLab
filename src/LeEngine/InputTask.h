@@ -11,7 +11,7 @@
 class InputTask : public ITask
 {
 public:
-    InputTask() {}
+    InputTask() : ITask("InputTask") {}
     virtual ~InputTask() {}
 
     bool Start();

@@ -6,8 +6,7 @@
 class ITask
 {
 public:
-    ITask(std::string name) : CanKill(false), Priority(5000), _name(name) {}
-    ITask() : CanKill(false), Priority(5000), _name("") {}
+    ITask(const std::string& name) : CanKill(false), Priority(5000), _name(name) {}
     virtual bool Start() = 0;
     virtual void OnSuspend() {}
     virtual void Update() = 0;
@@ -17,7 +16,7 @@ public:
     bool CanKill;
     int Priority;
 
-    std::string GetName() const { return _name; }
+    const std::string& GetName() const { return _name; }
 
 protected:
     std::string _name;

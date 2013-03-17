@@ -1,7 +1,7 @@
 #ifndef SERVERAPPLICATION_H
 #define SERVERAPPLICATION_H
 
-#include "IApplication.h"
+#include <LeEngine/IApplication.h>
 
 class ServerApplication : public IApplication
 {

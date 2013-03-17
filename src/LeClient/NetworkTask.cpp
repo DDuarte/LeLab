@@ -1,12 +1,12 @@
 #include "NetworkTask.h"
-#include "SettingsManager.h"
-#include "Packet.h"
-#include "OpcodeMgr.h"
+#include <LeEngine/SettingsManager.h>
+#include <LeEngine/Packet.h>
+#include <LeEngine/OpcodeMgr.h>
 #include <ctime>
 #include <iostream>
 #include <string>
 
-NetworkTask::NetworkTask()
+NetworkTask::NetworkTask() : ITask("NetworkTask")
 {
     _hive = new Hive();
 }

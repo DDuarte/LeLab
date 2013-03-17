@@ -1,5 +1,5 @@
 #include "OpcodeMgr.h"
-#include <boost/function.hpp>
+#include <functional>
 #include <boost/bind.hpp>
 #include "Defines.h"
 #include "Log.h"

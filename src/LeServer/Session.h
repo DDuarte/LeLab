@@ -1,9 +1,9 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include "Network.h"
-#include "Packet.h"
-#include "Defines.h"
+#include <LeEngine/Network.h>
+#include <LeEngine/Packet.h>
+#include <LeEngine/Defines.h>
 
 #include <iostream>
 

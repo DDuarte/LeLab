@@ -11,7 +11,7 @@ private:
     static Window* _window;
 
 public:
-    VideoUpdate() {}
+    VideoUpdate() : ITask("VideoUpdate") {}
     virtual ~VideoUpdate() {}
 
     static Window* GetWindow() { return _window;}

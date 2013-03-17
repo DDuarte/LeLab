@@ -7,6 +7,8 @@
 class GlobalTimer : public ITask
 {
 public:
+    GlobalTimer() : ITask("GlobalTimer") { }
+
     //! Difference between last and current frame (ms)
     static float dT;
     //! Time of the previous frame (ms)

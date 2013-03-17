@@ -1,1 +1,0 @@
-Define environment variable named BOOST_HOME (example path: D:\Libraries\boost_1_49_0)

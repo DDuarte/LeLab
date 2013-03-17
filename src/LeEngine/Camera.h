@@ -8,12 +8,12 @@
 class Camera : public ITask
 {
 public:
-    Vector<3> _pos;
-    Vector<3> _view;
+    Vector3f _pos;
+    Vector3f _view;
 
-    Vector<2> _rot;
+    Vector2f _rot;
 public:
-    Camera() {}
+    Camera() : ITask("Camera") {}
     virtual ~Camera() {}
 
     bool Start();

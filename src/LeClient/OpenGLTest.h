@@ -1,9 +1,9 @@
 #ifndef OPENGLTEST_H
 #define OPENGLTEST_H
 
-#include "ITask.h"
-#include "Shapes.h"
-#include "Lighting.h"
+#include <LeEngine/ITask.h>
+#include <LeEngine/Shapes.h>
+#include <LeEngine/Lighting.h>
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -11,7 +11,7 @@
 class OpenGLTest : public ITask
 {
 public:
-    OpenGLTest()
+    OpenGLTest() : ITask("OpenGLTest")
     {
         z = -5.0f;
         filter = 0;

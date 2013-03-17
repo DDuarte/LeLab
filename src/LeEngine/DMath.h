@@ -4,14 +4,14 @@
 // Kitties are murdered if you rename this file to "Math.h"
 
 #include <cmath>
-#include <boost/static_assert.hpp>
 #include <boost/math/constants/constants.hpp>
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include <limits>
 
 template <class Real>
 class Math
 {
+static_assert(std::is_floating_point<Real>::value, "Math class requires real type.");
 public:
     // Constants
     static const Real EPSILON;
@@ -59,9 +59,6 @@ public:
     static int Sign(Real val) { return (val > 0 ? 1 : (val < 0 ? -1 : 0)); }
     static bool IsFuzzyZero(Real val) { return !val || (Abs(val) <= std::numeric_limits<Real>::epsilon()); }
     static bool IsFuzzyEqual(Real val1, Real val2) { return val1 == val2 || (Abs(val2 - val1) <= std::numeric_limits<Real>::epsilon()); }
-
-private:
-    BOOST_STATIC_ASSERT_MSG(boost::is_floating_point<Real>::value, "Math class requires real type.");
 };
 
 template<class Real> const Real Math<Real>::EPSILON      = std::numeric_limits<Real>::epsilon();

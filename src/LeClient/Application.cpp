@@ -1,21 +1,18 @@
 #include "Application.h"
-#include "Log.h"
-#include "SettingsManager.h"
-#include "Kernel.h"
-#include "GlobalTimer.h"
-#include "ITask.h"
-#include "InputTask.h"
-#include "SoundTask.h"
-#include "VideoUpdate.h"
+#include <LeEngine/Log.h>
+#include <LeEngine/SettingsManager.h>
+#include <LeEngine/Kernel.h>
+#include <LeEngine/GlobalTimer.h>
+#include <LeEngine/ITask.h>
+#include <LeEngine/InputTask.h>
+#include <LeEngine/SoundTask.h>
+#include <LeEngine/VideoUpdate.h>
 #include "OpenGLTest.h"
 #include "PolygonTest.h"
-#include "Camera.h"
-#include "Window.h"
+#include <LeEngine/Camera.h>
+#include <LeEngine/Window.h>
 #include "NetworkTask.h"
-#include "Lighting.h"
-
-#include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
+#include <LeEngine/Lighting.h>
 
 void Application::Run(int argc, char* argv[])
 {
@@ -44,41 +41,41 @@ void Application::Run(int argc, char* argv[])
 
     // Init tasks
 
-    shared_ptr<GlobalTimer> globalTimer(new GlobalTimer);
+    std::shared_ptr<GlobalTimer> globalTimer(new GlobalTimer);
     globalTimer->Priority = 10;
     Kernel::Get().AddTask(globalTimer);
 
-    shared_ptr<VideoUpdate> videoTask(new VideoUpdate);
+    std::shared_ptr<VideoUpdate> videoTask(new VideoUpdate);
     videoTask->Priority = 10000;
     Kernel::Get().AddTask(videoTask);
 
-    shared_ptr<InputTask> inputTask(new InputTask);
+    std::shared_ptr<InputTask> inputTask(new InputTask);
     inputTask->Priority = 20;
     Kernel::Get().AddTask(inputTask);
 
-    shared_ptr<SoundTask> soundTask(new SoundTask);
+    std::shared_ptr<SoundTask> soundTask(new SoundTask);
     soundTask->Priority = 50;
     Kernel::Get().AddTask(soundTask);
 
-    shared_ptr<Camera> camera(new Camera);
+    std::shared_ptr<Camera> camera(new Camera);
     camera->Priority = 40;
     Kernel::Get().AddTask(camera);
 
-    shared_ptr<LightingManager> lightingManager(new LightingManager);
+    std::shared_ptr<LightingManager> lightingManager(new LightingManager);
     lightingManager->Priority = 50;
     Kernel::Get().AddTask(lightingManager);
 
-    shared_ptr<NetworkTask> network(new NetworkTask);
+    std::shared_ptr<NetworkTask> network(new NetworkTask);
     network->Priority = 30;
     Kernel::Get().AddTask(network);
 
     // Game specific tasks
     
-    shared_ptr<OpenGLTest> test(new OpenGLTest);
+    std::shared_ptr<OpenGLTest> test(new OpenGLTest);
     test->Priority = 100;
     Kernel::Get().AddTask(test);
 
-    //shared_ptr<PolygonTest> test(new PolygonTest);
+    //std::shared_ptr<PolygonTest> test(new PolygonTest);
     //test->Priority = 100;
     //Kernel::Get().AddTask(test);
 

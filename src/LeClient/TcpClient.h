@@ -1,7 +1,7 @@
 #ifndef TCPCLIENT_H
 #define TCPCLIENT_H
 
-#include "Network.h"
+#include <LeEngine/Network.h>
 
 class TcpConnection : public Connection
 {

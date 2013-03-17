@@ -1,11 +1,11 @@
 #ifndef NETWORKTASK_H
 #define NETWORKTASK_H
 
-#include "ITask.h"
+#include <LeEngine/ITask.h>
 #include "TcpClient.h"
-#include "Singleton.h"
-#include "Packet.h"
-#include "OpcodeMgr.h"
+#include <LeEngine/Singleton.h>
+#include <LeEngine/Packet.h>
+#include <LeEngine/OpcodeMgr.h>
 #include <queue>
 
 class NetworkTask : public ITask, public Singleton<NetworkTask>

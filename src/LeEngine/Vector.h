@@ -5,7 +5,7 @@
 #include "MathDefines.h"
 
 #include <type_traits>
-//#include <initializer_list>
+// #include <initializer_list>
 
 template<int Size, typename T = float>
 class Vector
@@ -54,7 +54,7 @@ public:
     //    static_assert(size == Size, "The number of arguments of Vector should be the same of the templated Size");
     //
     //    int i = 0;
-    //    auto args = { parameters... };
+    //    std::initializer_list<T> args = { parameters... };
     //    for (auto arg : args)
     //        V[i++] = static_cast<T>(arg);
     //}

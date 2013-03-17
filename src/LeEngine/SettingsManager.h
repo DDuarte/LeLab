@@ -23,6 +23,8 @@ private:
     void Save(const std::string& fileName, bool firstLoad = false);
 
 public:
+    SettingsManager() {}
+
     //! Constructor
     SettingsManager(const std::string& filename);
     //! Constructor with OnLoad callback

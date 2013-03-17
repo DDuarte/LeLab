@@ -1,13 +1,13 @@
 #ifndef NETWORKTASK_H
 #define NETWORKTASK_H
 
-#include "ITask.h"
+#include <LeEngine/ITask.h>
 #include "TcpServer.h"
 #include "Session.h"
-#include "Singleton.h"
+#include <LeEngine/Singleton.h>
 #include <queue>
 #include <utility>
-#include <boost/function.hpp>
+#include <functional>
 #include <map>
 
 enum Direction
@@ -16,7 +16,7 @@ enum Direction
     ServerToClient = 1, // SMSG
 };
 
-typedef boost::function<void (Session*, Packet*)> OpcHandler;
+typedef std::function<void (Session*, Packet*)> OpcHandler;
 
 class NetworkTask : public ITask, public Singleton<NetworkTask>
 {
@@ -25,7 +25,7 @@ private:
     TcpServer* _server;
 
     std::list<Session*> _sessions;
-    std::queue< std::pair<Session*, Packet> > _packetQueue;
+    std::queue<std::pair<Session*, Packet>> _packetQueue;
 
     std::map<uint16, OpcHandler> _handlers;
 

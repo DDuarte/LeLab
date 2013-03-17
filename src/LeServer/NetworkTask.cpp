@@ -1,7 +1,8 @@
 #include "NetworkTask.h"
-#include "Log.h"
+#include <LeEngine/Log.h>
+#include <functional>
 
-NetworkTask::NetworkTask()
+NetworkTask::NetworkTask() : ITask("NetworkTask")
 {
     _hive = new Hive();
     _server = new TcpServer(_hive);
@@ -11,7 +12,7 @@ bool NetworkTask::Start()
 {
     AcceptNew();
 
-    AddHandler(2, &Session::HandleTest);
+    AddHandler(2, std::mem_fn(&Session::HandleTest));
 
     return true;
 }

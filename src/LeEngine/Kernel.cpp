@@ -3,8 +3,7 @@
 
 #include <algorithm>
 #include <list>
-#include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
+#include <memory>
 
 Kernel::Kernel() {}
 
@@ -12,7 +11,7 @@ Kernel::~Kernel() {}
 
 int Kernel::Execute()
 {
-    std::list< shared_ptr<ITask> >::iterator it, thisIt;
+    std::list<std::shared_ptr<ITask>>::iterator it, thisIt;
     while (_taskList.size())
     {
         for (it = _taskList.begin(); it != _taskList.end();)
@@ -40,15 +39,15 @@ int Kernel::Execute()
     return 0;
 }
 
-bool Kernel::AddTask(const shared_ptr<ITask>& t)
+bool Kernel::AddTask(const std::shared_ptr<ITask>& t)
 {
     if (!t->Start())
     {
-        LeLog.WriteP("Task %s failed to start.", t->GetName());
+        LeLog.WriteP("Task %s failed to start.", t->GetName().c_str());
         return false;
     }
 
-    std::list< shared_ptr<ITask> >::iterator itr;
+    std::list<std::shared_ptr<ITask>>::iterator itr;
     for (itr = _taskList.begin(); itr != _taskList.end(); ++itr)
         if ((*itr)->Priority > t->Priority)
             break;
@@ -57,9 +56,9 @@ bool Kernel::AddTask(const shared_ptr<ITask>& t)
     return true;
 }
 
-void Kernel::ResumeTask(const shared_ptr<ITask>& t)
+void Kernel::ResumeTask(const std::shared_ptr<ITask>& t)
 {
-    std::list< shared_ptr<ITask> >::iterator itr = std::find(_pausedTaskList.begin(), _pausedTaskList.end(), t);
+    std::list<std::shared_ptr<ITask>>::iterator itr = std::find(_pausedTaskList.begin(), _pausedTaskList.end(), t);
 
     if (itr != _pausedTaskList.end())
     {
@@ -77,7 +76,7 @@ void Kernel::ResumeTask(const shared_ptr<ITask>& t)
 }
 
 
-void Kernel::RemoveTask(const shared_ptr<ITask>& t)
+void Kernel::RemoveTask(const std::shared_ptr<ITask>& t)
 {
     if (std::find(_taskList.begin(), _taskList.end(), t) != _taskList.end())
         t->CanKill = true;

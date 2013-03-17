@@ -6,9 +6,8 @@
 #include "Shapes.h"
 
 #include <list>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <boost/noncopyable.hpp>
-using boost::shared_ptr;
 
 class Kernel : public Singleton<Kernel>, private boost::noncopyable
 {
@@ -18,15 +17,15 @@ public:
 
     int Execute();
 
-    bool AddTask(const shared_ptr<ITask>& t);
-    void SuspendTask(const shared_ptr<ITask>& t);
-    void ResumeTask(const shared_ptr<ITask>& t);
-    void RemoveTask(const shared_ptr<ITask>& t);
+    bool AddTask(const std::shared_ptr<ITask>& t);
+    void SuspendTask(const std::shared_ptr<ITask>& t);
+    void ResumeTask(const std::shared_ptr<ITask>& t);
+    void RemoveTask(const std::shared_ptr<ITask>& t);
     void KillAllTasks();
 
 protected:
-    std::list< shared_ptr<ITask> > _taskList;
-    std::list< shared_ptr<ITask> > _pausedTaskList;
+    std::list<std::shared_ptr<ITask>> _taskList;
+    std::list<std::shared_ptr<ITask>> _pausedTaskList;
 };
 
 #endif // KERNEL_H

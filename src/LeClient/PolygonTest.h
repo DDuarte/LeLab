@@ -4,8 +4,8 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "ITask.h"
-#include "Shapes.h"
+#include <LeEngine/ITask.h>
+#include <LeEngine/Shapes.h>
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -13,7 +13,7 @@
 class PolygonTest : public ITask
 {
 public:
-    PolygonTest() { }
+    PolygonTest() : ITask("PolygonTest") { }
     bool Start();
     void Update();
     void Render() const;

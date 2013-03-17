@@ -2,7 +2,7 @@
 #define OPCODEMGR_H
 
 #include <map>
-#include <boost/function.hpp>
+#include <functional>
 #include "Defines.h"
 //#include "Singleton.h"
 
@@ -14,7 +14,7 @@ enum Direction
     ServerToClient = 1, // SMSG
 };
 
-typedef boost::function<void (Packet* packet)> OpcHandler;
+typedef std::function<void (Packet* packet)> OpcHandler;
 
 class OpcodeMgr// : Singleton<OpcodeMgr>
 {

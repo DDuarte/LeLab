@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{2DABA66F-3905-4E7E-9057-4BF1CD0C11E6}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>assimp</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimp.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimpD</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Debug</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/Users/DX2/Desktop/LeLab/dep/assimp_build/code/Debug/assimpD.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Release</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/Users/DX2/Desktop/LeLab/dep/assimp_build/code/Release/assimp.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>MinSizeRel</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/Users/DX2/Desktop/LeLab/dep/assimp_build/code/MinSizeRel/assimp.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>RelWithDebInfo</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/Users/DX2/Desktop/LeLab/dep/assimp_build/code/RelWithDebInfo/assimp.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_DLL_EXPORT;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/Users/DX2/Desktop/LeLab/dep/assimp/include;D:/boost_1_53_0;C:/Users/DX2/Desktop/LeLab/dep/assimp/3rdparty/zlib;C:/Users/DX2/Desktop/LeLab/dep/assimp/code/../contrib/unzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/Users/DX2/Desktop/LeLab/dep/assimp -BC:/Users/DX2/Desktop/LeLab/dep/assimp_build --check-stamp-file C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/Users/DX2/Desktop/LeLab/dep/assimp -BC:/Users/DX2/Desktop/LeLab/dep/assimp_build --check-stamp-file C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/Users/DX2/Desktop/LeLab/dep/assimp -BC:/Users/DX2/Desktop/LeLab/dep/assimp_build --check-stamp-file C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -HC:/Users/DX2/Desktop/LeLab/dep/assimp -BC:/Users/DX2/Desktop/LeLab/dep/assimp_build --check-stamp-file C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/DX2/Desktop/LeLab/dep/assimp/code/CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\DX2\Desktop\LeLab\dep\assimp_build\code\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\AssimpPCH.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\fast_atof.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\qnan.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BaseImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BaseProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Importer.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ScenePrivate.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ByteSwap.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultProgressHandler.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultIOStream.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultIOSystem.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CInterfaceIOWrapper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Hash.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFF.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ParsingUtils.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\StdOStreamLogStream.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\StreamReader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\StringComparison.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SGSpatialSort.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\VertexTriangleAdjacency.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\GenericProperty.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SpatialSort.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SceneCombiner.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ScenePreprocessor.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SkeletonMeshBuilder.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SplitByBoneCountProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SmoothingGroups.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\StandardShapes.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TargetAnimation.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveComments.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Subdivision.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Vertex.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LineSplitter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TinyFormatter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Profiler.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LogAux.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\IOStream.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\LogStream.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\Logger.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\NullLogger.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Win32DebugLogStream.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FileLogStream.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlobIOSystem.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CalcTangentsProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ComputeUVMappingProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ConvertToLHProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindDegenerates.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindInstancesProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindInvalidDataProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FixNormalsStep.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\GenFaceNormalsProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\GenVertexNormalsProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PretransformVertices.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ImproveCacheLocality.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\JoinVerticesProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LimitBoneWeightsProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveRedundantMaterials.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveVCProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SortByPTypeProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SplitLargeMeshes.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TerragenLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TextureTransform.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TriangulateProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ValidateDataStructure.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OptimizeGraph.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OptimizeMeshes.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DeboneProcess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ProcessHelper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PolyTools.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MakeVerboseFormat.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\3DSHelper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\3DSLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ACLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ASELoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ASEParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\B3DImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BVHLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaHelper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaExporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DXFLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DXFHelper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CSMLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\HMPFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\HMPLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\HalfLifeFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRMeshLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRShared.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOAnimation.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWSLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\M3Importer.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD2FileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD2Loader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD2NormalTable.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD3FileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD3Loader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD5Loader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD5Parser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDCFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDCLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDCNormalTable.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDLDefaultColorMap.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDLFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDLLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MaterialSystem.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\NFFLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OFFLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileMtlImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjTools.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjExporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreImporter.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreXmlHelper.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyExporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3DLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPFileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPFileParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPFileImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPZipArchive.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RawLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SMDLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STLLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STLExporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\UnrealLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XFileHelper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XFileImporter.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XFileParser.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD4FileData.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MS3DLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\COBLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\COBScene.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderDNA.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderDNA.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderScene.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderSceneGen.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderIntermediate.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderModifier.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\NDOLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCReaderGen.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCUtil.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STEPFile.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STEPFileReader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XGLLoader.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\irrXMLWrapper.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\CXMLReaderImpl.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\heapsort.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\irrArray.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\irrString.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\irrTypes.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\irrXML.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\ConvertUTF\ConvertUTF.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\unzip\crypt.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\unzip\ioapi.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\unzip\unzip.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\common\shapes.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\common\utils.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\cdt.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\sweep.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\clipper\clipper.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\math\common_factor_rt.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\foreach.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\format.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\scoped_array.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\scoped_ptr.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\shared_array.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\shared_ptr.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\make_shared.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\static_assert.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BoostWorkaround\boost\tuple\tuple.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\anim.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\ai_assert.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\camera.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\color4.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\color4.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\config.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\defs.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\cfileio.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\light.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\material.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\material.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\matrix3x3.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\matrix3x3.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\matrix4x4.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\matrix4x4.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\mesh.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\postprocess.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\quaternion.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\quaternion.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\scene.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\texture.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\types.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\vector2.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\vector2.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\vector3.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\vector3.inl" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\version.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\cimport.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\importerdesc.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\Importer.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\IOSystem.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\cexport.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\Exporter.hpp" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\include\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\pstdint.h" />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Assimp.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\AssimpPCH.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BaseImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BaseProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PostStepRegistry.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ImporterRegistry.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultIOStream.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultIOSystem.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Importer.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SGSpatialSort.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\VertexTriangleAdjacency.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SpatialSort.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SceneCombiner.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ScenePreprocessor.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SkeletonMeshBuilder.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SplitByBoneCountProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\StandardShapes.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TargetAnimation.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveComments.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Subdivision.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DefaultLogger.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Exporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\AssimpCExport.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CalcTangentsProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ComputeUVMappingProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ConvertToLHProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindDegenerates.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindInstancesProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FindInvalidDataProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\FixNormalsStep.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\GenFaceNormalsProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\GenVertexNormalsProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PretransformVertices.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ImproveCacheLocality.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\JoinVerticesProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LimitBoneWeightsProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveRedundantMaterials.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RemoveVCProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SortByPTypeProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SplitLargeMeshes.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TerragenLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TextureTransform.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\TriangulateProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ValidateDataStructure.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OptimizeGraph.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OptimizeMeshes.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DeboneProcess.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ProcessHelper.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MakeVerboseFormat.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\3DSConverter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\3DSLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ACLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ASELoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ASEParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\B3DImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BVHLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ColladaExporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\DXFLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\CSMLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\HMPLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRMeshLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IRRShared.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOAnimation.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOBLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWOMaterial.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\LWSLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\M3Importer.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD2Loader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD3Loader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD5Loader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MD5Parser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDCLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDLLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MDLMaterialLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MaterialSystem.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\NFFLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OFFLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileMtlImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjFileParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\ObjExporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreMaterial.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreMesh.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\OgreSkeleton.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\PlyExporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3DLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPFileParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPFileImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\Q3BSPZipArchive.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\RawLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\SMDLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STLLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STLExporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\UnrealLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XFileImporter.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XFileParser.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\MS3DLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\COBLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderDNA.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderScene.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\BlenderModifier.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\NDOLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCReaderGen.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCUtil.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCGeometry.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCMaterial.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCProfile.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\IFCCurve.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\STEPFileReader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\code\XGLLoader.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\irrXML\irrXML.cpp"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\ConvertUTF\ConvertUTF.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\unzip\ioapi.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\unzip\unzip.c" >
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\common\shapes.cc"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\advancing_front.cc"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\cdt.cc"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\sweep.cc"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\poly2tri\poly2tri\sweep\sweep_context.cc"  />
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\contrib\clipper\clipper.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/Users/DX2/Desktop/LeLab/dep/assimp_build/ZERO_CHECK.vcxproj">
+      <Project>F803D739-2538-4B34-99F9-C8D71EFAB84A</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/Users/DX2/Desktop/LeLab/dep/assimp_build/contrib/zlib/zlib.vcxproj">
+      <Project>02BBB8AB-EB9E-4644-BEFF-144D9404A62B</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

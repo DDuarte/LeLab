@@ -1,12 +1,11 @@
 #include "ServerApplication.h"
-#include "Log.h"
-#include "SettingsManager.h"
-#include "Kernel.h"
+#include <LeEngine/Log.h>
+#include <LeEngine/SettingsManager.h>
+#include <LeEngine/Kernel.h>
 #include "NetworkTask.h"
-#include "ITask.h"
+#include <LeEngine/ITask.h>
 
-#include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
+#include <memory>
 
 void ServerApplication::Run(int argc, char* argv[])
 {
@@ -29,7 +28,7 @@ void ServerApplication::Run(int argc, char* argv[])
 
     // Init tasks
 
-    shared_ptr<NetworkTask> network(new NetworkTask);
+    std::shared_ptr<NetworkTask> network(new NetworkTask);
     network->Priority = 100;
     Kernel::Get().AddTask(network);
 

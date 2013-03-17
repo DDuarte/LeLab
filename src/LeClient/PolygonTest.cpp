@@ -1,13 +1,13 @@
 #include "PolygonTest.h"
 #include <GL/glew.h>
 #include <GL/glfw.h>
-#include "InputTask.h"
-#include "Kernel.h"
-#include "SOIL.h"
-#include "Shapes.h"
-#include "VideoUpdate.h"
-#include "Window.h"
-#include "Vertex.h"
+#include <LeEngine/InputTask.h>
+#include <LeEngine/Kernel.h>
+#include <SOIL.h>
+#include <LeEngine/Shapes.h>
+#include <LeEngine/VideoUpdate.h>
+#include <LeEngine/Window.h>
+#include <LeEngine/Vertex.h>
 
 #include <vector>
 #include <map>

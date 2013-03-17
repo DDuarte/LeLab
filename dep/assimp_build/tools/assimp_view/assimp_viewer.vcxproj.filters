@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\AnimEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\HelpDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\LogDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\LogWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\MeshRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\MessageProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Normals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\SceneAnimator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\Shaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\assimp_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\banner.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\banner_pure.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\base_anim.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\base_display.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\base_inter.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\base_rendering.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\base_stats.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\fx.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\n.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\root.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\tx.bmp" />
+    <None Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\txi.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\DX2\Desktop\LeLab\dep\assimp\tools\assimp_view\assimp_view.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EDF23A9C-9D91-4A4A-B178-424C5BB83356}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
