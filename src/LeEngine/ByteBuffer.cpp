@@ -10,6 +10,7 @@
 
 #ifdef _WIN32
 #define alloca _alloca
+#define sprintf sprintf_s
 #endif
 
 ByteBuffer::ByteBuffer(uint32 capacity) : _readPos(0), _writePos(0)
@@ -103,7 +104,7 @@ void ByteBuffer::Put(uint32 pos, const Byte* src, uint32 count)
 
 uint32 ByteBuffer::Size() const
 {
-    return _buffer.size();
+    return static_cast<uint32>(_buffer.size());
 }
 
 bool ByteBuffer::IsEmpty() const
@@ -191,7 +192,7 @@ ByteBuffer& ByteBuffer::operator <<(double value) { Append<double>(value); retur
 ByteBuffer& ByteBuffer::operator <<(const ByteBuffer& other) { Append(other); return *this; }
 ByteBuffer& ByteBuffer::operator <<(const std::string& value)
 {
-    if (uint32 length = value.length())
+    if (uint32 length = static_cast<uint32>(value.length()))
     {
         Append7BitEncodedInt(length);
         Append((Byte const*)value.c_str(), length);
@@ -201,8 +202,8 @@ ByteBuffer& ByteBuffer::operator <<(const std::string& value)
 
 ByteBuffer& ByteBuffer::operator <<(const char* str)
 {
-    size_t length = 0;
-    if (str && (length = strlen(str)))
+    uint32 length = 0;
+    if (str && (length = static_cast<uint32>(strlen(str))))
     {
         Append7BitEncodedInt(length);
         Append((Byte const*)str, length);

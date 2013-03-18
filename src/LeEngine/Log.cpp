@@ -3,6 +3,10 @@
 #include <cstdarg>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+#ifdef _WIN32
+#define vsprintf vsprintf_s
+#endif
+
 bool Log::Init()
 {
     _stream.open(_filename);

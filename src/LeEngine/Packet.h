@@ -15,7 +15,7 @@ protected:
 public:
     Packet(uint16 opcode, uint32 reserveSize) : ByteBuffer(reserveSize), _opcode(opcode) {}
     Packet(const Packet& other) : ByteBuffer(other), _opcode(other._opcode) {}
-    Packet(const std::vector<uint8>& buffer) : ByteBuffer(buffer.size() - 13)
+    Packet(const std::vector<uint8>& buffer) : ByteBuffer(static_cast<uint32>(buffer.size() - 13))
     {
         _time      = *((uint64 const*)&buffer[0]);
         _direction = *((uint8  const*)&buffer[8]);
@@ -27,7 +27,7 @@ public:
     uint16 GetOpcode() const { return _opcode; }
     void SetOpcode(uint16 opcode) { _opcode = opcode; }
 
-    uint32 GetDataSize() const { return _buffer.size(); }
+    uint32 GetDataSize() const { return static_cast<uint32>(_buffer.size()); }
 };
 
 #endif // PACKET_H
