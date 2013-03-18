@@ -1,4 +1,0 @@
-C:/Users/DX2/Desktop/LeLab/dep/gtest_build/CMakeFiles/ALL_BUILD.dir
-C:/Users/DX2/Desktop/LeLab/dep/gtest_build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/DX2/Desktop/LeLab/dep/gtest_build/CMakeFiles/gtest.dir
-C:/Users/DX2/Desktop/LeLab/dep/gtest_build/CMakeFiles/gtest_main.dir

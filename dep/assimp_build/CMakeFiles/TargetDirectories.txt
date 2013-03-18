@@ -1,7 +1,0 @@
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/CMakeFiles/ALL_BUILD.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/code/CMakeFiles/assimp.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/tools/assimp_view/CMakeFiles/assimp_viewer.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/CMakeFiles/uninstall.dir
-C:/Users/DX2/Desktop/LeLab/dep/assimp_build/contrib/zlib/CMakeFiles/zlib.dir
