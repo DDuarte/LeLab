@@ -15,15 +15,15 @@ bool Window::Create()
 {
     if(!glfwOpenWindow(_width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, FullScreenMode(_fullScreen)))
     {
-        LeLog.WriteP("Window: Could not open glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, mode: %b",
-            _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen);
+        LeLog.WriteP("Window: Could not open glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, fullscreen: %s",
+            _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen ? "yes" : "no");
         return false;
     }
 
     glfwSetWindowTitle(_title.c_str());
 
-    LeLog.WriteP("Window: Opened glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, mode: %b",
-        _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen);
+    LeLog.WriteP("Window: Opened glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, fullscreen: %s",
+        _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen ? "yes" : "no");
 
     return true;
 }

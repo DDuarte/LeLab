@@ -3,7 +3,6 @@
 
 #include "Singleton.h"
 #include "ITask.h"
-#include "Shapes.h"
 
 #include <list>
 #include <memory>

@@ -1,6 +1,7 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
+#include <random>
 #include <boost/random.hpp>
 #include <boost/concept_check.hpp>
 #include <ctime>
@@ -9,14 +10,17 @@
 class Random
 {
 private:
-    typedef boost::random::mt19937 GeneratorType;
+    typedef std::mt19937 GeneratorType;
 
     GeneratorType _gen;
-    boost::random::uniform_01<GeneratorType, float>* _uniformDist01;
+    std::uniform_real_distribution<float>* _uniformDist01;
 
 public:
     //! Constructor
-    Random(int seed = clock());
+    Random();
+
+    //! Constructor
+    Random(int seed);
 
     //! Destructor
     ~Random();
@@ -39,6 +43,7 @@ public:
     T Distribution(T* values, float* probabilities, int size)
     {
         boost::random::discrete_distribution<int, float> dist(probabilities, probabilities+size);
+        //std::discrete_distribution<float> dist(probabilities, probabilities + size);
         int rand = dist(_gen);
         return values[rand];
     }

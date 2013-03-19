@@ -5,29 +5,31 @@
 #include "DMath.h"
 #include "MathDefines.h"
 
-#include <cstring> // memcpy, memset
 #include <cassert>
 #include <cstdarg>
 #include <vector>
-
-#include <boost/shared_array.hpp>
-using boost::shared_array;
+#include <algorithm>
+#include <array>
 
 template <int Size, typename T = float>
 class Matrix
 {
+    static_assert(std::is_scalar<T>::value, "Matrix should use a scalar type.");
 private:
-    T M[Size][Size];
+    std::array<std::array<T, Size>, Size> M;
 
 public:
+    typedef typename std::conditional<std::is_floating_point<T>::value, T, double>::type Real;
+    typedef T Type;
+    static const int Size = Size;
     static const Matrix<Size, T> IDENTITY;
     static const Matrix<Size, T> ZERO;
 
-    Matrix() { memset(M, 0, Size * Size * sizeof(T)); }
+    Matrix() { std::fill_n(M, Size * Size, 0); }
 
-    Matrix(const T arr[Size][Size]) { memcpy(M, arr, Size * Size * sizeof(T)); }
+    Matrix(const T arr[Size][Size]) { std::copy_n(arr, Size * Size, M) };
 
-    Matrix(const Matrix<Size, T>& matrix) { memcpy(M, matrix.M, Size * Size * sizeof(T)); }
+    Matrix(const Matrix<Size, T>& matrix) { std::copy_n(matrix.M, Size * Size, M); }
 
     Matrix(const T vals[Size * Size])
     {
@@ -116,8 +118,7 @@ public:
         return result;
     }
 
-    template <typename S>
-    Matrix<Size, T> operator *(const S& scalar) const
+    Matrix<Size, T> operator *(const T& scalar) const
     {
         Matrix<Size, T> result;
         for (int row = 0; row < Size; ++row)
@@ -126,24 +127,28 @@ public:
         return result;
     }
 
-    shared_array<T> GetRow(int row) const
+    std::vector<T> GetRow(int row) const
     {
         assert(row < Size);
 
-        shared_array<T> r(new T[Size]);
-        memcpy(r, M[row], Size * sizeof(T));
+        std::vector<T> r(Size);
+
+        for (int i = 0; i < Size; ++i)
+            r[i] = M[row];
 
         return r;
     }
 
-    shared_array<T> GetColumn(int column) const
+    std::vector<T> GetColumn(int column) const
     {
         assert(column < Size);
 
-        shared_array<T> col(new T[Size]);
+        std::vector<T> r(Size);
+
         for (int i = 0; i < Size; ++i)
-            col[i] = M[i][column];
-        return col;
+            r[i] = M[i][column];
+
+        return r;
     }
 
     Matrix<Size, T>& SetRow(int row, const T arr[Size])
@@ -169,15 +174,15 @@ public:
         assert(column1 < Size && column2 < Size);
         if (column1 != column2)
         {
-            shared_array<T> aux = GetColumn(column1);
-            SetColumn(column1, GetColumn(column2).get());
+            std::vector<T> aux = GetColumn(column1);
+            SetColumn(column1, GetColumn(column2).data());
             SetColumn(column2, aux.get());
         }
 
         return *this;
     }
 
-    double Determinant() const
+    Real Determinant() const
     {
         if (Size == 1)
             return M[0][0];
@@ -238,11 +243,11 @@ public:
                 }
             }
 
-            double det = 1;
+            Real det = 1;
             for (int i = 0; i < Size; ++i)
                 det *= m[i][i];
 
-            return det * pow(-1.0, colEx);
+            return det * Math<Real>::Pow(-1.0, colEx);
         }
     }
 
@@ -262,10 +267,10 @@ public:
         return aux.Transpose();
     }
 
-    double Cofactor(int l, int c) const
+    Real Cofactor(int l, int c) const
     {
         const Matrix<Size,T>& m = *this;
-        std::vector<double> subMatrixVec;
+        std::vector<Real> subMatrixVec;
         
         for (int i = 0; i < Size; i++)
             if (i != l)
@@ -273,7 +278,7 @@ public:
                     if (j != c)
                         subMatrixVec.push_back(m[i][j]);
 
-        Matrix<Size-1, double> subMat(&subMatrixVec[0]);
+        Matrix<Size-1, Real> subMat(&subMatrixVec[0]);
 
         return pow(-1.0, l+c) * subMat.Determinant(); 
     }
@@ -317,7 +322,7 @@ public:
     //! Returns true if matrix is invertible. Result is stored in first argument, result.
     bool Inverse(Matrix<Size, T>& result) const
     {
-        double determinant = Determinant();
+        Real determinant = Determinant();
 
         if (IsZero(determinant))
             return false;
@@ -347,27 +352,32 @@ const Matrix<Size, T> Matrix<Size, T>::ZERO;
 template <int Size, typename T>
 const Matrix<Size, T> Matrix<Size, T>::IDENTITY = BuildIdentityMatrix();
 
-typedef Matrix<4, float> mat4;
+typedef Matrix<3, float> Matrix3f;
+typedef Matrix<3, double> Matrix3d;
+typedef Matrix<3, int> Matrix3i;
+typedef Matrix<4, float> Matrix4f;
+typedef Matrix<4, double> Matrix4d;
+typedef Matrix<4, int> Matrix4i;
 
-inline mat4 translate(float x, float y, float z)
+inline Matrix4f CreateTranslasteMatrix(float x, float y, float z)
 {
     float m[] = { 1, 0, 0, x,
                   0, 1, 0, y,
                   0, 0, 1, z,
                   0, 0, 0, 1 };
-    return mat4(m);
+    return Matrix4f(m);
 }
 
-inline mat4 scale(float x, float y, float z)
+inline Matrix4f CreateScaleMatrix(float x, float y, float z)
 {
     float m[] = { x, 0, 0, 0,
                   0, y, 0, 0,
                   0, 0, z, 0,
                   0, 0, 0, 1 };
-    return mat4(m);
+    return Matrix4f(m);
 }
 
-inline mat4 rotate(float rotation, Vector3f axis)
+inline Matrix4f CreateRotateMatrix(float rotation, Vector3f axis)
 {
     float a = rotation * Math<float>::ACos(-1.0f) / 180.0f;
     float c = Math<float>::Cos(a);
@@ -391,7 +401,7 @@ inline mat4 rotate(float rotation, Vector3f axis)
                   0,
                   0, 0, 0, 1 };
 
-    return mat4(m);
+    return Matrix4f(m);
 }
 
 #endif // MATRIX_H
