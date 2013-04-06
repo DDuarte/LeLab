@@ -31,6 +31,8 @@ public:
     static Real Tan(Real val) { return tan(val); }
     static Real ACos(Real val) { return acos(val); }
     static Real ASin(Real val) { return asin(val); }
+    static Real ATan(Real val) { return atan(val); }
+    static Real ATan2(Real y, Real x) { return atan2(y, x); }
    
     // Hyperbolic
     static Real Sinh(Real val) { return sinh(val); }
@@ -48,6 +50,25 @@ public:
     static Real Pow(Real base, T exponent) { return pow(base, exponent); }
     static Real Sqrt(Real val) { return sqrt(val); }
     static Real InvSqrt(Real val) { return 1/Sqrt(val); }
+    static Real FastInvSqrt(Real val)
+    {
+        // original from Silicon Graphics, modified
+        const Real valhalf = 0.5 * val;
+        const int magicConstant;
+        if (sizeof(Real) == 4)
+            magicConstant = 0x5f3759df;
+        else if (sizeof(Real) == 8)
+            magicConstant = 0x5fe6eb50c7b537a9;
+        else
+            static_assert(false, "FastInvSqrt not defined for non-floats or non-doubles.");
+
+        int i = reinterpret_cast<int>(val);
+        i = magicConstant - (i >> 1);
+        val = reinterpret_cast<Real>(i);
+        val = val * (1.5 - valhalf * val * val);
+        return val;
+    }
+
     static Real Sqr(Real val) { return val*val; }
 
     // Misc
@@ -57,8 +78,8 @@ public:
     static Real FMod(Real numerator, Real denominator) { return fmod(numerator, denominator); }
     static Real Clamp(Real val, Real min, Real max) { return (val < min ? min : (val > max ? max : val)); }
     static int Sign(Real val) { return (val > 0 ? 1 : (val < 0 ? -1 : 0)); }
-    static bool IsFuzzyZero(Real val) { return !val || (Abs(val) <= std::numeric_limits<Real>::epsilon()); }
-    static bool IsFuzzyEqual(Real val1, Real val2) { return val1 == val2 || (Abs(val2 - val1) <= std::numeric_limits<Real>::epsilon()); }
+    static bool IsFuzzyZero(Real val) { return !val || (Abs(val) <= EPSILON); }
+    static bool IsFuzzyEqual(Real val1, Real val2) { return val1 == val2 || (Abs(val2 - val1) <= EPSILON); }
 };
 
 template<class Real> const Real Math<Real>::EPSILON      = std::numeric_limits<Real>::epsilon();
