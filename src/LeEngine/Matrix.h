@@ -10,13 +10,19 @@
 #include <vector>
 #include <algorithm>
 #include <array>
+#include <initializer_list>
+#include <iostream>
 
 template <int Size, typename T = float>
 class Matrix
 {
     static_assert(std::is_scalar<T>::value, "Matrix should use a scalar type.");
 private:
-    std::array<std::array<T, Size>, Size> M;
+    union
+    {
+        std::array<std::array<T, Size>, Size> M;
+        std::array<T, Size * Size> _M;
+    };
 
 public:
     typedef typename std::conditional<std::is_floating_point<T>::value, T, double>::type Real;
@@ -25,51 +31,50 @@ public:
     static const Matrix<Size, T> IDENTITY;
     static const Matrix<Size, T> ZERO;
 
-    Matrix() { std::fill_n(M, Size * Size, 0); }
+    Matrix() { _M.fill(0); }
 
-    Matrix(const T arr[Size][Size]) { std::copy_n(arr, Size * Size, M) };
+    Matrix(const T arr[Size][Size]) { memcpy(_M.data(), arr, sizeof(T) * Size * Size); }
+    Matrix(const T arr[Size*Size]) { memcpy(_M.data(), arr, sizeof(T) * Size * Size); }
+    Matrix(T arr[Size*Size]) { memcpy(_M.data(), arr, sizeof(T) * Size * Size); }
+    Matrix(T arr[Size][Size]) { memcpy(_M.data(), arr, sizeof(T) * Size * Size); }
 
-    Matrix(const Matrix<Size, T>& matrix) { std::copy_n(matrix.M, Size * Size, M); }
+    Matrix(const Matrix<Size, T>& matrix) : M(matrix.M) { }
 
-    Matrix(const T vals[Size * Size])
+    template <typename... Arguments>
+    Matrix(T first, Arguments... parameters)
     {
-        for (int row = 0; row < Size; ++row)
-            for (int col = 0; col < Size; ++col)
-                M[row][col] = vals[Size * row + col];
+        // This isn't pretty but it is working on MSVC CTP Nov 2012
+        auto arr = { first, parameters... };
+
+        int i = 0;
+        for (auto& a : arr)
+            _M[i++] = a;
     }
 
-    //! First parameter has to be the number of values
-    //! in the matrix (size * size) and it should be
-    //! followed by that exact number of parameters,
-    //! each one representing a value in the matrix
-    //! in a row-major way.
-    Matrix(int num, ...)
+    const std::array<T, Size>& operator[](int row) const { assert(row < Size); return M[row]; }
+    std::array<T, Size>& operator[](int row) { assert(row < Size); return M[row]; }
+
+    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(_M.data(), other._M.data(), Size * Size * sizeof(T)); return *this; }
+
+    bool operator ==(const Matrix<Size, T>& other) const
     {
-        assert(num == Size * Size);
-
-        va_list arguments;
-
-        // Non portable hack to use this without requiring argument num:
-        // int a = ((int)this) - 228;
-        // arguments = (va_list)a + sizeof(a);
-        va_start(arguments, num);
-
-        for (int i = 0; i < Size; ++i)
-            for (int j = 0; j < Size; ++j)
-                M[i][j] = va_arg(arguments, T);
-
-        va_end(arguments); 
+        if (std::is_floating_point<T>::value)
+        {
+            for (int i = 0; i < Size * Size; ++i)
+                if (!Math<Real>::IsFuzzyEqual(_M[i], other._M[i]))
+                    return false;
+            return true;
+        }
+        else
+            return memcmp(_M.data(), other._M.data(), Size * Size * sizeof(T)) == 0;
     }
-
-    T* operator[](int row) const { assert(row < Size); return (T*)M[row]; }
-
-    Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(M, other.M, Size * Size * sizeof(T)); return *this; }
-
-    bool operator ==(const Matrix<Size, T>& other) const { return memcmp(M, other.M, Size * Size * sizeof(T)) == 0; }
     bool operator !=(const Matrix<Size, T>& other) const { return !operator ==(other); }
 
     T operator ()(int row, int column) const { return M[row][column]; }
     T& operator ()(int row, int column) { return M[row][column]; }
+
+    operator const T* () const { return _M.data(); }
+    operator T* () { return _M.data(); }
 
     Matrix<Size, T> operator +(const Matrix<Size, T>& other) const
     {
@@ -127,23 +132,17 @@ public:
         return result;
     }
 
-    std::vector<T> GetRow(int row) const
+    std::array<T, Size> GetRow(int row) const
     {
         assert(row < Size);
-
-        std::vector<T> r(Size);
-
-        for (int i = 0; i < Size; ++i)
-            r[i] = M[row];
-
-        return r;
+        return M[row];
     }
 
-    std::vector<T> GetColumn(int column) const
+    std::array<T, Size> GetColumn(int column) const
     {
         assert(column < Size);
 
-        std::vector<T> r(Size);
+        std::array<T, Size> r;
 
         for (int i = 0; i < Size; ++i)
             r[i] = M[i][column];
@@ -174,9 +173,9 @@ public:
         assert(column1 < Size && column2 < Size);
         if (column1 != column2)
         {
-            std::vector<T> aux = GetColumn(column1);
+            std::array<T, Size> aux = GetColumn(column1);
             SetColumn(column1, GetColumn(column2).data());
-            SetColumn(column2, aux.get());
+            SetColumn(column2, aux.data());
         }
 
         return *this;
@@ -255,8 +254,8 @@ public:
     {
         Matrix<Size, T> aux(*this);
 
-        for (size_t i = 0; i < Size; ++i)
-            SetRow(i, aux.GetColumn(i).get());
+        for (int i = 0; i < Size; ++i)
+            SetRow(i, aux.GetColumn(i).data());
 
         return *this;
     }
@@ -280,7 +279,7 @@ public:
 
         Matrix<Size-1, Real> subMat(&subMatrixVec[0]);
 
-        return pow(-1.0, l+c) * subMat.Determinant(); 
+        return Math<Real>::Pow(-1.0, l+c) * subMat.Determinant(); 
     }
 
     Matrix<Size, T> CofactorsMatrix() const
@@ -312,26 +311,29 @@ public:
             std::vector<T> cofactorMatrixVec;
             for (int i = 0; i < Size; i++)
                 for (int j = 0; j < Size; j++)
-                    cofactorMatrixVec.push_back(Cofactor(i,j));
-            mat = &cofactorMatrixVec[0];
+                    cofactorMatrixVec.push_back(static_cast<T>(Cofactor(i,j)));
+            mat = cofactorMatrixVec.data();
         }
 
         return mat;
     }
 
-    //! Returns true if matrix is invertible. Result is stored in first argument, result.
-    bool Inverse(Matrix<Size, T>& result) const
+    Matrix<Size, Real> GetInverse() const
     {
-        Real determinant = Determinant();
+        Matrix<Size, T> m = GetTransposed().CofactorsMatrix();
+        return m.ToReal() * (static_cast<Real>(1) / Determinant());
+    }
 
-        if (IsZero(determinant))
-            return false;
+    Matrix<Size, Real> ToReal() const
+    {
+        //if (std::is_floating_point<T>::value)
+        //    return *this;
 
-        Matrix<Size, T> mcopy(*this);
-
-        determinant = 1.0 / determinant;
-        result = mcopy.Transpose().CofactorsMatrix() * (T)determinant;
-        return true;
+        Matrix<Size, Real> result;
+        for (int i = 0; i < Size; ++i)
+            for (int j = 0; j < Size; ++j)
+                result[i][j] = static_cast<Real>(M[i][j]);
+        return result;
     }
 
 private:
@@ -340,7 +342,7 @@ private:
         Matrix<Size, T> result;
         for (int row = 0; row < Size; ++row)
             for (int col = 0; col < Size; ++col)
-                result(row, col) = (row == col) ? 1 : 0;
+                result(row, col) = (row == col) ? static_cast<T>(1) : static_cast<T>(0);
         return result;
     }
     
@@ -358,6 +360,22 @@ typedef Matrix<3, int> Matrix3i;
 typedef Matrix<4, float> Matrix4f;
 typedef Matrix<4, double> Matrix4d;
 typedef Matrix<4, int> Matrix4i;
+
+// Helpers for scalar multiplications
+template <int Size, typename T> Matrix<Size, T> operator *(const T& scalar, const Matrix<Size, T>& rhs) { return rhs * scalar; }
+template <int Size, typename T> Matrix<Size, T> operator /(const T& scalar, const Matrix<Size, T>& rhs) { return rhs / scalar; }
+
+template <int Size, typename T>
+::std::ostream& operator<<(::std::ostream& os, const Matrix<Size, T>& m)
+{
+    os << "(";
+    for (int i = 0; i < Size; ++i)
+        for (int j = 0; j < Size; ++j)
+            os << m[i][j] << ", ";
+    os << ")";
+    
+    return os;
+}
 
 inline Matrix4f CreateTranslasteMatrix(float x, float y, float z)
 {
@@ -388,10 +406,10 @@ inline Matrix4f CreateRotateMatrix(float rotation, Vector3f axis)
     Vector3f temp = axis * (1-c);
 
     float m[] = { axis[0] * temp[0] + c,
-                  axis[1] * temp[0] - axis[2]*s,
-                  axis[2] * temp[0] + axis[1]*s,
+                  axis[1] * temp[0] - axis[2] * s,
+                  axis[2] * temp[0] + axis[1] * s,
                   0,
-                  axis[0] * temp[1] + axis[2]*s,
+                  axis[0] * temp[1] + axis[2] * s,
                   axis[1] * temp[1] + c,
                   axis[2] * temp[1] - axis[0] * s,
                   0,

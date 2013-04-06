@@ -88,7 +88,18 @@ public:
     void Set(T x, T y, T z) { static_assert(Size >= 3, "Set(T, T, T) requires at least size 3"); V[0] = x; V[1] = y; V[2] = z; }
     void Set(T x, T y, T z, T w) { static_assert(Size >= 4, , "Set(T, T, T, T) requires at least size 4"); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
 
-    bool operator ==(const Vector<Size, T>& other) const { return memcmp(V, other.V, Size * sizeof(T)) == 0; }
+    bool operator ==(const Vector<Size, T>& other) const
+    {
+        if (std::is_floating_point<T>::value)
+        {
+            for (int i = 0; i < Size; ++i)
+                if (!Math<Real>::IsFuzzyEqual(V[i], other.V[i]))
+                    return false;
+            return true;
+        }
+        else
+            return memcmp(V, other.V, Size * sizeof(T)) == 0;
+    }
     bool operator !=(const Vector<Size, T>& other) const { return !operator ==(other); }
 
     Vector<Size, T> operator +(const Vector<Size, T>& other) const
@@ -193,7 +204,7 @@ public:
     //! The squared magnitude or length of this vector (more efficient)
     T MagnitudeSqr() const
     {
-        T sum = (T)0;
+        T sum = static_cast<T>(0);
         for (int i = 0; i < Size; ++i)
             sum += V[i] * V[i];
         return sum;
@@ -212,7 +223,7 @@ public:
             T length = Magnitude();
             for (int i = 0; i < Size; ++i)
                 V[i] /= length;
-            assert(IsZero(MagnitudeSqr() - static_cast<T>(1.0)));
+            assert(IsZero(MagnitudeSqr() - static_cast<T>(1)));
         }
     }
 
@@ -227,7 +238,7 @@ public:
 	//! Returns the dot product (a scalar) between this vector and some other
     T DotProduct(const Vector<Size, T>& other) const
     {
-        T sum = 0;
+        T sum = static_cast<T>(0);
         for (int i = 0; i < Size; ++i)
             sum += V[i] * other[i];
         return sum;
