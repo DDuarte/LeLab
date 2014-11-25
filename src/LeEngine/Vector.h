@@ -3,63 +3,34 @@
 
 #include "DMath.h"
 #include "MathDefines.h"
+#include "TypeHelpers.h"
 
+#include <array>
 #include <type_traits>
-// #include <initializer_list>
+#include <initializer_list>
 
 template<int Size, typename T = float>
 class Vector
 {
     static_assert(std::is_scalar<T>::value, "Vector should use a scalar type.");
 private:
-    T V[Size];
+    std::array<T, Size> V;
 
 public:
     typedef typename std::conditional<std::is_floating_point<T>::value, T, double>::type Real;
     typedef T Type;
     static const Vector<Size, T> ZERO;
 
-    Vector() { memset(V, 0, Size * sizeof(T)); }
+    Vector() { V.fill(0); }
 
-    Vector(T x, T y)
-    {
-        static_assert(Size == 2, "T x, T y constructor requires Size == 2");
-        V[0] = x;
-        V[1] = y;
-    }
+    // One day this will be properly supported by compilers... 25-11-2014 - Today is the day !!! YAY!!!
+    template <typename ...Ts>
+    Vector(Ts... parameters) : V { { static_cast<T>(parameters)... } } { }
 
-    Vector(T x, T y, T z)
-    {
-        static_assert(Size == 3, "T x, T y, T z constructor requires Size == 3");
-        V[0] = x;
-        V[1] = y;
-        V[2] = z;
-    }
+    Vector(std::initializer_list<T> list) : V {{ list }} { }
 
-    Vector(T x, T y, T z, T w)
-    {
-        static_assert(Size == 4, "T x, T y, T z, T w constructor requires Size == 4");
-        V[0] = x;
-        V[1] = y;
-        V[2] = z;
-        V[3] = w;
-    }
-
-    // One day this will be properly supported by compilers...
-    //template< typename... Arguments>
-    //Vector(Arguments... parameters)
-    //{
-    //    static const unsigned short int size = sizeof...(Arguments);
-    //    static_assert(size == Size, "The number of arguments of Vector should be the same of the templated Size");
-    //
-    //    int i = 0;
-    //    std::initializer_list<T> args = { parameters... };
-    //    for (auto arg : args)
-    //        V[i++] = static_cast<T>(arg);
-    //}
-
-    Vector(const Vector<Size, T>& other) { memcpy(V, other.V, Size * sizeof(T)); }
-    Vector(const T arr[Size]) { memcpy(V, arr, Size * sizeof(T)); }
+    Vector(const Vector<Size, T>& other) { memcpy(V.data(), other.V.data(), Size * sizeof(T)); }
+    Vector(const T arr[Size]) { memcpy(V.data(), arr, Size * sizeof(T)); }
     Vector(T val) { for (int i = 0; i < Size; ++i) V[i] = val; }
 
     const T& X() const { static_assert(Size >= 1, "const X() requires at least size 1"); return V[0]; }
@@ -75,29 +46,40 @@ public:
     const T& operator [](int index) const { assert(index < Size); return V[index]; }
     T& operator [](int index) { assert(index < Size); return V[index]; }
 
-    operator const T* () const { return V; }
-    operator T* () { return V; }
+    operator const T* () const { return V.data(); }
+    operator T* () { return V.data(); }
 
     void SetX(T x) { static_assert(Size >= 1, "SetX() requires at least size 1"); V[0] = x; }
-    void SetY(T y) { static_assert(Size >= 2, "SetY() requires at least size 2"); V[1] = y; }
-    void SetZ(T z) { static_assert(Size >= 3, "SetZ() requires at least size 3"); V[2] = z; }
-    void SetW(T w) { static_assert(Size >= 4, "SetW() requires at least size 4"); V[3] = w; }
-    void Set(T x) { static_assert(Size >= 2, "Set(T) requires at least size 1"); V[0] = x; }
-    void Set(T x, T y) { static_assert(Size >= 2, "Set(T, T) requires at least size 2"); V[0] = x; V[1] = y; }
-    void Set(T x, T y, T z) { static_assert(Size >= 3, "Set(T, T, T) requires at least size 3"); V[0] = x; V[1] = y; V[2] = z; }
-    void Set(T x, T y, T z, T w) { static_assert(Size >= 4, "Set(T, T, T, T) requires at least size 4"); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
 
+    void SetY(T y) { static_assert(Size >= 2, "SetY() requires at least size 2"); V[1] = y; }
+
+    void SetZ(T z) { static_assert(Size >= 3, "SetZ() requires at least size 3"); V[2] = z; }
+
+	void SetW(T w) { static_assert(Size >= 4, "SetW() requires at least size 4"); V[3] = w; }
+
+    template <typename... Ts>
+    void Set(Ts... params) {
+    	V = { static_cast<T>(params)... };
+    }
+
+private:
+    bool equalsImpl(const Vector<Size, T>& other, std::true_type) const {
+		for (int i = 0; i < Size; ++i)
+			if (!Math<Real>::IsFuzzyEqual(V[i], other.V[i]))
+				return false;
+		return true;
+    }
+
+    bool equalsImpl(const Vector<Size, T>& other, std::false_type) const {
+    	return memcmp(V.data(), other.V.data(), Size * sizeof(T)) == 0;
+    }
+
+
+
+public:
     bool operator ==(const Vector<Size, T>& other) const
     {
-        if (std::is_floating_point<T>::value)
-        {
-            for (int i = 0; i < Size; ++i)
-                if (!Math<Real>::IsFuzzyEqual(V[i], other.V[i]))
-                    return false;
-            return true;
-        }
-        else
-            return memcmp(V, other.V, Size * sizeof(T)) == 0;
+        return equalsImpl(other, typename std::is_floating_point<T>::type());
     }
     bool operator !=(const Vector<Size, T>& other) const { return !operator ==(other); }
 
@@ -144,7 +126,7 @@ public:
         return result;
     }
 
-    Vector<Size, T>& operator =(const Vector<Size, T>& other) { memcpy(V, other.V, Size * sizeof(T)); return *this; }
+    Vector<Size, T>& operator =(const Vector<Size, T>& other) { memcpy(V.data(), other.V.data(), Size * sizeof(T)); return *this; }
 
     Vector<Size, T>& operator =(const T& val)
     {
@@ -243,17 +225,25 @@ public:
         return sum;
     }
 
+private:
+    Vector<Size, T> CrossProductImpl(const Vector<Size, T>& other, size_type<2>) const
+	{
+    	return V[0] * other.V[1] - V[1] * other.V[0];
+	}
+
+    Vector<Size, T> CrossProductImpl(const Vector<Size, T>& other, size_type<3>) const
+	{
+    	return Vector<Size, T>(V[1] * other.V[2] - V[2] * other.V[1],
+    	                	   V[2] * other.V[0] - V[0] * other.V[2],
+							   V[0] * other.V[1] - V[1] * other.V[0]);
+	}
+
+public:
+
 	//! Returns the cross product (a vector) between this vector and some other
     Vector<Size, T> CrossProduct(const Vector<Size, T>& other) const
     {
-        static_assert(Size == 2 || Size == 3, "Cross product not defined for more than 3 dimensions");
-
-        if (Size == 2) // this needs some sort of split
-            return V[0] * other.V[1] - V[1] * other.V[0];
-        else if (Size == 3)
-            return Vector<Size, T>(V[1] * other.V[2] - V[2] * other.V[1],
-                V[2] * other.V[0] - V[0] * other.V[2],
-                V[0] * other.V[1] - V[1] * other.V[0]);
+        return CrossProductImpl(other, typename size_type<Size>::type());
     }
 
 	//! Returns the angle in radians of this vector and other
@@ -267,23 +257,30 @@ public:
         return Math<Real>::ACos(dotP / lengthP);
 	}
 
+private:
+	Vector<Size, T> PerpendicularImpl(size_type<2>)
+	{
+		return Vector<Size, T>(-V[1], V[0]);
+	}
+
+	Vector<Size, T> PerpendicularImpl(size_type<3>)
+	{
+		Vector<Size, T> try1 = CrossProduct(Vector<Size, T>(1, 0, 0));
+
+		if (IsZero(try1.MagnitudeSqr())) // vector is perpendicular to xx, pick a different one
+			return CrossProduct(Vector<Size, T>(0, 1, 0));
+
+		return try1;
+	}
+
+
+public:
+
 	//! Returns a vector that is perpendicular to this vector
 	//! There are many solutions, this will only get one of those
-    template <typename R = T>
-    typename std::enable_if<(Size == 2 || Size == 3) && std::is_same<T, R>::value, Vector<Size, T>>::type
-    Perpendicular()
+    Vector<Size, T> Perpendicular()
 	{
-        if (Size == 2)
-            return Vector<Size, T>(-V[1], V[0]);
-        else if (Size == 3)
-        {
-            Vector<Size, T> try1 = CrossProduct(Vector<Size, T>(1, 0, 0));
-
-            if (IsZero(try1.MagnitudeSqr())) // vector is perpendicular to xx, pick a different one
-                return CrossProduct(Vector<Size, T>(0, 1, 0));
-
-            return try1;
-        }
+        return PerpendicularImpl(typename size_type<Size>::type());
 	}
 
     //! Also named box product. Signed volume of a parallelepiped formed by u, v and w.
@@ -296,12 +293,26 @@ public:
 template<int Size, typename T>
 const Vector<Size, T> Vector<Size, T>::ZERO;
 
-typedef Vector<2, float> Vector2f;
-typedef Vector<2, double> Vector2d;
-typedef Vector<2, int> Vector2i;
-typedef Vector<3, float> Vector3f;
-typedef Vector<3, double> Vector3d;
-typedef Vector<3, int> Vector3i;
+template <typename T>
+using Vector2 = Vector<2, T>;
+
+using Vector2f = Vector2<float>;
+using Vector2d = Vector2<double>;
+using Vector2i = Vector2<int>;
+
+template <typename T>
+using Vector3 = Vector<3, T>;
+
+using Vector3f = Vector3<float>;
+using Vector3d = Vector3<double>;
+using Vector3i = Vector3<int>;
+
+template <typename T>
+using Vector4 = Vector<4, T>;
+
+using Vector4f = Vector4<float>;
+using Vector4d = Vector4<double>;
+using Vector4i = Vector4<int>;
 
 // Helpers for scalar multiplications
 template <int Size, typename T> Vector<Size, T> operator *(const T& scalar, const Vector<Size, T>& rhs) { return rhs * scalar; }

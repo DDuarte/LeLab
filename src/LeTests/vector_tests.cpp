@@ -104,7 +104,7 @@ TYPED_TEST(VectorTest, IdentitiesScalarTripeProduct3) {
     EXPECT_EQ(-STP(w, v, u), -STP(u, w, v));
     EXPECT_EQ(-STP(w, v, u), -STP(v, u, w));
     EXPECT_EQ(0, STP(v, u, v)); // [uuv] = [vuv] = 0
-    EXPECT_EQ(0, STP(u, u, v)); // FIXME
+    EXPECT_EQ(0, STP(u, u, v));
     EXPECT_EQ(STP(u.CrossProduct(v), v.CrossProduct(w), w.CrossProduct(u)), Math<typename MyVector::Real>::Sqr(STP(u, v, w))); // [uvw]^2 = [(u x v)(v x w)(w x u)]
     EXPECT_EQ(MyVector::ZERO, u * STP(v, w, x) - v * STP(w, x, u) + w * STP(x, u, v) - x * STP(u, v, w)); // u[vwx] - v[wxu] + w[xuv] - x[uvw] = 0
     EXPECT_EQ(v * STP(u, w, x) - u * STP(v, w, x), u.CrossProduct(v).CrossProduct(w.CrossProduct(x))); // (u x v) x (w x x) = v[uwx] - u[vwx]

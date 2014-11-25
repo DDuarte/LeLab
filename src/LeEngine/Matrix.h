@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "DMath.h"
 #include "MathDefines.h"
+#include "TypeHelpers.h"
 
 #include <cassert>
 #include <cstdarg>
@@ -13,9 +14,6 @@
 #include <initializer_list>
 #include <iostream>
 #include <type_traits>
-
-template <int Size>
-using size_type = std::integral_constant<int, Size>;
 
 template <
 	int Size,
