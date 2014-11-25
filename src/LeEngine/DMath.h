@@ -50,17 +50,22 @@ public:
     static Real Pow(Real base, T exponent) { return pow(base, exponent); }
     static Real Sqrt(Real val) { return sqrt(val); }
     static Real InvSqrt(Real val) { return 1/Sqrt(val); }
+
+private:
+    static constexpr long FastInvMagicConstant(std::integral_constant<int, 4>) noexcept {
+    	return 0x5f3759df;
+    }
+
+    static constexpr long FastInvMagicConstant(std::integral_constant<int, 8>) noexcept {
+		return 0x5fe6eb50c7b537a9;
+	}
+
+public:
     static Real FastInvSqrt(Real val)
     {
         // original from Silicon Graphics, modified
         const Real valhalf = 0.5 * val;
-        const int magicConstant;
-        if (sizeof(Real) == 4)
-            magicConstant = 0x5f3759df;
-        else if (sizeof(Real) == 8)
-            magicConstant = 0x5fe6eb50c7b537a9;
-        else
-            static_assert(false, "FastInvSqrt not defined for non-floats or non-doubles.");
+        auto magicConstant = FastInvMagicConstant(typename std::integral_constant<int, sizeof(Real)>::type());
 
         int i = reinterpret_cast<int>(val);
         i = magicConstant - (i >> 1);
@@ -74,7 +79,7 @@ public:
     // Misc
     static Real Ceil(Real val) { return ceil(val); }
     static Real Floor(Real val) { return floor(val); }
-    static Real Abs(Real val) { return abs(val); }
+    static Real Abs(Real val) { return std::abs(val); }
     static Real FMod(Real numerator, Real denominator) { return fmod(numerator, denominator); }
     static Real Clamp(Real val, Real min, Real max) { return (val < min ? min : (val > max ? max : val)); }
     static int Sign(Real val) { return (val > 0 ? 1 : (val < 0 ? -1 : 0)); }

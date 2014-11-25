@@ -10,7 +10,7 @@ typedef testing::Types<float, double, int> TestTypes;
 TYPED_TEST_CASE(VectorTest, TestTypes);
 
 TYPED_TEST(VectorTest, Identities3) {
-    typedef typename Vector<3, TypeParam> MyVector;
+    using MyVector = Vector<3, TypeParam>;
 
     const MyVector u(1, 2, 3);
     const MyVector v(6, 6, 6);
@@ -34,14 +34,14 @@ TYPED_TEST(VectorTest, Identities3) {
 }
 
 TYPED_TEST(VectorTest, IdentitiesDot3) {
-    typedef typename Vector<3, TypeParam> MyVector;
+	using MyVector = Vector<3, TypeParam>;
 
     const MyVector u(1, 2, 3);
     const MyVector v(6, 6, 6);
     const MyVector w(-8, -8, -8);
 
     EXPECT_EQ(u.X() * v.X() + u.Y() * v.Y() + u.Z() * v.Z(), u.DotProduct(v)); // u . v = u1v1 + u2v2 + ... + unvn
-    EXPECT_EQ(u.Magnitude() * v.Magnitude() * Math<MyVector::Real>::Cos(u.AngleBetween(v)), u.DotProduct(v)); // u . v = ||u|| ||v|| cos o
+    EXPECT_EQ(u.Magnitude() * v.Magnitude() * Math<typename MyVector::Real>::Cos(u.AngleBetween(v)), u.DotProduct(v)); // u . v = ||u|| ||v|| cos o
     EXPECT_EQ(u.MagnitudeSqr(), u.DotProduct(u)); // u . u = ||u||^2
     EXPECT_EQ(v.DotProduct(u), u.DotProduct(v)); // u . v = v . u
     EXPECT_EQ(u.DotProduct(v) + u.DotProduct(w), u.DotProduct(v + w)); // u . (v + w) = u . v + u . w
@@ -54,7 +54,7 @@ TYPED_TEST(VectorTest, IdentitiesDot3) {
 }
 
 TYPED_TEST(VectorTest, IdentitiesCross3) {
-    typedef typename Vector<3, TypeParam> MyVector;
+	using MyVector = Vector<3, TypeParam>;
 
     const MyVector u(1, 2, 3);
     const MyVector v(6, 6, 6);
@@ -76,7 +76,7 @@ TYPED_TEST(VectorTest, IdentitiesCross3) {
     EXPECT_EQ(u.DotProduct(w) * v - v.DotProduct(w) * u, w.CrossProduct(v.CrossProduct(u))); // (u x v) x w = w x (v x u) = (u . w)v - (v . w)u (a vector in the plane of u and v)
     EXPECT_EQ(w.CrossProduct(v).CrossProduct(u), u.CrossProduct(v.CrossProduct(w))); // u x (v x w) = (w x v) x u = (u . w)v - (u . v)w (a vector in the plane of v and w)
     EXPECT_EQ(u.CrossProduct(v.CrossProduct(w)), u.DotProduct(w) * v - u.DotProduct(v) * w); // u x (v x w) = (w x v) x u = (u . w)v - (u . v)w (a vector in the plane of v and w)
-    EXPECT_NEAR(u.Magnitude() * v.Magnitude() * Math<MyVector::Real>::Sin(u.AngleBetween(v)), u.CrossProduct(v).Magnitude(), Math<MyVector::Real>::EPSILON * 100); // ||u x v|| = ||u| ||v|| sin o
+    EXPECT_NEAR(u.Magnitude() * v.Magnitude() * Math<typename MyVector::Real>::Sin(u.AngleBetween(v)), u.CrossProduct(v).Magnitude(), Math<typename MyVector::Real>::EPSILON * 100); // ||u x v|| = ||u| ||v|| sin o
     EXPECT_EQ(u.DotProduct(w) * v.DotProduct(x) - v.DotProduct(w) * u.DotProduct(x), u.CrossProduct(v).DotProduct(w.CrossProduct(x))); // (u x v) . (w x x) = (u . w)(v . x) - (v . w)(u . x) (Lagrange's identity)
     EXPECT_EQ(MyVector::ZERO, u.CrossProduct(v.CrossProduct(w)) + v.CrossProduct(w.CrossProduct(u)) + w.CrossProduct(u.CrossProduct(v))); // u x (v x w) + v x (w x u) + w x (u x v) = 0 (Jacobi's identity)
 
@@ -87,7 +87,7 @@ TYPED_TEST(VectorTest, IdentitiesCross3) {
 }
 
 TYPED_TEST(VectorTest, IdentitiesScalarTripeProduct3) {
-    typedef typename Vector<3, TypeParam> MyVector;
+	using MyVector = Vector<3, TypeParam>;
 
     const MyVector u(1, 2, 3);
     const MyVector v(6, 6, 6);
@@ -104,14 +104,13 @@ TYPED_TEST(VectorTest, IdentitiesScalarTripeProduct3) {
     EXPECT_EQ(-STP(w, v, u), -STP(u, w, v));
     EXPECT_EQ(-STP(w, v, u), -STP(v, u, w));
     EXPECT_EQ(0, STP(v, u, v)); // [uuv] = [vuv] = 0
-    EXPECT_EQ(0, STP(u, u, v));
-    EXPECT_EQ(STP(u.CrossProduct(v), v.CrossProduct(w), w.CrossProduct(u)), Math<MyVector::Real>::Sqr(STP(u, v, w))); // [uvw]^2 = [(u x v)(v x w)(w x u)]
+    EXPECT_EQ(0, STP(u, u, v)); // FIXME
+    EXPECT_EQ(STP(u.CrossProduct(v), v.CrossProduct(w), w.CrossProduct(u)), Math<typename MyVector::Real>::Sqr(STP(u, v, w))); // [uvw]^2 = [(u x v)(v x w)(w x u)]
     EXPECT_EQ(MyVector::ZERO, u * STP(v, w, x) - v * STP(w, x, u) + w * STP(x, u, v) - x * STP(u, v, w)); // u[vwx] - v[wxu] + w[xuv] - x[uvw] = 0
     EXPECT_EQ(v * STP(u, w, x) - u * STP(v, w, x), u.CrossProduct(v).CrossProduct(w.CrossProduct(x))); // (u x v) x (w x x) = v[uwx] - u[vwx]
     EXPECT_EQ(STP(v, y, z) * STP(u, w, x) - STP(u, y, z) * STP(v, w, x), STP(u.CrossProduct(v), w.CrossProduct(x), y.CrossProduct(z))); // [(u x v)(w x x)(y x z)] = [vyz][uwx] - [uyz][vwx]
     EXPECT_EQ(2 * STP(u, v, w), STP(u + v, v + w, w + u)); // [(u+v)(v+w)(w+u)] = 2[uvw]
     EXPECT_EQ(STP(u - x, v, w) - STP(v - w, x, u), STP(u - x, v - x, w - x)); // [(u - x)(v - x)(w - x)] = [uvw] - [uv x] - [uxw] - [xvw] = [(u - x)vw] - [(v - w)xu]
     EXPECT_EQ(STP(u - x, v, w) - STP(v - w, x, u), STP(u, v, w) - STP(u, v, x) - STP(u, x, w) - STP(x, v, w));
-
 #undef STP
 }

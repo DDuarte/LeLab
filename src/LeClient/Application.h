@@ -6,6 +6,7 @@
 class Application : public IApplication
 {
 public:
+	virtual ~Application() { }
     void Run(int argc, char* argv[]);
 };
 

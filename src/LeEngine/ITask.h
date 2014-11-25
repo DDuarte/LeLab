@@ -7,6 +7,7 @@ class ITask
 {
 public:
     ITask(const std::string& name) : CanKill(false), Priority(5000), _name(name) {}
+    virtual ~ITask() { }
     virtual bool Start() = 0;
     virtual void OnSuspend() {}
     virtual void Update() = 0;

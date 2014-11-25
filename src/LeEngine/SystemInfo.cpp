@@ -12,8 +12,7 @@ std::string SystemInfo::GetOS()
     //...
 }
 
-std::vector<VideoMode> SystemInfo::GetAvailableVideoModes()
-{
+std::vector<VideoMode> SystemInfo::GetAvailableVideoModes() {
     const int maxCount = 25;
     GLFWvidmode list[maxCount];
 
@@ -25,8 +24,7 @@ std::vector<VideoMode> SystemInfo::GetAvailableVideoModes()
 
     std::vector<VideoMode> vec;
     VideoMode mod;
-    for (int i = 0; i < count; ++i)
-    {
+    for (int i = 0; i < count; ++i) {
         mod.Width = list[i].Width;
         mod.Height = list[i].Height;
         mod.RedBits = list[i].RedBits;

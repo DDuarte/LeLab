@@ -168,11 +168,13 @@ ColorRGBA::ColorRGBA(float r, float g, float b, float a/*= 1.0f*/)
     _values[3] = ClampColor(a);
 }
 
+/*
 ColorRGBA::ColorRGBA(float vals[COLOR_RGBA_SIZE])
 {
     for (int i = 0; i < COLOR_RGBA_SIZE; ++i)
         _values[i] = ClampColor(vals[i]);
 }
+*/
 
 ColorRGBA::ColorRGBA(const ColorRGBA& other)
 {

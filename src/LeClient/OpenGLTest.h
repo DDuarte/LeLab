@@ -17,7 +17,10 @@ public:
         filter = 0;
         xrot = yrot = 0.0f;
         xspeed = yspeed = 0.0012f;
+        bp = f1p = fp = light = lp = blend = false;
+        light1 = nullptr;
     }
+    virtual ~OpenGLTest() { }
     bool Start();
     void Update();
     void Render() const;

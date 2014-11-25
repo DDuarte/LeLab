@@ -8,7 +8,6 @@
 #include "Vertex.h"
 
 #include <GL/glew.h>
-#include <GL/GLFW.h>
 
 #include <vector>
 
@@ -84,7 +83,7 @@ public:
         }
         glBegin(face_mode);
         {
-            for (std::vector<V>::const_iterator it = _vertices.cbegin(); it != _vertices.cend(); it++)
+            for (auto it = _vertices.cbegin(); it != _vertices.cend(); it++)
             {
                 it->Render();
             }

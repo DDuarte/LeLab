@@ -75,7 +75,7 @@ protected:
 public:
     ColorRGBA(); //!> Default constructor, black color
     ColorRGBA(float r, float g, float b, float a = 1.0f); //!> Constructor. Values between 0 and 1
-    ColorRGBA(float vals[COLOR_RGBA_SIZE]); //!> Constructor. Values between 0 and 1 in an array
+    // ColorRGBA(float vals[COLOR_RGBA_SIZE]); //!> Constructor. Values between 0 and 1 in an array
     ColorRGBA(const ColorRGBA& other); //!> Copy constructor
 
     ColorRGBA& operator =(const ColorRGBA& other);

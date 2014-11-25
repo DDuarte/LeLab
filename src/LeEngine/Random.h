@@ -2,8 +2,10 @@
 #define RANDOM_H
 
 #include <random>
+/*
 #include <boost/random.hpp>
 #include <boost/concept_check.hpp>
+*/
 #include <ctime>
 #include <iterator>
 
@@ -42,8 +44,13 @@ public:
     template<typename T>
     T Distribution(T* values, float* probabilities, int size)
     {
-        boost::random::discrete_distribution<int, float> dist(probabilities, probabilities+size);
-        //std::discrete_distribution<float> dist(probabilities, probabilities + size);
+        //boost::random::discrete_distribution<int, float> dist(probabilities, probabilities+size);
+        std::vector<int> weights;
+        for (int i = 0; i < size; ++i) {
+            weights.push_back(probabilities[i] * 100);
+        }
+
+        std::discrete_distribution<int> dist(weights.begin(), weights.end());
         int rand = dist(_gen);
         return values[rand];
     }
@@ -66,7 +73,7 @@ public:
         // This will work with any container that supports iterators
         // The only requirement is that the iterator must be
         // an input iterator (random or sequential)
-        BOOST_CONCEPT_ASSERT((InputIterator<InputIterator>));
+        // BOOST_CONCEPT_ASSERT((InputIterator<InputIterator>)); FIXME
 
         int size = std::distance(begin, end);
         int rand = Interval(0, size);

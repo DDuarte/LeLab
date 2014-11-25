@@ -17,7 +17,6 @@ private:
 public:
     typedef typename std::conditional<std::is_floating_point<T>::value, T, double>::type Real;
     typedef T Type;
-    static const int Size = Size;
     static const Vector<Size, T> ZERO;
 
     Vector() { memset(V, 0, Size * sizeof(T)); }
@@ -86,7 +85,7 @@ public:
     void Set(T x) { static_assert(Size >= 2, "Set(T) requires at least size 1"); V[0] = x; }
     void Set(T x, T y) { static_assert(Size >= 2, "Set(T, T) requires at least size 2"); V[0] = x; V[1] = y; }
     void Set(T x, T y, T z) { static_assert(Size >= 3, "Set(T, T, T) requires at least size 3"); V[0] = x; V[1] = y; V[2] = z; }
-    void Set(T x, T y, T z, T w) { static_assert(Size >= 4, , "Set(T, T, T, T) requires at least size 4"); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
+    void Set(T x, T y, T z, T w) { static_assert(Size >= 4, "Set(T, T, T, T) requires at least size 4"); V[0] = x; V[1] = y; V[2] = z; V[3] = w; }
 
     bool operator ==(const Vector<Size, T>& other) const
     {
@@ -270,7 +269,9 @@ public:
 
 	//! Returns a vector that is perpendicular to this vector
 	//! There are many solutions, this will only get one of those
-	Vector<Size, T> Perpendicular()
+    template <typename R = T>
+    typename std::enable_if<(Size == 2 || Size == 3) && std::is_same<T, R>::value, Vector<Size, T>>::type
+    Perpendicular()
 	{
         if (Size == 2)
             return Vector<Size, T>(-V[1], V[0]);
@@ -282,11 +283,6 @@ public:
                 return CrossProduct(Vector<Size, T>(0, 1, 0));
 
             return try1;
-        }
-        else
-        {
-            static_assert(false && "Perpendicular vector is not defined for more than 3 dimensions");
-            return Vector<Size, T>();
         }
 	}
 

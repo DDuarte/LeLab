@@ -54,4 +54,4 @@ add_library(LeEngine
     ${Rendering_hdrs} ${Rendering_srcs}
 )
 
-target_link_libraries(LeEngine ${GLEW_LIBRARY} ${GLFW_LIBRARY} ${OPENGL_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(LeEngine ${GLEW_LIBRARY} ${GLFW_LIBRARY} ${OPENGL_LIBRARIES} ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${X11_LIBRARIES})

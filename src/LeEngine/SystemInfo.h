@@ -21,7 +21,7 @@ public:
     static int ProcessorCount() { return glfwGetNumberOfProcessors(); }
 
     static void GetOpenGlVersion(int* major, int* minor, int* rev) { glfwGetGLVersion(major, minor, rev); }
-    
+
     static std::vector<VideoMode> GetAvailableVideoModes();
 
     // To be expanded...

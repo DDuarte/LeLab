@@ -6,7 +6,6 @@
 #include "Renderer.h"
 
 #include <GL/glew.h>
-#include <GL/glfw.h>
 
 class Vertex : public IRenderable
 {

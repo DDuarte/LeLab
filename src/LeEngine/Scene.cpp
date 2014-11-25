@@ -16,7 +16,7 @@ void Scene::RemoveRenderable(IRenderable* r)
     if (itr != _objectList.end())
         _objectList.erase(itr);
     else
-        LeLog.WriteP("Tried to remove %s but renderable does not exist in rederable list", r->GetName());
+        LeLog.WriteP("Tried to remove %s but renderable does not exist in rederable list", r->GetName().c_str());
 }
 
 void Scene::RenderObjectList() const

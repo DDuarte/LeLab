@@ -37,3 +37,6 @@ dep/includes/assimp/Compiler/*.h
 dep/includes/GL/*.h
 dep/includes/IL/*.h
 dep/includes/IL/*.hpp
+
+# Configuration Files
+*.conf

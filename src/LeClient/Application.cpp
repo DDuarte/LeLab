@@ -7,12 +7,13 @@
 #include <LeEngine/InputTask.h>
 #include <LeEngine/SoundTask.h>
 #include <LeEngine/VideoUpdate.h>
-#include "OpenGLTest.h"
+#include "OpenGLTest2.h"
 #include "PolygonTest.h"
 #include <LeEngine/Camera.h>
 #include <LeEngine/Window.h>
 #include "NetworkTask.h"
 #include <LeEngine/Lighting.h>
+#include <memory>
 
 void Application::Run(int argc, char* argv[])
 {
@@ -71,7 +72,7 @@ void Application::Run(int argc, char* argv[])
 
     // Game specific tasks
     
-    std::shared_ptr<OpenGLTest> test(new OpenGLTest);
+    std::shared_ptr<OpenGLTest2> test(new OpenGLTest2);
     test->Priority = 100;
     Kernel::Get().AddTask(test);
 

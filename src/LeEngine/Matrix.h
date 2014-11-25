@@ -12,11 +12,19 @@
 #include <array>
 #include <initializer_list>
 #include <iostream>
+#include <type_traits>
 
-template <int Size, typename T = float>
+template <int Size>
+using size_type = std::integral_constant<int, Size>;
+
+template <
+	int Size,
+	typename T = float
+>
 class Matrix
 {
-    static_assert(std::is_scalar<T>::value, "Matrix should use a scalar type.");
+	static_assert(std::is_scalar<T>::value, "T must be scalar");
+
 private:
     union
     {
@@ -25,11 +33,11 @@ private:
     };
 
 public:
-    typedef typename std::conditional<std::is_floating_point<T>::value, T, double>::type Real;
+    using Real = typename std::conditional<std::is_floating_point<T>::value, T, double>::type;
+    using Self = Matrix<Size, T>;
     typedef T Type;
-    static const int Size = Size;
-    static const Matrix<Size, T> IDENTITY;
-    static const Matrix<Size, T> ZERO;
+    static const Self IDENTITY;
+    static const Self ZERO;
 
     Matrix() { _M.fill(0); }
 
@@ -40,33 +48,31 @@ public:
 
     Matrix(const Matrix<Size, T>& matrix) : M(matrix.M) { }
 
-    template <typename... Arguments>
-    Matrix(T first, Arguments... parameters)
-    {
-        // This isn't pretty but it is working on MSVC CTP Nov 2012
-        auto arr = { first, parameters... };
-
-        int i = 0;
-        for (auto& a : arr)
-            _M[i++] = a;
-    }
+    template <typename ...Ts>
+    Matrix(Ts... parameters) : _M { std::forward<Ts>(parameters)... } { }
 
     const std::array<T, Size>& operator[](int row) const { assert(row < Size); return M[row]; }
     std::array<T, Size>& operator[](int row) { assert(row < Size); return M[row]; }
 
     Matrix<Size, T>& operator =(const Matrix<Size, T>& other) { memcpy(_M.data(), other._M.data(), Size * Size * sizeof(T)); return *this; }
 
+private:
+    bool equalsImpl(const Matrix<Size, T>& other, std::true_type) const {
+        for (int i = 0; i < Size * Size; ++i)
+            if (!Math<Real>::IsFuzzyEqual(_M[i], other._M[i]))
+                return false;
+        return true;
+    }
+
+    bool equalsImpl(const Matrix<Size, T>& other, std::false_type) const {
+    	return memcmp(_M.data(), other._M.data(), Size * Size * sizeof(T)) == 0;
+    }
+
+public:
+
     bool operator ==(const Matrix<Size, T>& other) const
     {
-        if (std::is_floating_point<T>::value)
-        {
-            for (int i = 0; i < Size * Size; ++i)
-                if (!Math<Real>::IsFuzzyEqual(_M[i], other._M[i]))
-                    return false;
-            return true;
-        }
-        else
-            return memcmp(_M.data(), other._M.data(), Size * Size * sizeof(T)) == 0;
+    	return equalsImpl(other, std::is_floating_point<typename std::remove_reference<T>::type>());
     }
     bool operator !=(const Matrix<Size, T>& other) const { return !operator ==(other); }
 
@@ -181,73 +187,87 @@ public:
         return *this;
     }
 
-    Real Determinant() const
+private:
+    Real DeterminantImpl(size_type<1>) const
     {
-        if (Size == 1)
-            return M[0][0];
-        else if (Size == 2)
-            return M[0][0] * M[1][1] - M[0][1] * M[1][0];
-        else if (Size == 3)
-        {
-            return M[0][0] * (M[1][1]*M[2][2] - M[1][2]*M[2][1]) -
-                M[0][1] * (M[1][0]*M[2][2] - M[1][2]*M[2][0]) +
-                M[0][2] * (M[1][0]*M[2][1] - M[1][1]*M[2][0]);
-        }
-        else if (Size == 4)
-        {
-            return
-                M[0][0] * (M[1][1] * (M[2][2] * M[3][3] - M[2][3] * M[3][2]) -
-                M[1][2] * (M[2][1] * M[3][3] - M[2][3] * M[3][1]) +
-                M[1][3] * (M[2][1] * M[3][2] - M[2][2] * M[3][1])) -
-                M[0][1] * (M[1][0] * (M[2][2] * M[3][3] - M[2][3] * M[3][2]) -
-                M[1][2] * (M[2][0] * M[3][3] - M[2][3] * M[3][0]) +
-                M[1][3] * (M[2][0] * M[3][2] - M[2][2] * M[3][0])) +
-                M[0][2] * (M[1][0] * (M[2][1] * M[3][3] - M[2][3] * M[3][1]) -
-                M[1][1] * (M[2][0] * M[3][3] - M[2][3] * M[3][0]) +
-                M[1][3] * (M[2][0] * M[3][1] - M[2][1] * M[3][0])) -
-                M[0][3] * (M[1][0] * (M[2][1] * M[3][2] - M[2][2] * M[3][1]) -
-                M[1][1] * (M[2][0] * M[3][2] - M[2][2] * M[3][0]) +
-                M[1][2] * (M[2][0] * M[3][1] - M[2][1] * M[3][0]));
-        }
-        else
-        {
-            Matrix<Size, T> m(*this);
-            int colEx = 0; // Number of columns exchange
-            bool flag = true; // Has line of zeros
-            int j;
-            for (int k = 0; k < Size - 1; ++k)
-            {
-                j = k + 1;
-                flag = true;
-                while (flag && j <= Size)
-                    if (m[k][j - 1] != 0)
-                        flag = false;
-                    else
-                        ++j;
+    	return M[0][0];
+    }
 
-                if (flag) return 0.0;
+    Real DeterminantImpl(size_type<2>) const
+	{
+    	return M[0][0] * M[1][1] - M[0][1] * M[1][0];
+	}
 
-                if (j != k + 1)
-                {
-                    ++colEx;
-                    m.ExchangeColumn(k, j - 1);
-                }
+    Real DeterminantImpl(size_type<3>) const
+	{
+    	return M[0][0] * (M[1][1]*M[2][2] - M[1][2]*M[2][1]) -
+			   M[0][1] * (M[1][0]*M[2][2] - M[1][2]*M[2][0]) +
+			   M[0][2] * (M[1][0]*M[2][1] - M[1][1]*M[2][0]);
+	}
 
-                for (int i = k + 2; i <= Size; ++i)
-                {
-                    for (int j = k + 2; j <= Size; ++j)
-                        m[i - 1][j - 1] = m[i - 1][j - 1] - m[i - 1][k] * m[k][j - 1] / m[k][k];
+    Real DeterminantImpl(size_type<4>) const
+	{
+    	return
+			   M[0][0] * (M[1][1] * (M[2][2] * M[3][3] - M[2][3] * M[3][2]) -
+			   M[1][2] * (M[2][1] * M[3][3] - M[2][3] * M[3][1]) +
+			   M[1][3] * (M[2][1] * M[3][2] - M[2][2] * M[3][1])) -
+			   M[0][1] * (M[1][0] * (M[2][2] * M[3][3] - M[2][3] * M[3][2]) -
+			   M[1][2] * (M[2][0] * M[3][3] - M[2][3] * M[3][0]) +
+			   M[1][3] * (M[2][0] * M[3][2] - M[2][2] * M[3][0])) +
+			   M[0][2] * (M[1][0] * (M[2][1] * M[3][3] - M[2][3] * M[3][1]) -
+			   M[1][1] * (M[2][0] * M[3][3] - M[2][3] * M[3][0]) +
+			   M[1][3] * (M[2][0] * M[3][1] - M[2][1] * M[3][0])) -
+			   M[0][3] * (M[1][0] * (M[2][1] * M[3][2] - M[2][2] * M[3][1]) -
+			   M[1][1] * (M[2][0] * M[3][2] - M[2][2] * M[3][0]) +
+			   M[1][2] * (M[2][0] * M[3][1] - M[2][1] * M[3][0]));
+	}
 
-                    m[i - 1][k] = 0;
-                }
-            }
+    template <int _size, typename = typename std::enable_if<_size >= 5>::type> // has to be >= 5 because > 4 causes parser error
+    Real DeterminantImpl(size_type<_size>) const
+    {
+    	Matrix<Size, T> m(*this);
+		int colEx = 0; // Number of columns exchange
+		bool flag = true; // Has line of zeros
+		int j;
+		for (int k = 0; k < Size - 1; ++k)
+		{
+			j = k + 1;
+			flag = true;
+			while (flag && j <= Size)
+				if (m[k][j - 1] != 0)
+					flag = false;
+				else
+					++j;
 
-            Real det = 1;
-            for (int i = 0; i < Size; ++i)
-                det *= m[i][i];
+			if (flag) return 0.0;
 
-            return det * Math<Real>::Pow(-1.0, colEx);
-        }
+			if (j != k + 1)
+			{
+				++colEx;
+				m.ExchangeColumn(k, j - 1);
+			}
+
+			for (int i = k + 2; i <= Size; ++i)
+			{
+				for (int j = k + 2; j <= Size; ++j)
+					m[i - 1][j - 1] = m[i - 1][j - 1] - m[i - 1][k] * m[k][j - 1] / m[k][k];
+
+				m[i - 1][k] = 0;
+			}
+		}
+
+		Real det = 1;
+		for (int i = 0; i < Size; ++i)
+			det *= m[i][i];
+
+		return det * Math<Real>::Pow(-1.0, colEx);
+    }
+
+public:
+
+	Real Determinant() const
+    {
+		return DeterminantImpl(typename size_type<Size>::type());
     }
 
     Matrix<Size, T>& Transpose()
@@ -282,40 +302,47 @@ public:
         return Math<Real>::Pow(-1.0, l+c) * subMat.Determinant(); 
     }
 
+private:
+
+    Matrix<Size, T> CofactorsMatrixImpl(size_type<1>) const
+	{
+    	return *this;
+	}
+
+    Matrix<Size, T> CofactorsMatrixImpl(size_type<2>) const
+	{
+		return Matrix<Size, T> { M[1][1], -M[1][0], -M[0][1], M[0][0] };
+	}
+
+    Matrix<Size, T> CofactorsMatrixImpl(size_type<3>) const
+	{
+    	return Matrix<Size, T> { M[1][1]*M[2][2]-M[1][2]*M[2][1],
+								 M[1][2]*M[2][0]-M[1][0]*M[2][2],
+								 M[1][0]*M[2][1]-M[1][1]*M[2][0],
+								 M[0][2]*M[2][1]-M[0][1]*M[2][2],
+								 M[0][0]*M[2][2]-M[0][2]*M[2][0],
+								 M[0][1]*M[2][0]-M[0][0]*M[2][1],
+								 M[0][1]*M[1][2]-M[0][2]*M[1][1],
+								 M[0][2]*M[1][0]-M[0][0]*M[1][2],
+								 M[0][0]*M[1][1]-M[0][1]*M[1][0] };
+	}
+
+    template <int _size, typename = typename std::enable_if<_size >= 4>::type>
+    Matrix<Size, T> CofactorsMatrixImpl(size_type<_size>) const
+	{
+    	Matrix<Size, T> mat;
+    	std::vector<T> cofactorMatrixVec;
+		for (int i = 0; i < Size; i++)
+			for (int j = 0; j < Size; j++)
+				cofactorMatrixVec.push_back(static_cast<T>(Cofactor(i,j)));
+		mat = cofactorMatrixVec.data();
+		return mat;
+	}
+
+public:
     Matrix<Size, T> CofactorsMatrix() const
     {
-        Matrix<Size,T> mat;
-
-        if (Size == 1)
-            mat = (*this);
-        else if (Size == 2)
-        {
-            T matArr[] = { M[1][1], -M[1][0], -M[0][1], M[0][0] };
-            mat = matArr;
-        }
-        else if (Size == 3)
-        {
-            T matArr[] = { M[1][1]*M[2][2]-M[1][2]*M[2][1], 
-                M[1][2]*M[2][0]-M[1][0]*M[2][2],
-                M[1][0]*M[2][1]-M[1][1]*M[2][0],
-                M[0][2]*M[2][1]-M[0][1]*M[2][2],
-                M[0][0]*M[2][2]-M[0][2]*M[2][0],
-                M[0][1]*M[2][0]-M[0][0]*M[2][1],
-                M[0][1]*M[1][2]-M[0][2]*M[1][1],
-                M[0][2]*M[1][0]-M[0][0]*M[1][2],
-                M[0][0]*M[1][1]-M[0][1]*M[1][0] };
-            mat = matArr;
-        }
-        else
-        {
-            std::vector<T> cofactorMatrixVec;
-            for (int i = 0; i < Size; i++)
-                for (int j = 0; j < Size; j++)
-                    cofactorMatrixVec.push_back(static_cast<T>(Cofactor(i,j)));
-            mat = cofactorMatrixVec.data();
-        }
-
-        return mat;
+        return CofactorsMatrixImpl(typename size_type<Size>::type());
     }
 
     Matrix<Size, Real> GetInverse() const
@@ -324,16 +351,25 @@ public:
         return m.ToReal() * (static_cast<Real>(1) / Determinant());
     }
 
+private:
+    Matrix<Size, Real> ToRealImpl(std::true_type) const
+	{
+    	return *this;
+	}
+
+    Matrix<Size, Real> ToRealImpl(std::false_type) const
+	{
+    	Matrix<Size, Real> result;
+		for (int i = 0; i < Size; ++i)
+			for (int j = 0; j < Size; ++j)
+				result[i][j] = static_cast<Real>(M[i][j]);
+		return result;
+	}
+
+public:
     Matrix<Size, Real> ToReal() const
     {
-        //if (std::is_floating_point<T>::value)
-        //    return *this;
-
-        Matrix<Size, Real> result;
-        for (int i = 0; i < Size; ++i)
-            for (int j = 0; j < Size; ++j)
-                result[i][j] = static_cast<Real>(M[i][j]);
-        return result;
+        return ToRealImpl(std::is_same<T, Real>());
     }
 
 private:
@@ -354,12 +390,12 @@ const Matrix<Size, T> Matrix<Size, T>::ZERO;
 template <int Size, typename T>
 const Matrix<Size, T> Matrix<Size, T>::IDENTITY = BuildIdentityMatrix();
 
-typedef Matrix<3, float> Matrix3f;
-typedef Matrix<3, double> Matrix3d;
-typedef Matrix<3, int> Matrix3i;
-typedef Matrix<4, float> Matrix4f;
-typedef Matrix<4, double> Matrix4d;
-typedef Matrix<4, int> Matrix4i;
+using Matrix3f = Matrix<3, float>;
+using Matrix3d = Matrix<3, double>;
+using Matrix3i = Matrix<3, int>;
+using Matrix4f = Matrix<4, float>;
+using Matrix4d = Matrix<4, double>;
+using Matrix4i = Matrix<4, int>;
 
 // Helpers for scalar multiplications
 template <int Size, typename T> Matrix<Size, T> operator *(const T& scalar, const Matrix<Size, T>& rhs) { return rhs * scalar; }

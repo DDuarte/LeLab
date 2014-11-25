@@ -25,6 +25,11 @@ bool Window::Create()
     LeLog.WriteP("Window: Opened glfw window. Width: %i, height: %i, r: %i, g: %i, b: %i, a: %i, d: %i, s: %i, fullscreen: %s",
         _width, _height, _redBits, _greenBits, _blueBits, _alphaBits, _depthBits, _stencilBits, _fullScreen ? "yes" : "no");
 
+    auto version = glGetString(GL_VERSION);
+    auto renderer = glGetString(GL_RENDERER);
+
+    LeLog.WriteP("OpenGL version: %s, renderer: %s", version, renderer);
+
     return true;
 }
 

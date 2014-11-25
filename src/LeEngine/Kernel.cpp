@@ -72,7 +72,7 @@ void Kernel::ResumeTask(const std::shared_ptr<ITask>& t)
         _taskList.insert(itr, t);
     }
     else
-        LeLog.WriteP("Tried to resume %s but task does not exist in paused task list", t->GetName());
+        LeLog.WriteP("Tried to resume %s but task does not exist in paused task list", t->GetName().c_str());
 }
 
 
@@ -81,7 +81,7 @@ void Kernel::RemoveTask(const std::shared_ptr<ITask>& t)
     if (std::find(_taskList.begin(), _taskList.end(), t) != _taskList.end())
         t->CanKill = true;
     else
-        LeLog.WriteP("Tried to remove but task does not exist in task list", t->GetName());
+        LeLog.WriteP("Tried to remove but task does not exist in task list", t->GetName().c_str());
 }
 
 void Kernel::KillAllTasks()
