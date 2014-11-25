@@ -49,11 +49,39 @@ TYPED_TEST(MatrixTest, Identities3) {
     EXPECT_EQ((A * B).GetTransposed(), B.GetTransposed() * A.GetTransposed()); // (AB)^T=B^TA^T
 }
 
+TYPED_TEST(MatrixTest, Determinants2) {
+    using MyMatrix = Matrix<2, TypeParam>;
+
+    TypeParam a[] = { 1, 2, 3, 4 };
+    TypeParam b[] = { 4, 3, 3, 2 }; // invertible
+
+    const MyMatrix A(a);
+    const MyMatrix B(b);
+
+    EXPECT_NEAR(MyMatrix::IDENTITY.Determinant(), 1, Math<typename MyMatrix::Real>::EPSILON * 100);
+    EXPECT_NEAR(A.GetTransposed().Determinant(), A.Determinant(), Math<typename MyMatrix::Real>::EPSILON * 100);
+    EXPECT_NEAR(B.GetInverse().Determinant(), 1.0 / B.Determinant(), Math<typename MyMatrix::Real>::EPSILON * 100);
+}
+
 TYPED_TEST(MatrixTest, Determinants3) {
 	using MyMatrix = Matrix<3, TypeParam>;
 
     TypeParam a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     TypeParam b[] = { 1, 2, 3, 0, 4, 5, 1, 0, 6 }; // invertible
+
+    const MyMatrix A(a);
+    const MyMatrix B(b);
+
+    EXPECT_NEAR(MyMatrix::IDENTITY.Determinant(), 1, Math<typename MyMatrix::Real>::EPSILON * 100);
+    EXPECT_NEAR(A.GetTransposed().Determinant(), A.Determinant(), Math<typename MyMatrix::Real>::EPSILON * 100);
+    EXPECT_NEAR(B.GetInverse().Determinant(), 1.0 / B.Determinant(), Math<typename MyMatrix::Real>::EPSILON * 100);
+}
+
+TYPED_TEST(MatrixTest, Determinants4) {
+    using MyMatrix = Matrix<4, TypeParam>;
+
+    TypeParam a[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    TypeParam b[] = { 2, 3, 1, 5, 1, 0, 3, 1, 0, 2, -3, 2, 0, 2, 3, 1 }; // invertible
 
     const MyMatrix A(a);
     const MyMatrix B(b);
