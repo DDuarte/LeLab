@@ -17,7 +17,7 @@ find_package(GLEW REQUIRED)
 find_package(GLFW2 REQUIRED)
 find_package(ASSIMP REQUIRED)
 find_package(SOIL REQUIRED)
-find_package (Threads)
+find_package(Threads)
 find_package(GTest REQUIRED)
 
 # add source directories

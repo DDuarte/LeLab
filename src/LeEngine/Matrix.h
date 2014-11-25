@@ -49,7 +49,7 @@ public:
     Matrix(const Matrix<Size, T>& matrix) : M(matrix.M) { }
 
     template <typename ...Ts>
-    Matrix(Ts... parameters) : _M { std::forward<Ts>(parameters)... } { }
+    Matrix(Ts... parameters) : _M{ { std::forward<Ts>(parameters)... } } { }
 
     const std::array<T, Size>& operator[](int row) const { assert(row < Size); return M[row]; }
     std::array<T, Size>& operator[](int row) { assert(row < Size); return M[row]; }

@@ -39,7 +39,7 @@ source_group(Timing    FILES ${Timing_hdrs}    ${Timing_srcs})
 source_group(Input     FILES ${Input_hdrs}     ${Input_srcs})
 source_group(Rendering FILES ${Rendering_hdrs} ${Rendering_srcs})
 
-add_library(LeEngine
+add_library(LeEngine STATIC
     ${Network_hdrs}   ${Network_srcs}
     ${Math_hdrs}      ${Math_srcs}
     ${Geometry_hdrs}  ${Geometry_srcs}
